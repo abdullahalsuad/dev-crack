@@ -1,0 +1,236 @@
+# HTML Interview Questions
+
+## Basic Level (1–20)
+
+
+### 1. What is HTML?
+
+> HTML (HyperText Markup Language) is the standard language for creating and structuring content on the web.
+
+### 2. What is the purpose of `<!DOCTYPE html>`?
+
+> It tells the browser to use the HTML5 standard for rendering the page.
+
+### 3. How to comment in HTML?
+
+> Use `<!-- comment here -->`. Comments are ignored by the browser.
+
+### 4. What is the difference between `<div>` and `<span>`?
+
+> `<div>` is block-level; `<span>` is inline. Use `<div>` for layout, `<span>` for small inline styling.
+
+### 5. What is the `<head>` tag used for?
+
+> Contains metadata, page title, and links to CSS/JS files.
+
+### 6. How to create a hyperlink in HTML?
+
+> Use `<a href="https://example.com">Link</a>`.
+
+### 7. How to insert an image in HTML?
+
+> Use `<img src="image.jpg" alt="Description">`.
+
+### 8. What is the `alt` attribute in `<img>`?
+
+> It provides alternative text for accessibility and shows when the image can't load.
+
+### 9. Difference between block and inline elements?
+
+> Block starts on a new line and takes full width; inline does not break the line.
+
+### 10. What are self-closing (void) tags?
+
+> Tags that don’t need closing tags, like `<br>`, `<hr>`, `<img>`, `<input>`.
+
+### 11. What is the `<mark>` tag used for?
+
+> It highlights text like a highlighter.
+
+### 12. What is the `lang` attribute used for?
+
+> It sets the language of the document for browsers and screen readers.
+
+### 13. What is the difference between `<strong>` and `<b>`?
+
+> `<strong>` gives semantic importance; `<b>` is just bold styling.
+
+### 14. What is the difference between `<em>` and `<i>`?
+
+> `<em>` means emphasis; `<i>` is just italic text.
+
+### 15. What is a favicon?
+
+> A small icon shown in the browser tab. Use `<link rel="icon" href="favicon.ico">`.
+
+### 16. What is the use of `<abbr>` tag?
+
+> Defines abbreviations. Example: `<abbr title="HyperText Markup Language">HTML</abbr>`
+
+### 17. What is the purpose of the `hidden` attribute?
+
+> Hides an element from view without removing it from the DOM.
+
+### 18. What is the `contenteditable` attribute?
+
+> Makes an element editable directly in the browser.
+
+### 19. What is the `<noscript>` tag?
+
+> Provides fallback content for users with JavaScript disabled.
+
+### 20. How to open a link in a new tab?
+
+> Use `target="_blank"` in the `<a>` tag.
+
+## Intermediate Level (21–40)
+
+_For real-world project knowledge and HTML5 features_
+
+### 21. What are semantic HTML elements?
+
+> Elements that clearly describe their meaning, e.g., `<article>`, `<header>`, `<footer>`.
+
+### 22. Difference between `id` and `class`?
+
+> `id` is unique; `class` can be reused on multiple elements.
+
+### 23. What are new features of HTML5?
+
+> Semantic tags, multimedia tags, form enhancements, APIs like geolocation.
+
+### 24. What are HTML form elements?
+
+> Elements like `<form>`, `<input>`, `<label>`, `<textarea>`, `<select>`, `<button>`.
+
+### 25. Difference between GET and POST in forms?
+
+> GET appends data to the URL; POST sends data in the request body.
+
+### 26. What is the `placeholder` attribute?
+
+> Shows temporary hint text inside an input field.
+
+### 27. What is the `required` attribute?
+
+> Makes the input mandatory before form submission.
+
+### 28. How to embed audio in HTML?
+
+> Use:
+>
+> ```html
+> <audio controls>
+>   <source src="song.mp3" type="audio/mpeg" />
+> </audio>
+> ```
+
+### 29. What is the `<iframe>` tag used for?
+
+> Embeds another web page or external content.
+
+### 30. How to create a table in HTML?
+
+> Use `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and `<td>`.
+
+### 31. What are HTML entities?
+
+> Codes for special characters, e.g., `&lt;` for `<`, `&gt;` for `>`.
+
+### 32. What are `<fieldset>` and `<legend>` used for?
+
+> `<fieldset>` groups form elements; `<legend>` is a caption for it.
+
+### 33. Difference between `readonly` and `disabled`?
+
+> `readonly`: uneditable but sent with form.  
+> `disabled`: uneditable and not submitted.
+
+### 34. What is the `<base>` tag used for?
+
+> Sets the base URL for all relative URLs.
+
+### 35. Difference between `<ol>`, `<ul>`, and `<dl>`?
+
+> - `<ol>`: ordered/numbered list
+> - `<ul>`: unordered/bulleted list
+> - `<dl>`: description list
+
+### 36. What does the `download` attribute do?
+
+> Allows users to download a file instead of opening it.
+
+### 37. What is the `tabindex` attribute?
+
+> Sets custom keyboard tab order for elements.
+
+### 38. What is the `<label>` tag used for?
+
+> Associates text with input fields and improves accessibility.
+
+### 39. What is the difference between `<span>`, `<b>`, and `<strong>`?
+
+> - `<span>`: generic inline container
+> - `<b>`: bold styling
+> - `<strong>`: bold with semantic meaning
+
+### 40. What are `<details>` and `<summary>` tags?
+
+> Creates toggleable/collapsible content sections.
+
+## Advanced Level (41–50)
+
+_For interviews, frontend roles, and accessibility experts_
+
+### 41. What is the `<meta>` tag used for?
+
+> Defines metadata like charset, viewport, SEO info.
+
+### 42. What is the viewport meta tag?
+
+> Helps with mobile responsiveness:
+>
+> ```html
+> <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+> ```
+
+### 43. What are `data-*` attributes in HTML5?
+
+> Custom data storage on elements. Example:
+>
+> ```html
+> <div data-user="123"></div>
+> ```
+
+### 44. What is the `<template>` tag?
+
+> Holds HTML content that is not rendered until inserted via JavaScript.
+
+### 45. What is progressive enhancement?
+
+> Start with basic HTML, then enhance with CSS/JS for modern features.
+
+### 46. What are ARIA roles in HTML?
+
+> Attributes like `role="button"` that enhance accessibility for screen readers.
+
+### 47. What is the difference between HTML and XHTML?
+
+> XHTML is stricter and XML-based. Tags must be properly closed and lowercase.
+
+### 48. What is the difference between `defer` and `async` in scripts?
+
+> - `defer`: waits until page parsing is done
+> - `async`: loads and runs as soon as possible
+
+### 49. What is the difference between `innerHTML`, `innerText`, and `textContent`?
+
+> - `innerHTML`: includes HTML tags
+> - `innerText`: visible text only
+> - `textContent`: all text, even hidden
+
+### 50. What is the difference between `inline`, `block`, and `inline-block` elements?
+
+> - **Inline**: flows with text
+> - **Block**: takes full width, starts on a new line
+> - **Inline-block**: like inline but supports width/height
