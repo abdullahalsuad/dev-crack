@@ -1,0 +1,112 @@
+# Node.js Interview Questions - Basic Level
+
+---
+
+### 1. What is **Event Loop** in Node.js?
+
+> The Event Loop is like a traffic policeman that never sleeps. It handles all asynchronous operations without blocking the main thread. It constantly checks if any async task is finished, and then executes its callback.
+
+### 2. What is a **Stream**?
+
+> A Stream is like a water pipe for data. It allows processing data in chunks instead of loading the whole file into memory—great for large files.
+
+### 3. What is a **Buffer**?
+
+> Buffer is temporary storage for raw binary data. It stores file or network data before processing. Useful for handling binary efficiently.
+
+### 4. What is **EventEmitter**?
+
+> EventEmitter is like a radio station that broadcasts events. Other parts of your code can listen to these broadcasts and respond. It's the foundation for many Node.js features.
+
+### 5. What is a **Router** in Express?
+
+> Routers help organize related routes into separate files. For example, user routes and product routes can live in different modules.
+
+### 6. What is **Middleware** in Express?
+
+> Middleware functions are like checkpoints. Each HTTP request passes through them before reaching the final route. They can modify the request, response, or end the cycle.
+
+### 7. Purpose of `next()` in Express?
+
+> `next()` moves the request to the next middleware or route handler. Without it, the request gets stuck.
+
+### 8. Difference between `req.params` and `req.query`?
+
+- `req.params` comes from the URL path (e.g., `/user/:id`)
+- `req.query` comes from query strings (e.g., `?search=john`)
+
+### 9. What is the Global Object in Node.js?
+
+> The global object in Node.js is `global`. It provides global variables and functions like `setTimeout`, `console`, and `process`. Unlike browsers, Node.js doesn't use `window`.
+
+### 10. What is the role of the package.json file?
+
+> `package.json` holds metadata about the project like name, version, dependencies, scripts, and more. It's essential for managing a Node.js project.
+
+### 11. What are CommonJS modules?
+
+> CommonJS is the module system used in Node.js. It uses `require()` and `module.exports` to import/export code between files.
+
+### 12. What is a callback function in Node.js?
+
+> A callback is a function passed to another function to be called when a task completes. It's a way to handle async code.
+
+### 13. What is a REPL in Node.js?
+
+> REPL stands for **Read-Eval-Print Loop**. It's an interactive shell to execute Node.js code and see results immediately.
+
+### 14. What is the purpose of the **dirname and **filename variables?
+
+- `__dirname` gives the directory of the current file.
+- `__filename` gives the full path of the current file.
+
+### 15. Difference between `readFile` and `createReadStream`?
+
+- `readFile`: Loads the entire file into memory.
+- `createReadStream`: Reads the file in small chunks—better for large files.
+
+### 16. Difference between `app.use()` and `app.all()`?
+
+- `app.use()`: Applies to **all** HTTP methods and paths.
+- `app.all()`: Applies to **all** HTTP methods but only **specific** paths.
+
+### 17. What is **Error-handling Middleware**?
+
+> It catches errors in middleware or routes. It uses four arguments: `(err, req, res, next)` and is used as a fallback to handle problems.
+
+### 18. What is **Helmet Middleware**?
+
+> Helmet adds secure HTTP headers to protect against attacks like XSS and clickjacking. It hides Express-specific details from attackers.
+
+### 19. What is **Rate Limiting**?
+
+> It limits how many requests a user can make in a given time. Prevents abuse and server overload (e.g., 100 requests/hour).
+
+### 20. What is **CORS**?
+
+> CORS (Cross-Origin Resource Sharing) controls which domains can access your API. Prevents unauthorized requests from other domains.
+
+### 21. Session vs **JWT Authentication**?
+
+- **Sessions**: Store user data on the server.
+- **JWT**: Store encrypted user data in a client-side token.  
+  JWT is stateless and does not require server storage.
+
+### 22. Purpose of the **dotenv Package**?
+
+> Loads environment variables from a `.env` file. Useful for storing secrets like DB passwords or API keys.
+
+### 23. Difference between **Synchronous** and **Asynchronous**?
+
+- **Synchronous**: Blocks execution until the current task finishes.
+- **Asynchronous**: Non-blocking; tasks run in the background.
+
+### 24. What is `Promise.all()`?
+
+> Executes multiple promises in parallel and waits for all to finish. Returns an array of results.
+
+### 25. What is `async/await`?
+
+> It makes asynchronous code look synchronous. `await` waits for a promise to resolve inside an `async` function.
+
+---

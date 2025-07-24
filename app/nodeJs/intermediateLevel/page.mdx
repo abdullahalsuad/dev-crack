@@ -1,0 +1,138 @@
+# Node.js Interview Questions - Intermediate Level
+
+---
+
+### 1. Difference between process.nextTick() and setImmediate()?
+
+> - process.nextTick() runs before the next event loop iteration.
+> - setImmediate() runs in the next event loop iteration.
+> - nextTick has higher priority and is faster.
+
+
+### 2. Purpose of the Cluster Module?
+
+> The Cluster module allows you to create multiple worker processes to utilize all CPU cores. One master distributes work to workers, improving performance.
+
+
+### 3. Difference between require() and import?
+
+> - require(): CommonJS, synchronous.
+> - import: ES6 module, asynchronous.  
+>   Requires `"type": "module"` in package.json.
+
+
+### 4. What is Clustering?
+
+> Runs multiple Node.js processes to use all CPU cores. Improves performance for heavy or CPU-bound tasks.
+
+
+### 5. Purpose of package-lock.json?
+
+> Locks exact versions of dependencies for consistent installs across environments.
+
+
+### 6. Difference: dependencies vs devDependencies?
+
+> - dependencies: Needed for app to run.
+> - devDependencies: Only needed during development (e.g., testing tools).
+
+
+### 7. What are NPM Scripts?
+
+> Scripts defined in package.json to run tasks like testing, building, starting the server, etc. Example: `npm start`.
+
+
+### 8. Purpose of nodemon?
+
+> Automatically restarts the server when file changes are detected. Great for development.
+
+
+### 9. What is the difference between synchronous and asynchronous exceptions?
+
+> - Synchronous exceptions can be caught using `try/catch`.
+> - Asynchronous exceptions (e.g., in callbacks or Promises) must be handled with `.catch()` or error callbacks.
+
+
+### 10. What is callback hell and how to avoid it?
+
+> Callback hell happens when multiple nested callbacks make code hard to read. Avoid it using Promises or `async/await`.
+
+
+### 11. What are the phases of the Node.js Event Loop?
+
+> The phases are: Timers, Pending Callbacks, Idle/Prepare, Poll, Check (setImmediate), Close Callbacks. Each phase handles different kinds of tasks.
+
+
+### 12. What is the role of the `process` object?
+
+> The `process` object provides information and control over the current Node.js process, like environment variables, arguments, and exit codes.
+
+
+### 13. How can you handle uncaught exceptions in Node.js?
+
+> Use `process.on('uncaughtException', callback)` to catch unexpected errors. However, it's better to avoid relying on it for stability.
+
+
+### 14. What is the use of process.env?
+
+> `process.env` allows access to environment variables. Useful for managing configurations like database URLs or secret keys.
+
+
+### 15. What are child processes in Node.js?
+
+> Child processes allow you to run shell commands or separate Node.js processes using the `child_process` module (`spawn`, `exec`, `fork`).
+
+
+### 16. What is the purpose of the `os` module?
+
+> The `os` module provides information about the operating system, like memory, CPU, and network interfaces.
+
+
+### 17. What are ticks and microtasks in Node.js?
+
+> - Ticks are processed after the current operation using `process.nextTick()`.
+> - Microtasks include Promise callbacks, processed after each phase before the next task.
+
+
+### 18. What is the use of the `util` module in Node.js?
+
+> The `util` module provides utility functions like `util.promisify()` and `util.inherits()` to help with debugging and inheritance.
+
+
+### 19. How does Node.js handle file uploads?
+
+> File uploads in Node.js are handled using middleware like `multer` that processes `multipart/form-data` requests.
+
+
+### 20. What is a throttle and debounce function?
+
+> - **Throttle** limits how often a function can run.
+> - **Debounce** delays function execution until no calls have occurred for a specific time.
+
+
+### 21. What are HTTP status codes?
+
+> HTTP status codes indicate the result of HTTP requests (e.g., `200 OK`, `404 Not Found`, `500 Server Error`).
+
+
+### 22. What is meant by a stateless server?
+
+> A stateless server does not store any user session data. Each request is processed independently.
+
+
+### 23. What is middleware chaining in Express?
+
+> Middleware chaining means multiple middleware functions run in order. Each calls `next()` to move to the next.
+
+
+### 24. How to serve static files in Express?
+
+> `app.use(express.static('public'))`  
+> Use `express.static()` to serve static files like images, CSS, JS from a folder.
+
+
+### 25. What are template engines in Node.js?
+
+> Template engines like **EJS**, **Pug**, or **Handlebars** allow you to generate dynamic HTML content from server-side data.
+
+---
