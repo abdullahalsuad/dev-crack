@@ -1,0 +1,155 @@
+## 1. What is the Event Loop and Call Stack?
+
+JavaScript is single-threaded and uses the call stack and event loop to manage async tasks.
+
+```js
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+Promise.resolve().then(() => console.log("3"));
+console.log("4");
+
+// Output: 1, 4, 3, 2
+```
+
+---
+
+## 2. What is a closure and how is it useful?
+
+A closure is a function that remembers variables from its outer scope.
+
+```js
+function outer() {
+  let count = 0;
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+const counter = outer();
+console.log(counter()); // 1
+console.log(counter()); // 2
+```
+
+---
+
+## 3. Explain `this` in different contexts.
+
+`this` refers to different things depending on how a function is called.
+
+```js
+const obj = {
+  name: "Alice",
+  greet() {
+    return `Hello, ${this.name}`;
+  },
+};
+
+console.log(obj.greet()); // Hello, Alice
+```
+
+Arrow functions do not have their own `this`.
+
+---
+
+## 4. What is a Promise? How does async/await work?
+
+A Promise represents a future value.
+
+```js
+function getData() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("Data loaded"), 1000);
+  });
+}
+
+async function fetchData() {
+  const result = await getData();
+  console.log(result);
+}
+```
+
+---
+
+## 5. What is a generator function?
+
+A generator returns an iterator and uses `yield` to pause execution.
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+}
+
+const it = gen();
+console.log(it.next().value); // 1
+```
+
+---
+
+## 6. What are proxies in JavaScript?
+
+Proxies allow custom behavior for fundamental operations like getting and setting properties.
+
+```js
+const obj = { name: "Test" };
+const proxy = new Proxy(obj, {
+  get(target, prop) {
+    return prop in target ? target[prop] : "Not Found";
+  },
+});
+
+console.log(proxy.name); // Test
+console.log(proxy.age); // Not Found
+```
+
+---
+
+## 7. What are Symbols and why use them?
+
+Symbols are unique and immutable and often used to avoid key collisions.
+
+```js
+const ID = Symbol("id");
+const user = { [ID]: 123 };
+
+console.log(user[ID]); // 123
+```
+
+---
+
+## 8. What is the difference between microtask and macrotask queues?
+
+- Microtasks (e.g. Promises) are processed before macrotasks (e.g. setTimeout).
+
+```js
+setTimeout(() => console.log("timeout"), 0);
+Promise.resolve().then(() => console.log("promise"));
+
+// Output: promise, timeout
+```
+
+---
+
+## 9. What is functional programming?
+
+Functional programming emphasizes pure functions and immutability.
+
+```js
+const double = (x) => x * 2;
+const nums = [1, 2, 3];
+const result = nums.map(double); // [2, 4, 6]
+```
+
+---
+
+## 10. What is tail call optimization?
+
+Tail call optimization (TCO) is a technique where the JS engine can reuse stack frames for recursive calls. Not widely supported.
+
+```js
+function factorial(n, acc = 1) {
+  if (n === 0) return acc;
+  return factorial(n - 1, n * acc); // tail-recursive
+}
+```

@@ -1,0 +1,145 @@
+## 1. What are higher-order functions?
+
+A higher-order function is a function that takes another function as an argument or returns a function.
+
+```js
+function greet(fn) {
+  return fn();
+}
+
+function sayHello() {
+  return "Hello!";
+}
+
+console.log(greet(sayHello)); // Hello!
+```
+
+---
+
+## 2. What is the difference between `map()`, `filter()`, and `reduce()`?
+
+- `map()`: Transforms each element.
+- `filter()`: Filters elements by condition.
+- `reduce()`: Reduces array to a single value.
+
+```js
+const nums = [1, 2, 3, 4];
+
+console.log(nums.map((n) => n * 2)); // [2, 4, 6, 8]
+console.log(nums.filter((n) => n > 2)); // [3, 4]
+console.log(nums.reduce((acc, n) => acc + n, 0)); // 10
+```
+
+---
+
+## 3. What is the difference between `for...in` and `for...of`?
+
+- `for...in`: Iterates over keys (index or property names).
+- `for...of`: Iterates over values.
+
+```js
+const arr = ["a", "b"];
+
+for (let key in arr) {
+  console.log(key); // 0, 1
+}
+
+for (let value of arr) {
+  console.log(value); // a, b
+}
+```
+
+---
+
+## 4. What are template literals?
+
+Template literals use backticks `` ` `` and support interpolation with `${}`.
+
+```js
+const name = "Kawsar";
+console.log(`Hello, ${name}!`); // Hello, Kawsar!
+```
+
+---
+
+## 5. What is destructuring?
+
+Destructuring extracts values from arrays or objects.
+
+```js
+const user = { name: "Alice", age: 25 };
+const { name, age } = user;
+
+const nums = [1, 2];
+const [a, b] = nums;
+```
+
+---
+
+## 6. What are default parameters?
+
+Allows setting default values for function parameters.
+
+```js
+function greet(name = "Guest") {
+  return `Hello, ${name}`;
+}
+console.log(greet()); // Hello, Guest
+```
+
+---
+
+## 7. What is optional chaining?
+
+Safely access deeply nested object properties.
+
+```js
+const user = { profile: { name: "Tom" } };
+console.log(user?.profile?.name); // Tom
+console.log(user?.address?.city); // undefined
+```
+
+---
+
+## 8. What is short-circuit evaluation?
+
+Logical operators return the first truthy/falsy value.
+
+```js
+const name = null;
+console.log(name || "Default"); // Default
+console.log(true && "Hello"); // Hello
+```
+
+---
+
+## 9. What are rest and spread operators?
+
+- **Spread** `...` expands elements.
+- **Rest** `...` collects them.
+
+```js
+const nums = [1, 2, 3];
+const newNums = [...nums, 4]; // spread
+
+function sum(...args) {
+  return args.reduce((a, b) => a + b);
+}
+```
+
+---
+
+## 10. What is the difference between function declaration and expression?
+
+- **Declaration** is hoisted.
+- **Expression** is not.
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+const multiply = function (a, b) {
+  return a * b;
+};
+```

@@ -1,0 +1,165 @@
+## 1. What is the difference between `let`, `const`, and `var`?
+
+- `var` is function-scoped and can be re-declared.
+- `let` is block-scoped and cannot be re-declared.
+- `const` is also block-scoped and cannot be reassigned.
+
+```js
+function example() {
+  var a = 1;
+  let b = 2;
+  const c = 3;
+
+  if (true) {
+    var a = 10; // allowed
+    let b = 20; // different scope
+    // const c = 30; // different scope
+  }
+
+  console.log(a); // 10
+  console.log(b); // 2
+  console.log(c); // 3
+}
+```
+
+ 
+
+---
+
+## 2. What is a closure?
+
+A closure is a function that remembers its outer variables even after the outer function has finished executing.
+
+```js
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+```
+
+---
+
+## 3. What is hoisting in JavaScript?
+
+Hoisting is JavaScript’s behavior of moving declarations to the top of their scope during compilation.
+
+```js
+console.log(a); // undefined
+var a = 5;
+```
+
+`var` declarations are hoisted with value `undefined`. `let` and `const` are hoisted but not initialized.
+
+---
+
+## 4. What is the difference between `==` and `===`?
+
+- `==` compares values after type conversion.
+- `===` compares both value and type.
+
+```js
+console.log(2 == "2"); // true
+console.log(2 === "2"); // false
+```
+
+---
+
+## 5. What is the difference between synchronous and asynchronous code?
+
+- **Synchronous** code runs line-by-line.
+- **Asynchronous** code allows non-blocking operations like `setTimeout`, `fetch`, etc.
+
+```js
+console.log("Start");
+setTimeout(() => console.log("Async"), 1000);
+console.log("End");
+```
+
+Output:
+
+```
+Start
+End
+Async
+```
+
+---
+
+## 6. What are arrow functions and how are they different from regular functions?
+
+Arrow functions are a shorter syntax for writing functions and **do not have their own `this`**.
+
+```js
+const add = (a, b) => a + b;
+console.log(add(2, 3)); // 5
+```
+
+Arrow functions are best used for simple tasks or inside array methods.
+
+---
+
+## 7. What is the difference between `null` and `undefined`?
+
+- `undefined`: a variable that has been declared but not assigned a value.
+- `null`: an assignment value that represents no value.
+
+```js
+let a;
+console.log(a); // undefined
+
+let b = null;
+console.log(b); // null
+```
+
+---
+
+## 8. What is event delegation?
+
+Event delegation is a technique of handling events at a **parent element** instead of the children.
+
+```js
+document.getElementById("list").addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    console.log("Clicked:", e.target.textContent);
+  }
+});
+```
+
+---
+
+## 9. What is the use of `this` keyword?
+
+`this` refers to the object that is executing the current function.
+
+```js
+const person = {
+  name: "John",
+  greet() {
+    console.log("Hello", this.name);
+  },
+};
+
+person.greet(); // Hello John
+```
+
+---
+
+## 10. What is a promise?
+
+A Promise is an object representing the eventual completion or failure of an asynchronous operation.
+
+```js
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Success"), 1000);
+});
+
+promise.then((res) => console.log(res)); // Success
+```
+ 
