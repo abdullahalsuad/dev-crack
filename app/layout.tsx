@@ -4,25 +4,23 @@ import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 
 export const metadata = {
-  title: "Dev Crack",
+  title: "My Cool Docs Site",
 };
 
-// const banner = (
-//   <Banner storageKey="some-key"></Banner>
-// );
-
-// Navbar
+const banner = (
+  <Banner storageKey="some-key">My Project 1.0.0 is released 🎉</Banner>
+);
 const navbar = (
   <Navbar
-    logo={<b>📚 Dev Crack</b>}
-    logoLink={"/"}
-    projectLink="https://github.com/abdullahalsuad/dev-crack"
-    chatLink="https://discord.gg/HSkFkxqx"
+    logo={<b>🦐 My Cool Project</b>}
+    logoLink={"https://bhavyadang.in"}
+    projectLink="https://github.com/bhavya-dang"
+    chatLink="https://discord.gg/"
   />
 );
-
-// footer
-const footer = <Footer>MIT {new Date().getFullYear()} © Dev Crack</Footer>;
+const footer = (
+  <Footer>MIT {new Date().getFullYear()} © My Cool Project.</Footer>
+);
 
 const search = <Search placeholder="Search docs.."></Search>;
 
@@ -32,7 +30,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html
+      // Not required, but good for SEO
+      lang="en"
+      // Required to be set
+      dir="ltr"
+      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
+      suppressHydrationWarning
+    >
       <Head
       // ... Your additional head options
       >
@@ -40,13 +45,15 @@ export default async function RootLayout({
       </Head>
       <body>
         <Layout
+          banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/abdullahalsuad/dev-crack"
+          docsRepositoryBase="https://github.com/bhavya-dang/my-project"
           footer={footer}
           search={search}
           editLink={null}
           feedback={{ content: null }}
+          // ... Your additional layout options
         >
           {children}
         </Layout>

@@ -1,0 +1,30 @@
+# Tools
+
+```json filename="vscode-snippets.json" showLineNumbers {3,5-10} /Playwright Test Scaffold/
+{
+  "Playwright Test Scaffold": {
+    "scope": "javascript,typescript",
+    "prefix": ["pwtest", "playwright-test", "playwright"],
+    "body": [
+      "const { test, expect } = require('@playwright/test');\n",
+      "test('${1:title}', async ({ page }) => {",
+      "\u0009await page.goto('${2:url}')",
+      "});"
+    ],
+    "description": "Scaffold a playwright test"
+  }
+}
+```
+
+## Command-line
+
+- [fzf](https://junegunn.github.io/fzf/) - 🌸 A command-line fuzzy finder
+- [bat](https://github.com/sharkdp/bat) - A cat(1) clone with wings.
+- [zoxide](https://github.com/ajeetdsouza/zoxide): A smarter **cd** command for your terminal.
+
+### Shells and Prompts
+
+- [Nushell](https://www.nushell.sh/): A new type of shell. Been playing around with it and it's pretty cool.
+- [Zsh & Oh My ZSH](https://ohmyz.sh/): A delightful, community-driven framework for managing your Zsh configuration.
+- [Oh My Posh](https://ohmyposh.dev/)
+- [Starship](https://starship.rs/): The minimal, blazing-fast, and infinitely customizable prompt for any shell!
