@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 import { FaDiscord, FaGithub, FaHtml5, FaNodeJs } from "react-icons/fa";
 import { IoLogoCss3 } from "react-icons/io";
-import { IoStarOutline } from "react-icons/io5";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { RiNextjsFill, RiReactjsFill } from "react-icons/ri";
 import { SiExpress, SiMongodb, SiMongoose } from "react-icons/si";
