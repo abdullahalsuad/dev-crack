@@ -1,14 +1,22 @@
+import Link from "next/link";
 import React from "react";
+import { FaDiscord, FaGithub, FaHtml5, FaNodeJs } from "react-icons/fa";
+import { IoLogoCss3 } from "react-icons/io";
+import { IoStarOutline } from "react-icons/io5";
+import { MdOutlineArrowOutward } from "react-icons/md";
+import { RiNextjsFill, RiReactjsFill } from "react-icons/ri";
+import { SiExpress, SiMongodb, SiMongoose } from "react-icons/si";
 
 const DevCrackPage = () => {
   return (
     <div className="min-h-screen bg-[#171717] text-white">
       {/* Hero Section */}
-      <section className="py-16 px-4 bg-gray-900 text-gray-100">
+      {/* #0a1410 */}
+      <section className="py-40 px-4 bg-gradient-to-r from-[#0a1410] via-teal-950 to-[#0a1410] text-gray-300">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
             Master Your{" "}
-            <span className="bg-gradient-to-r from-green-500 to-teal-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">
               Tech Interviews
             </span>
           </h2>
@@ -18,28 +26,35 @@ const DevCrackPage = () => {
             development. From frontend fundamentals to backend mastery.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
-            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-              Start Learning
+            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer flex items-center gap-2">
+              <MdOutlineArrowOutward size={20} /> Start Learning
             </button>
-            <button className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 border border-gray-700">
-              View Questions
+            <button className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 border border-gray-700 cursor-pointer flex items-center gap-2">
+              <FaGithub size={20} /> View on GitHub
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 rounded-lg p-6 text-center shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-30">
+            {/* question */}
+            <div className="bg-gray-800/30 backdrop-blur-md border border-teal-800/30 rounded-2xl p-6 text-center shadow-lg hover:shadow-teal-700/90 transition-shadow duration-300 cursor-pointer">
               <h3 className="text-emerald-400 text-4xl font-bold mb-2">500+</h3>
               <p className="text-gray-400 text-lg">Questions</p>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6 text-center shadow-xl">
+
+            {/* technologies */}
+            <div className="bg-gray-800/30 backdrop-blur-md border border-teal-800/30 rounded-2xl p-6 text-center shadow-lg hover:shadow-teal-700/90 transition-shadow duration-300 cursor-pointer">
               <h3 className="text-emerald-400 text-4xl font-bold mb-2">8</h3>
               <p className="text-gray-400 text-lg">Technologies</p>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6 text-center shadow-xl">
+
+            {/* free */}
+            <div className="bg-gray-800/30 backdrop-blur-md border border-teal-800/30 rounded-2xl p-6 text-center shadow-lg hover:shadow-teal-700/90 transition-shadow duration-300 cursor-pointer">
               <h3 className="text-emerald-400 text-4xl font-bold mb-2">100%</h3>
               <p className="text-gray-400 text-lg">Free</p>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6 text-center shadow-xl">
+
+            {/* Available */}
+            <div className="bg-gray-800/30 backdrop-blur-md border border-teal-800/30 rounded-2xl p-6 text-center shadow-lg hover:shadow-teal-700/90 transition-shadow duration-300 cursor-pointer">
               <h3 className="text-emerald-400 text-4xl font-bold mb-2">24/7</h3>
               <p className="text-gray-400 text-lg">Available</p>
             </div>
@@ -47,65 +62,96 @@ const DevCrackPage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-gray-800">
-        <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="text-3xl font-bold text-amber-500">1000+</div>
-            <div className="text-gray-400">Questions</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-amber-500">50+</div>
-            <div className="text-gray-400">Technologies</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-amber-500">10K+</div>
-            <div className="text-gray-400">Users</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-amber-500">95%</div>
-            <div className="text-gray-400">Success Rate</div>
-          </div>
-        </div>
-      </section>
-
       {/* Questions by Technology */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Interview Questions by Technology
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-20 bg-gradient-to-r from-[#0a1410] via-gray-900 to-[#0a1410] text-gray-100">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <div className="py-6">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4">
+              Interview Questions{" "}
+              <span className="bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">
+                by Technology
+              </span>
+            </h2>
+            <p className="text-center text-gray-400 mb-12">
+              Choose your technology stack and dive deep into curated interview
+              questions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: "JavaScript", questions: 120, color: "bg-yellow-500" },
-              { name: "React", questions: 95, color: "bg-blue-500" },
-              { name: "Node.js", questions: 80, color: "bg-green-500" },
-              { name: "Python", questions: 110, color: "bg-blue-400" },
-              { name: "Java", questions: 130, color: "bg-red-500" },
-              { name: "SQL", questions: 75, color: "bg-purple-500" },
+              {
+                name: "HTML",
+                level: "Beginner",
+                levelColor: "bg-green-600",
+                icon: <FaHtml5 />,
+                desc: "Fundamental markup language questions covering semantic HTML, accessibility, and modern standards.",
+                questions: 50,
+              },
+              {
+                name: "CSS",
+                levelColor: "bg-yellow-500",
+                icon: <IoLogoCss3 />,
+                desc: "Styling questions including Flexbox, Grid, animations, and responsive design principles.",
+                questions: 75,
+              },
+              {
+                name: "React",
+                levelColor: "bg-red-600",
+                icon: <RiReactjsFill />,
+                desc: "Component-based questions covering hooks, state management, lifecycle, and performance optimization.",
+                questions: 100,
+              },
+              {
+                name: "Node.js",
+                levelColor: "bg-red-600",
+                icon: <FaNodeJs />,
+                desc: "Server-side JavaScript questions including APIs, middleware, streams, and event-driven architecture.",
+                questions: 85,
+              },
+              {
+                name: "Next.js",
+                levelColor: "bg-red-600",
+                icon: <RiNextjsFill />,
+                desc: "Full-stack React framework questions covering SSR, SSG, routing, and performance optimization.",
+                questions: 60,
+              },
+              {
+                name: "Express",
+                levelColor: "bg-yellow-500",
+                icon: <SiExpress />,
+                desc: "Web framework questions including routing, middleware, error handling, and RESTful APIs.",
+                questions: 70,
+              },
+              {
+                name: "MongoDB",
+                levelColor: "bg-yellow-500",
+                icon: <SiMongodb />,
+                desc: "NoSQL database questions covering queries, indexing, aggregation, and data modeling.",
+                questions: 65,
+              },
+              {
+                name: "Mongoose",
+                levelColor: "bg-yellow-500",
+                icon: <SiMongoose />,
+                desc: "ODM questions including schemas, validation, middleware, and population techniques.",
+                questions: 45,
+              },
             ].map((tech, index) => (
               <div
                 key={index}
-                className="bg-gray-800 rounded-xl p-6 hover:bg-gray-700 transition"
+                className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 shadow-md backdrop-blur-md  hover:shadow-teal-700 transition-all duration-500 cursor-pointer transform hover:-translate-y-2"
               >
-                <div className="flex items-center mb-4">
-                  <div
-                    className={`w-12 h-12 ${tech.color} rounded-lg flex items-center justify-center mr-4`}
-                  >
-                    <span className="font-bold">{tech.name.charAt(0)}</span>
-                  </div>
-                  <h3 className="text-xl font-bold">{tech.name}</h3>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-3xl">{tech.icon}</span>
                 </div>
-                <p className="text-gray-400 mb-4">
-                  Comprehensive question bank with solutions
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-amber-500 font-bold">
-                    {tech.questions} Questions
+                <h3 className="text-xl font-bold mb-2">{tech.name}</h3>
+                <p className="text-gray-400 text-sm mb-4">{tech.desc}</p>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-emerald-400 font-semibold">
+                    {tech.questions} questions
                   </span>
-                  <button className="text-amber-500 hover:text-amber-400">
-                    Explore →
-                  </button>
+                  <span className="text-emerald-400">→</span>
                 </div>
               </div>
             ))}
@@ -113,57 +159,34 @@ const DevCrackPage = () => {
         </div>
       </section>
 
-      {/* Why Choose DevCrack */}
-      <section className="py-16 bg-gray-800">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Why Choose DevCrack?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Real Interview Questions",
-                desc: "Practice with actual questions asked in real interviews",
-                icon: "🔍",
-              },
-              {
-                title: "Detailed Solutions",
-                desc: "Step-by-step explanations for every problem",
-                icon: "📝",
-              },
-              {
-                title: "Progress Tracking",
-                desc: "Monitor your improvement over time",
-                icon: "📊",
-              },
-            ].map((item, index) => (
-              <div key={index} className="text-center p-6">
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
-              </div>
-            ))}
+      <section className="py-20  bg-[#111111] text-gray-200">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-15 text-center shadow-lg backdrop-blur-md">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
+              🚀 Join Our{" "}
+              <span className="bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">
+                Developer Community
+              </span>
+            </h2>
+            <p className="text-gray-400 my-10 mb-8 text-base sm:text-lg leading-relaxed">
+              Be part of a growing tech community where we build, share, and
+              grow together. <br />
+              Whether you're fixing bugs, adding features, or improving docs —
+              your contribution drives us forward.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="https://discord.gg/Qr7RbnJu" target="_blank">
+                <button
+                  href="#"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-lg  transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer flex items-center gap-2"
+                >
+                  <FaDiscord size={20} /> Join Our Discord Server
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-20 text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Ace Your Interview?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of developers who have improved their skills with
-            DevCrack
-          </p>
-          <button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-lg text-lg">
-            Start Practicing Now
-          </button>
-        </div>
-      </section>
-
-      {/* Footer */}
     </div>
   );
 };
