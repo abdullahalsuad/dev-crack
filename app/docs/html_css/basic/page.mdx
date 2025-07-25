@@ -1,0 +1,140 @@
+# HTML Basic Interview Questions
+
+## 1. What is HTML?
+
+**HTML** stands for **HyperText Markup Language**. It is used to structure the content on the web.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My First Page</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
+</html>
+```
+
+---
+
+## 2. What is the purpose of the `<!DOCTYPE html>` declaration?
+
+The `<!DOCTYPE html>` tells the browser to use **HTML5** standard. It must be the very first line in an HTML document.
+
+```html
+<!DOCTYPE html>
+```
+
+---
+
+## 3. What are semantic elements in HTML?
+
+Semantic elements clearly describe their meaning. Examples include: `<article>`, `<section>`, `<header>`, `<footer>`, `<nav>`.
+
+```html
+<article>
+  <h2>Blog Title</h2>
+  <p>This is a blog post.</p>
+</article>
+```
+
+---
+
+## 4. What is the difference between `<div>` and `<span>`?
+
+- `<div>` is a block-level container.
+- `<span>` is an inline-level container.
+
+```html
+<div>This is a block</div>
+<span>This is inline</span>
+```
+
+---
+
+## 5. How do you create a link in HTML?
+
+Use the `<a>` tag and the `href` attribute.
+
+```html
+<a href="https://example.com" target="_blank">Visit Example</a>
+```
+
+- `target="_blank"` opens the link in a new tab.
+
+---
+
+## 6. How do you insert an image in HTML?
+
+Use the `<img>` tag with `src` and `alt` attributes.
+
+```html
+<img src="logo.png" alt="Website Logo" width="200" />
+```
+
+- `alt` is for screen readers and when the image fails to load.
+
+---
+
+## 7. How can you create a list in HTML?
+
+- **Unordered list** uses `<ul>`.
+- **Ordered list** uses `<ol>`.
+
+```html
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+</ul>
+
+<ol>
+  <li>Step 1</li>
+  <li>Step 2</li>
+</ol>
+```
+
+---
+
+## 8. What are form elements in HTML?
+
+Forms are created using the `<form>` tag and may include:
+
+- `<input>`, `<textarea>`, `<button>`, `<select>`, `<label>`, etc.
+
+```html
+<form>
+  <label for="name">Name:</label>
+  <input id="name" type="text" name="name" />
+  <button type="submit">Submit</button>
+</form>
+```
+
+---
+
+## 9. What is the use of the `alt` attribute in an image tag?
+
+The `alt` attribute provides alternative text for screen readers and displays when the image can’t load.
+
+```html
+<img src="photo.jpg" alt="My Profile Photo" />
+```
+
+---
+
+## 10. How do you create a table in HTML?
+
+Use the `<table>`, `<tr>`, `<th>`, and `<td>` tags.
+
+```html
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Kawsar</td>
+    <td>28</td>
+  </tr>
+</table>
+```
