@@ -1,0 +1,178 @@
+# Advanced HTML Interview Questions
+
+## 1. What is the purpose of ARIA (Accessible Rich Internet Applications)?
+
+ARIA attributes improve accessibility by providing extra context to screen readers.
+
+```html
+<button aria-label="Close Menu">✖</button>
+<nav role="navigation" aria-labelledby="main-nav"></nav>
+```
+
+Common ARIA attributes:
+
+- `aria-label`
+- `aria-hidden`
+- `aria-expanded`
+- `role`
+
+---
+
+## 2. What is the difference between `async` and `defer` in `<script>`?
+
+Both load scripts asynchronously, but behave differently:
+
+```html
+<!-- Loads async, may execute before HTML finishes -->
+<script src="app.js" async></script>
+
+<!-- Waits until HTML is parsed, then runs in order -->
+<script src="app.js" defer></script>
+```
+
+- Use `defer` for predictable execution order.
+- Use `async` for analytics or third-party tools.
+
+---
+
+## 3. What is the `contenteditable` attribute?
+
+Allows users to directly edit the content inside an HTML element.
+
+```html
+<div contenteditable="true">Click to edit this text.</div>
+```
+
+---
+
+## 4. How do you use the `<template>` tag in HTML?
+
+The `<template>` tag defines reusable HTML that is not rendered until you use JavaScript to insert it.
+
+```html
+<template id="card">
+  <div class="card">
+    <h3></h3>
+    <p></p>
+  </div>
+</template>
+```
+
+```js
+const template = document.getElementById("card");
+const clone = template.content.cloneNode(true);
+clone.querySelector("h3").textContent = "Hello!";
+document.body.appendChild(clone);
+```
+
+---
+
+## 5. What are custom data attributes (`data-*`) and why are they useful?
+
+Custom attributes used to store extra data for JavaScript access without polluting HTML semantics.
+
+```html
+<div data-id="101" data-role="admin">Admin User</div>
+```
+
+```js
+const el = document.querySelector("[data-id]");
+console.log(el.dataset.id); // "101"
+```
+
+---
+
+## 6. What is the Shadow DOM?
+
+Shadow DOM lets you encapsulate HTML/CSS inside a component to avoid style or DOM conflicts.
+
+```html
+<custom-card></custom-card>
+
+<script>
+  class CustomCard extends HTMLElement {
+    constructor() {
+      super();
+      const shadow = this.attachShadow({ mode: "open" });
+      shadow.innerHTML = `<style>h1 { color: red; }</style><h1>Title</h1>`;
+    }
+  }
+
+  customElements.define("custom-card", CustomCard);
+</script>
+```
+
+---
+
+## 7. What is the `<meta>` tag used for?
+
+Defines metadata about the document (not visible on page). Common uses:
+
+```html
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Free Web tutorials" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+```
+
+---
+
+## 8. How does preloading resources with `<link rel="preload">` help performance?
+
+Preload tells the browser to fetch resources early.
+
+```html
+<link rel="preload" href="hero.jpg" as="image" />
+<link rel="preload" href="main.css" as="style" />
+```
+
+This reduces perceived load time.
+
+---
+
+## 9. How do HTML5 `input` types improve form validation?
+
+HTML5 added input types that automatically validate user input:
+
+```html
+<input type="email" required />
+<input type="number" min="1" max="10" />
+<input type="url" />
+<input type="date" />
+```
+
+No JS required for basic validation.
+
+---
+
+## 10. What are the differences between inline, internal, and external CSS?
+
+- **Inline**: inside tag via `style=""`
+- **Internal**: in `<style>` block in `<head>`
+- **External**: linked via `<link>` tag
+
+```html
+<!-- Inline -->
+<p style="color: red;">Text</p>
+
+<!-- Internal -->
+<style>
+  p {
+    color: blue;
+  }
+</style>
+
+<!-- External -->
+<link rel="stylesheet" href="styles.css" />
+```
+
+External is best for reusability and performance.
+
+---
+
+Need HTML + CSS + JS interview bundles or printable PDFs? Just ask!
+
+```
+
+
+```

@@ -1,0 +1,142 @@
+# HTML Intermediate Interview Questions
+
+## 1. What is the difference between `id` and `class` attributes?
+
+- `id`: unique identifier for one element.
+- `class`: can be shared across multiple elements.
+
+```html
+<div id="header">Unique Header</div>
+<div class="box">Reusable Box 1</div>
+<div class="box">Reusable Box 2</div>
+```
+
+---
+
+## 2. What is the purpose of the `label` element in forms?
+
+It improves accessibility and connects a text label to an input field using the `for` attribute.
+
+```html
+<label for="email">Email:</label> <input id="email" type="email" name="email" />
+```
+
+Clicking the label will focus the associated input.
+
+---
+
+## 3. What is the difference between `block`, `inline`, and `inline-block` elements?
+
+- **Block**: takes full width (e.g., `<div>`)
+- **Inline**: flows with text, no width/height (e.g., `<span>`)
+- **Inline-block**: behaves like inline but allows width/height
+
+```html
+<span>Inline</span>
+<div>Block</div>
+```
+
+---
+
+## 4. How do you create a dropdown menu in HTML?
+
+Use the `<select>` and `<option>` tags.
+
+```html
+<label for="city">Choose a city:</label>
+<select id="city" name="city">
+  <option value="dhaka">Dhaka</option>
+  <option value="chattogram">Chattogram</option>
+</select>
+```
+
+---
+
+## 5. What are self-closing tags in HTML?
+
+Tags that don't need a closing tag (HTML5 allows omitting `/` but XHTML requires it).
+
+Examples: `<img>`, `<input>`, `<br>`, `<hr>`
+
+```html
+<img src="logo.png" alt="Logo" />
+<br />
+<hr />
+```
+
+---
+
+## 6. What is the use of the `fieldset` and `legend` tags?
+
+Used to group related form elements together for better organization and accessibility.
+
+```html
+<fieldset>
+  <legend>Personal Info</legend>
+  <label>Name: <input type="text" /></label>
+</fieldset>
+```
+
+---
+
+## 7. What is the difference between `<section>`, `<article>`, and `<div>`?
+
+- `<section>`: thematic grouping of content
+- `<article>`: independent, reusable content
+- `<div>`: generic container with no meaning
+
+```html
+<section>
+  <h2>Services</h2>
+</section>
+
+<article>
+  <h2>Blog Post</h2>
+  <p>This is a post...</p>
+</article>
+```
+
+---
+
+## 8. How can you embed a video or audio file in HTML?
+
+Use `<video>` and `<audio>` with `controls` attribute.
+
+```html
+<video controls width="320">
+  <source src="movie.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<audio controls>
+  <source src="song.mp3" type="audio/mp3" />
+</audio>
+```
+
+---
+
+## 9. What are `data-*` attributes used for?
+
+They store extra data on elements without affecting the layout or performance. Often used with JavaScript.
+
+```html
+<div data-user-id="123" data-role="admin">User Info</div>
+```
+
+```js
+const div = document.querySelector("div");
+console.log(div.dataset.userId); // "123"
+```
+
+---
+
+## 10. What is the difference between `<script>` placement in `<head>` vs `<body>`?
+
+- **In `<head>`**: Blocks rendering until script loads (unless `async`/`defer` used).
+- **In `<body>` (bottom)**: Ensures HTML loads before script executes.
+
+✅ Best practice:
+
+```html
+<script src="script.js" defer></script>
+```
