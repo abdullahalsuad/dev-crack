@@ -170,7 +170,7 @@ const DevCrackPage = () => {
             <p className="text-gray-400 my-10 mb-8 text-base sm:text-lg leading-relaxed">
               Be part of a growing tech community where we build, share, and
               grow together. <br />
-              Whether you're fixing bugs, adding features, or improving docs —
+              Whether you are fixing bugs, adding features, or improving docs —
               your contribution drives us forward.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
