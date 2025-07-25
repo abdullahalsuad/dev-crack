@@ -3,6 +3,8 @@ import { Banner, Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 
+import "./index.css";
+
 export const metadata = {
   title: "Dev Crack",
 };
@@ -10,8 +12,8 @@ export const metadata = {
 const banner = <Banner storageKey="some-key">Hello</Banner>;
 const navbar = (
   <Navbar
-    logo={<b>🦐 My Cool Project</b>}
-    logoLink={"https://github.com/abdullahalsuad/dev-crack"}
+    logo={<b>Dev Crack</b>}
+    logoLink={"/"}
     projectLink="https://github.com/abdullahalsuad/dev-crack"
     chatLink="https://github.com/abdullahalsuad/dev-crack"
   />
