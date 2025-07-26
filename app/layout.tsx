@@ -2,6 +2,7 @@ import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head, Search } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
+import CustomFooter from "../components/shared/CustomFooter";
 
 import "./index.css";
 
@@ -9,19 +10,29 @@ export const metadata = {
   title: "Dev Crack",
 };
 
+// Banner component instance
 const banner = <Banner storageKey="some-key">Hello</Banner>;
+
+// Navbar component instance
 const navbar = (
   <Navbar
-    logo={<b>Dev Crack</b>}
+    logo={
+      <img
+        src="https://i.ibb.co/x8cJxqg0/dev-crack.png"
+        alt="DEV Crack"
+        className="h-90 w-auto"
+      />
+    }
     logoLink={"/"}
     projectLink="https://github.com/abdullahalsuad/dev-crack"
-    chatLink="https://github.com/abdullahalsuad/dev-crack"
+    chatLink="https://discord.gg/Gzht2qKAn8"
   />
 );
-const footer = (
-  <Footer>MIT {new Date().getFullYear()} © My Cool Project.</Footer>
-);
 
+// Footer component instance
+const footer = <CustomFooter />;
+
+// Search component instance
 const search = <Search placeholder="Search docs.."></Search>;
 
 export default async function RootLayout({
@@ -38,9 +49,7 @@ export default async function RootLayout({
       // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
       suppressHydrationWarning
     >
-      <Head
-      // ... Your additional head options
-      >
+      <Head>
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
@@ -53,7 +62,6 @@ export default async function RootLayout({
           search={search}
           editLink={null}
           feedback={{ content: null }}
-          // ... Your additional layout options
         >
           {children}
         </Layout>
