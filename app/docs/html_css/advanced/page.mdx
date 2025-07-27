@@ -16,8 +16,6 @@ Common ARIA attributes:
 - `aria-expanded`
 - `role`
 
----
-
 ## 2. What is the difference between `async` and `defer` in `<script>`?
 
 Both load scripts asynchronously, but behave differently:
@@ -33,8 +31,6 @@ Both load scripts asynchronously, but behave differently:
 - Use `defer` for predictable execution order.
 - Use `async` for analytics or third-party tools.
 
----
-
 ## 3. What is the `contenteditable` attribute?
 
 Allows users to directly edit the content inside an HTML element.
@@ -42,8 +38,6 @@ Allows users to directly edit the content inside an HTML element.
 ```html
 <div contenteditable="true">Click to edit this text.</div>
 ```
-
----
 
 ## 4. How do you use the `<template>` tag in HTML?
 
@@ -65,8 +59,6 @@ clone.querySelector("h3").textContent = "Hello!";
 document.body.appendChild(clone);
 ```
 
----
-
 ## 5. What are custom data attributes (`data-*`) and why are they useful?
 
 Custom attributes used to store extra data for JavaScript access without polluting HTML semantics.
@@ -79,8 +71,6 @@ Custom attributes used to store extra data for JavaScript access without polluti
 const el = document.querySelector("[data-id]");
 console.log(el.dataset.id); // "101"
 ```
-
----
 
 ## 6. What is the Shadow DOM?
 
@@ -102,8 +92,6 @@ Shadow DOM lets you encapsulate HTML/CSS inside a component to avoid style or DO
 </script>
 ```
 
----
-
 ## 7. What is the `<meta>` tag used for?
 
 Defines metadata about the document (not visible on page). Common uses:
@@ -115,8 +103,6 @@ Defines metadata about the document (not visible on page). Common uses:
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 ```
 
----
-
 ## 8. How does preloading resources with `<link rel="preload">` help performance?
 
 Preload tells the browser to fetch resources early.
@@ -127,8 +113,6 @@ Preload tells the browser to fetch resources early.
 ```
 
 This reduces perceived load time.
-
----
 
 ## 9. How do HTML5 `input` types improve form validation?
 
@@ -142,8 +126,6 @@ HTML5 added input types that automatically validate user input:
 ```
 
 No JS required for basic validation.
-
----
 
 ## 10. What are the differences between inline, internal, and external CSS?
 
@@ -164,15 +146,4 @@ No JS required for basic validation.
 
 <!-- External -->
 <link rel="stylesheet" href="styles.css" />
-```
-
-External is best for reusability and performance.
-
----
-
-Need HTML + CSS + JS interview bundles or printable PDFs? Just ask!
-
-```
-
-
 ```

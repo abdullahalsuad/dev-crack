@@ -11,8 +11,6 @@
 <div class="box">Reusable Box 2</div>
 ```
 
----
-
 ## 2. What is the purpose of the `label` element in forms?
 
 It improves accessibility and connects a text label to an input field using the `for` attribute.
@@ -22,8 +20,6 @@ It improves accessibility and connects a text label to an input field using the 
 ```
 
 Clicking the label will focus the associated input.
-
----
 
 ## 3. What is the difference between `block`, `inline`, and `inline-block` elements?
 
@@ -35,8 +31,6 @@ Clicking the label will focus the associated input.
 <span>Inline</span>
 <div>Block</div>
 ```
-
----
 
 ## 4. How do you create a dropdown menu in HTML?
 
@@ -50,8 +44,6 @@ Use the `<select>` and `<option>` tags.
 </select>
 ```
 
----
-
 ## 5. What are self-closing tags in HTML?
 
 Tags that don't need a closing tag (HTML5 allows omitting `/` but XHTML requires it).
@@ -64,8 +56,6 @@ Examples: `<img>`, `<input>`, `<br>`, `<hr>`
 <hr />
 ```
 
----
-
 ## 6. What is the use of the `fieldset` and `legend` tags?
 
 Used to group related form elements together for better organization and accessibility.
@@ -76,8 +66,6 @@ Used to group related form elements together for better organization and accessi
   <label>Name: <input type="text" /></label>
 </fieldset>
 ```
-
----
 
 ## 7. What is the difference between `<section>`, `<article>`, and `<div>`?
 
@@ -96,8 +84,6 @@ Used to group related form elements together for better organization and accessi
 </article>
 ```
 
----
-
 ## 8. How can you embed a video or audio file in HTML?
 
 Use `<video>` and `<audio>` with `controls` attribute.
@@ -113,8 +99,6 @@ Use `<video>` and `<audio>` with `controls` attribute.
 </audio>
 ```
 
----
-
 ## 9. What are `data-*` attributes used for?
 
 They store extra data on elements without affecting the layout or performance. Often used with JavaScript.
@@ -128,8 +112,6 @@ const div = document.querySelector("div");
 console.log(div.dataset.userId); // "123"
 ```
 
----
-
 ## 10. What is the difference between `<script>` placement in `<head>` vs `<body>`?
 
 - **In `<head>`**: Blocks rendering until script loads (unless `async`/`defer` used).
@@ -140,3 +122,38 @@ console.log(div.dataset.userId); // "123"
 ```html
 <script src="script.js" defer></script>
 ```
+
+## 11. What is the significance of `<head>` and `<body>` tag in HTML?
+
+The `<head>` tag provides information about the document. It is always enclosed within the `<html>` tag and contains **metadata** about the webpage.
+
+Some of the commonly used elements inside `<head>` include:
+
+- `<title>`
+- `<meta>`
+- `<link>`
+- `<style>`
+- `<script>`
+
+These elements define things like page title, character encoding, linked CSS files, and other resources.
+
+The `<body>` tag, on the other hand, contains **all the visible content** of the web page such as headings, paragraphs, images, links, buttons, and more. It's what users see and interact with in their browser.
+
+- `<h1> - <h6>`
+- `<p>`
+- `<img>`
+- `<link>`
+- `<button>`
+
+## 12. Difference between `<strong>`, `<b>` and `<em>`, `<i>` tags
+
+- `<b>` and `<i>` are **styling-only** tags.
+
+  - `<b>`: Makes text bold.
+  - `<i>`: Makes text italic.
+  - ❌ These do **not** carry any semantic meaning.
+
+- `<strong>` and `<em>` add **semantic meaning**:
+  - `<strong>`: Indicates **strong importance**.
+  - `<em>`: Indicates **emphasis**.
+  - ✅ These are better for **accessibility** and **SEO**.
