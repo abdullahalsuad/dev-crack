@@ -7,5 +7,9 @@ export default {
     title: "Contributors",
     type: "page",
   },
-  index: "く",
+  blog: {
+    title: "Blog",
+    type: "page",
+  },
+  index: "Go Back",
 };

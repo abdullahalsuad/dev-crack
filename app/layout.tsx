@@ -16,13 +16,7 @@ const banner = <Banner storageKey="some-key">Hello</Banner>;
 // Navbar component instance
 const navbar = (
   <Navbar
-    logo={
-      <img
-        src="https://i.ibb.co/x8cJxqg0/dev-crack.png"
-        alt="DEV Crack"
-        className="h-90 w-auto"
-      />
-    }
+    logo={<b>DEV Crack</b>}
     logoLink={"/"}
     projectLink="https://github.com/abdullahalsuad/dev-crack"
     chatLink="https://discord.gg/Gzht2qKAn8"
