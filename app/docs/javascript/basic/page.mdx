@@ -1,164 +1,309 @@
-# JavaScript Basic Interview Questions
+## 1. What Are Value & Reference in Programming?
 
-## 1. What is the difference between `let`, `const`, and `var`?
+**Answer:** Value types (primitives) store actual data directly in memory and are copied by value when assigned. Reference types (objects, arrays, functions) store memory addresses pointing to the actual data location. When you assign a reference type, you copy the address, not the data itself. This means multiple variables can point to the same object, and changes through one variable affect all others.
 
-- `var` is function-scoped and can be re-declared.
-- `let` is block-scoped and cannot be re-declared.
-- `const` is also block-scoped and cannot be reassigned.
+```javascript
+// VALUE (Primitives)
+let a = 5;
+let b = a; // copies value
+a = 10;
+console.log(b); // 5
 
-```js
-function example() {
-  var a = 1;
-  let b = 2;
-  const c = 3;
+// REFERENCE (Objects)
+let obj1 = { name: "John" };
+let obj2 = obj1; // copies reference
+obj1.name = "Jane";
+console.log(obj2.name); // "Jane"
+```
 
-  if (true) {
-    var a = 10; // allowed
-    let b = 20; // different scope
-    // const c = 30; // different scope
+---
+
+## 2. What is JavaScript Execution Context?
+
+**Answer:** Execution context is the environment where JavaScript code is executed and evaluated. It contains information about variables, functions, scope chain, and the value of 'this'. There are three types: Global Execution Context (created when script runs), Function Execution Context (created when function is called), and Eval Execution Context. Each context goes through creation phase (sets up memory space) and execution phase (code runs line by line).
+
+```javascript
+var global = "I'm global";
+
+function outer() {
+  var local = "I'm local";
+  console.log(global); // accessible
+
+  function inner() {
+    console.log(local); // accessible via scope chain
   }
+  inner();
+}
+outer(); // Creates execution contexts: Global -> Outer -> Inner
+```
 
-  console.log(a); // 10
-  console.log(b); // 2
-  console.log(c); // 3
+---
+
+## 3. What is Hoisting in JavaScript?
+
+**Answer:** Hoisting is JavaScript's behavior of moving all declarations (variables and functions) to the top of their scope during the compilation phase, before code execution. Variable declarations are hoisted but not their initializations. 'var' is hoisted and initialized with undefined, while 'let' and 'const' are hoisted but remain uninitialized (temporal dead zone). Function declarations are fully hoisted, but function expressions are not.
+
+```javascript
+console.log(x); // undefined (not error)
+var x = 5;
+
+console.log(y); // ReferenceError
+let y = 10;
+
+sayHello(); // "Hello!" - function hoisted
+function sayHello() {
+  console.log("Hello!");
 }
 ```
 
 ---
 
-## 2. What is a closure?
+## 4. What is Scope and Scope Chain?
 
-A closure is a function that remembers its outer variables even after the outer function has finished executing.
+**Answer:** Scope determines the accessibility and visibility of variables in different parts of code. JavaScript has global scope (accessible everywhere), function scope (accessible within function), and block scope (let/const within {}). Scope chain is the mechanism JavaScript uses to resolve variable names by looking up through nested scopes from innermost to outermost. When a variable is referenced, JavaScript searches the current scope first, then outer scopes until found or reaches global scope.
 
-```js
+```javascript
+var global = "global";
+
 function outer() {
-  let count = 0;
-  return function inner() {
-    count++;
-    console.log(count);
+  var outer = "outer";
+
+  function inner() {
+    console.log(global); // finds in global scope
+    console.log(outer); // finds in outer scope
+  }
+  inner();
+}
+```
+
+---
+
+## 5. Explain JavaScript Garbage Collection and Memory Leaks
+
+**Answer:** Garbage collection is JavaScript's automatic memory management system that frees up memory by removing objects that are no longer reachable or referenced. Memory leaks occur when objects that should be garbage collected remain in memory due to unintentional references. Common causes include forgotten timers, closures holding references, detached DOM nodes, and circular references. Modern engines use mark-and-sweep algorithm to identify and clean unreachable objects.
+
+```javascript
+// MEMORY LEAK EXAMPLE
+function leak() {
+  var element = document.getElementById("button");
+  element.onclick = function () {
+    // element reference kept alive
   };
 }
 
-const counter = outer();
-counter(); // 1
-counter(); // 2
+// AVOIDING LEAKS
+function noLeak() {
+  var element = document.getElementById("button");
+  element.onclick = function () {
+    // do something
+  };
+  element = null; // break reference
+}
 ```
 
 ---
 
-## 3. What is hoisting in JavaScript?
+## 6. What is Closure in JavaScript?
 
-Hoisting is JavaScript’s behavior of moving declarations to the top of their scope during compilation.
+**Answer:** A closure is a function that has access to variables from its outer (enclosing) scope even after the outer function has finished executing. Closures are created when a function is defined inside another function and references variables from the outer function. The inner function "closes over" the outer variables, keeping them alive in memory. This enables data privacy, function factories, and maintaining state in functional programming.
 
-```js
-console.log(a); // undefined
-var a = 5;
-```
+```javascript
+function counter() {
+  let count = 0;
+  return function () {
+    return ++count;
+  };
+}
 
-`var` declarations are hoisted with value `undefined`. `let` and `const` are hoisted but not initialized.
-
----
-
-## 4. What is the difference between `==` and `===`?
-
-- `==` compares values after type conversion.
-- `===` compares both value and type.
-
-```js
-console.log(2 == "2"); // true
-console.log(2 === "2"); // false
+const increment = counter();
+console.log(increment()); // 1
+console.log(increment()); // 2
 ```
 
 ---
 
-## 5. What is the difference between synchronous and asynchronous code?
+## 7. Explain how Prototypal Inheritance works
 
-- **Synchronous** code runs line-by-line.
-- **Asynchronous** code allows non-blocking operations like `setTimeout`, `fetch`, etc.
+**Answer:** Prototypal inheritance is JavaScript's mechanism where objects inherit properties and methods directly from other objects through the prototype chain. Every object has a hidden [[Prototype]] property that points to another object. When accessing a property, JavaScript first looks in the object itself, then follows the prototype chain until found or reaches null. This allows objects to share behavior without duplicating code, forming the foundation of JavaScript's object-oriented programming.
 
-```js
-console.log("Start");
-setTimeout(() => console.log("Async"), 1000);
-console.log("End");
-```
+```javascript
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.greet = function () {
+  return `Hello, ${this.name}`;
+};
 
-Output:
+function Student(name, grade) {
+  Person.call(this, name);
+  this.grade = grade;
+}
+Student.prototype = Object.create(Person.prototype);
 
-```
-Start
-End
-Async
-```
-
----
-
-## 6. What are arrow functions and how are they different from regular functions?
-
-Arrow functions are a shorter syntax for writing functions and **do not have their own `this`**.
-
-```js
-const add = (a, b) => a + b;
-console.log(add(2, 3)); // 5
-```
-
-Arrow functions are best used for simple tasks or inside array methods.
-
----
-
-## 7. What is the difference between `null` and `undefined`?
-
-- `undefined`: a variable that has been declared but not assigned a value.
-- `null`: an assignment value that represents no value.
-
-```js
-let a;
-console.log(a); // undefined
-
-let b = null;
-console.log(b); // null
+const student = new Student("John", "A");
+console.log(student.greet()); // "Hello, John"
 ```
 
 ---
 
-## 8. What is event delegation?
+## 8. What is the `this` keyword?
 
-Event delegation is a technique of handling events at a **parent element** instead of the children.
+**Answer:** The 'this' keyword refers to the object that is currently executing or calling the function, but its value depends on how the function is invoked. In regular functions, 'this' is determined at call time (dynamic binding). In arrow functions, 'this' is determined at definition time (lexical binding). The binding rules are: default (global object), implicit (object before dot), explicit (call/apply/bind), and new (newly created object).
 
-```js
-document.getElementById("list").addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    console.log("Clicked:", e.target.textContent);
+```javascript
+const obj = {
+  name: "John",
+  regular: function () {
+    console.log(this.name); // "John"
+  },
+  arrow: () => {
+    console.log(this.name); // undefined (lexical this)
+  },
+};
+
+obj.regular(); // "John"
+obj.arrow(); // undefined
+```
+
+---
+
+## 9. What are Arrow Functions vs Regular Functions?
+
+**Answer:** Arrow functions are a concise way to write functions introduced in ES6, but they differ significantly from regular functions. Arrow functions don't have their own 'this' (lexically bound), 'arguments' object, or 'prototype' property. They cannot be used as constructors with 'new' keyword and don't have their own 'super'. Arrow functions are best for short, non-method functions and callbacks where you want to preserve the outer 'this' context.
+
+```javascript
+// Regular function
+function regular(a, b) {
+  console.log(arguments); // [1, 2]
+  console.log(this); // depends on call
+}
+
+// Arrow function
+const arrow = (a, b) => {
+  // console.log(arguments); // Error
+  console.log(this); // lexical this
+  return a + b;
+};
+```
+
+---
+
+## 10. Synchronous vs Asynchronous JavaScript?
+
+**Answer:** Synchronous code executes line by line, blocking further execution until the current operation completes. Asynchronous code allows other operations to continue while waiting for long-running tasks to complete. JavaScript is single-threaded but uses the event loop, callback queue, and Web APIs to handle asynchronous operations. This prevents the UI from freezing during time-consuming operations like network requests, file operations, or timers.
+
+```javascript
+// SYNCHRONOUS
+console.log("1");
+console.log("2");
+console.log("3"); // Output: 1, 2, 3
+
+// ASYNCHRONOUS
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+console.log("3"); // Output: 1, 3, 2
+```
+
+---
+
+## 11. What is a Callback Function?
+
+**Answer:** A callback function is a function passed as an argument to another function and executed at a specific point within that function. Callbacks enable asynchronous programming, event handling, and functional programming patterns. They allow you to specify what should happen after an operation completes. However, nested callbacks can lead to "callback hell" with deeply nested, hard-to-read code, which is why Promises and async/await were introduced.
+
+```javascript
+function processData(data, callback) {
+  const result = data.toUpperCase();
+  callback(result);
+}
+
+processData("hello", function (result) {
+  console.log(result); // "HELLO"
+});
+
+// Array methods use callbacks
+[1, 2, 3].map((x) => x * 2); // [2, 4, 6]
+```
+
+---
+
+## 12. What are Promises and How Do They Work?
+
+**Answer:** Promises are objects representing the eventual completion or failure of an asynchronous operation and its resulting value. A Promise has three states: pending (initial), fulfilled (successful), and rejected (failed). Promises solve callback hell by allowing method chaining with .then() for success and .catch() for errors. They provide better error handling, composition with Promise.all/race, and serve as the foundation for async/await syntax.
+
+```javascript
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Success!");
+  }, 1000);
+});
+
+promise
+  .then((result) => console.log(result)) // "Success!"
+  .catch((error) => console.log(error));
+
+// Promise.all
+Promise.all([promise1, promise2]).then((results) => console.log(results));
+```
+
+---
+
+## 13. How does async/await work?
+
+**Answer:** Async/await is syntactic sugar built on top of Promises that makes asynchronous code look and behave more like synchronous code. The 'async' keyword makes a function return a Promise, while 'await' pauses function execution until the Promise resolves. This eliminates callback hell and .then() chains, making code more readable and easier to debug. Error handling is done with try/catch blocks, and multiple await operations can run sequentially or in parallel.
+
+```javascript
+// Without async/await
+function fetchData() {
+  return fetch("/api")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+}
+
+// With async/await
+async function fetchData() {
+  try {
+    const response = await fetch("/api");
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+```
+
+---
+
+## 14. What is Event Delegation?
+
+**Answer:** Event delegation is a technique that uses event bubbling to handle events on a parent element instead of attaching individual event listeners to multiple child elements. When an event occurs on a child, it bubbles up to the parent where a single listener can handle it by checking the event target. This improves performance, reduces memory usage, automatically handles dynamically added elements, and simplifies code maintenance when dealing with many similar elements.
+
+```javascript
+// Instead of adding listeners to each button
+// document.querySelectorAll('button').forEach(btn =>
+//     btn.addEventListener('click', handler));
+
+// Add one listener to parent
+document.getElementById("container").addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON") {
+    console.log("Button clicked:", e.target.textContent);
   }
 });
 ```
 
 ---
 
-## 9. What is the use of `this` keyword?
+## 15. What is Event Loop?
 
-`this` refers to the object that is executing the current function.
+**Answer:** The Event Loop is the mechanism that handles asynchronous operations in JavaScript's single-threaded environment. It continuously monitors the call stack and callback queues, moving callbacks to the call stack when it's empty. The process involves: call stack (synchronous code), Web APIs (browser features like setTimeout), callback queue (completed async operations), and microtask queue (Promises, higher priority). This allows JavaScript to be non-blocking despite being single-threaded.
 
-```js
-const person = {
-  name: "John",
-  greet() {
-    console.log("Hello", this.name);
-  },
-};
+```javascript
+console.log("1"); // Call stack
 
-person.greet(); // Hello John
-```
+setTimeout(() => console.log("2"), 0); // Web API -> Callback Queue
 
----
+Promise.resolve().then(() => console.log("3")); // Microtask Queue
 
-## 10. What is a promise?
+console.log("4"); // Call stack
 
-A Promise is an object representing the eventual completion or failure of an asynchronous operation.
-
-```js
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => resolve("Success"), 1000);
-});
-
-promise.then((res) => console.log(res)); // Success
+// Output: 1, 4, 3, 2 (microtasks have priority)
 ```
