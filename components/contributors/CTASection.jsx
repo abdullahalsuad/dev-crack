@@ -4,7 +4,7 @@ import GuideBtn from "../button/GuideBtn";
 
 const CTASection = () => {
   return (
-    <section className="py-10 font-inter bg-[#000000]">
+    <section className="py-20 font-inter bg-[#000000]">
       <div className="max-w-7xl mx-auto bg-gray-900 rounded-xl p-8 sm:p-12 shadow-lg border border-gray-800 text-center">
         <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight">
           Want to{" "}
@@ -19,7 +19,7 @@ const CTASection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <Link href="/docs">
+          <Link href="https://github.com/abdullahalsuad/dev-crack/blob/main/CONTRIBUTING.md">
             <GuideBtn />
           </Link>
 
