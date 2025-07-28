@@ -20,7 +20,7 @@ const SOCIAL_LINKS = [
 
 const CustomFooter = () => {
   return (
-    <footer className="w-full py-8 px-4 bg-black text-white mt-20  border-t-2 border-gray-800">
+    <footer className="w-full py-8 px-4 bg-black text-white border-t-2 border-gray-800">
       {/* Footer Content */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         {/* Left: Copyright */}
