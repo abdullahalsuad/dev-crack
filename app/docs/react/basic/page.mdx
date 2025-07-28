@@ -1,1 +1,292 @@
-## react basic
+### **01. What is React?**
+
+**React** is a declarative, component-based JavaScript library for building **user interfaces**, especially for **single-page applications (SPAs)**. Developed by Facebook, React lets you build UI components that manage their own state and can be composed to make complex UIs.
+
+Unlike traditional JS apps where you manipulate the DOM directly using `document.querySelector`, React maintains a **virtual DOM**, which is a copy of the real DOM kept in memory. React uses this to efficiently update only parts of the page that need to change, making it **fast and scalable**.
+
+> 🔧 Think of React as LEGO blocks — each block (component) can be reused and rearranged without changing the entire structure.
+
+```jsx
+function ProfileCard() {
+  return (
+    <div className="card">
+      <img src="/avatar.jpg" alt="Profile" />
+      <h2>KAWSAR KABIR</h2>
+      <p>Frontend Developer</p>
+    </div>
+  );
+}
+```
+
+This UI piece can now be reused across your app — on home, profile, team page, etc.
+
+---
+
+### **02. What is JSX in React?**
+
+JSX (JavaScript XML) is a **syntax extension** that allows writing HTML elements directly within JavaScript code. It's not valid JavaScript by default, so **Babel** (a compiler) is used to convert JSX into regular JavaScript calls like `React.createElement()`.
+
+JSX lets you embed expressions (`{}`), conditionals (ternary, `&&`), and map over arrays to create elements dynamically. This makes JSX incredibly powerful for building UI based on logic or data.
+
+> 🧠 JSX is not a string, and it's not HTML. It's syntactic sugar that makes your code cleaner.
+
+```jsx
+const user = {
+  name: "Kawsar",
+  isLoggedIn: true,
+};
+
+const element = (
+  <div>
+    <h1>Welcome, {user.name}</h1>
+    {user.isLoggedIn ? <p>You are logged in</p> : <p>Please log in</p>}
+  </div>
+);
+```
+
+Behind the scenes, this turns into nested `React.createElement()` calls.
+
+---
+
+### **03. What are components in React?**
+
+Components are **independent, reusable pieces of UI**. They can be small, like a button, or large, like a sidebar or full page. In React, you break the UI into components to make your code **modular, testable, and reusable**.
+
+There are two main types:
+
+- **Functional Components** (modern and hook-based)
+- **Class Components** (older, rarely used in new apps)
+
+Components can accept **props** and manage **state** internally. They can even be nested within each other, allowing powerful UI composition.
+
+> 🧱 Think of components as mini-templates that you can reuse with different data.
+
+```jsx
+function ProductCard({ name, price }) {
+  return (
+    <div className="product">
+      <h3>{name}</h3>
+      <p>Price: ${price}</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <ProductCard name="Headphones" price={49} />
+      <ProductCard name="Keyboard" price={99} />
+    </>
+  );
+}
+```
+
+Each `ProductCard` is the same component reused with different props.
+
+---
+
+### **04. What is state in React?**
+
+**State** is a built-in object that stores **dynamic data** in a component and allows the component to react (re-render) when that data changes. State should be used for **interactive** or **changing parts** of your component like toggles, inputs, counters, etc.
+
+In functional components, you use the `useState` hook to define state. You must **never mutate state directly**; always use the setter function to trigger a re-render.
+
+> 🔁 React state is like a memory bank for your component. When you update it, the component redraws itself to match.
+
+```jsx
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increase = () => setCount(count + 1);
+  const reset = () => setCount(0);
+
+  return (
+    <div>
+      <h2>Counter: {count}</h2>
+      <button onClick={increase}>+ Increase</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+
+Each click updates the `count` state and triggers a UI re-render.
+
+---
+
+### **05. What are props in React?**
+
+**Props** (short for “properties”) are how components **receive data** from their parent components. They are **read-only**, meaning a child cannot modify them. Props help in **passing dynamic values** to reusable components and in creating more flexible UIs.
+
+Props can be strings, numbers, arrays, objects, or even functions.
+
+> 📦 Props are like function arguments: You pass them into a component to customize what it does or displays.
+
+```jsx
+function WelcomeMessage({ username }) {
+  return <h1>Hello, {username}!</h1>;
+}
+
+function App() {
+  return (
+    <>
+      <WelcomeMessage username="Kawsar" />
+      <WelcomeMessage username="Maruf" />
+    </>
+  );
+}
+```
+
+This reuses `WelcomeMessage` to greet different users using different props.
+
+---
+
+### **06. What is the difference between state and props in React?**
+
+Both **state** and **props** are used to manage data in React, but they serve different purposes:
+
+| Feature    | Props                  | State                            |
+| ---------- | ---------------------- | -------------------------------- |
+| Mutability | Immutable (read-only)  | Mutable (can be updated)         |
+| Scope      | Passed from parent     | Managed within component         |
+| Use case   | Customizing components | Managing local, interactive data |
+
+- **Props** come from a parent component and help **configure a child**.
+- **State** is internal and controls how a component behaves over time.
+
+> 🔄 State is like the mood of a person, while props are like the clothes they’re wearing — others see it, but can’t change it.
+
+```jsx
+function Counter({ step }) {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={() => setCount(count + step)}>Increase</button>
+    </div>
+  );
+}
+
+function App() {
+  return <Counter step={5} />; // passing props
+}
+```
+
+- `step` is a prop (immutable, from parent).
+- `count` is state (mutable, changes inside component).
+
+---
+
+### **07. What is a React hook?**
+
+Hooks are **functions** introduced in React 16.8 that let you “hook into” React features like **state**, **lifecycle**, and **context** from **functional components**.
+
+Before hooks, only class components had state and lifecycle. Hooks changed that, making **functional components** just as powerful — and even more concise.
+
+> 🔧 Hooks are tools like `useState`, `useEffect`, `useContext`, etc., that help you manage component logic in a clean, modular way.
+
+```jsx
+import { useState, useEffect } from "react";
+
+function Clock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+
+    return () => clearInterval(timer); // cleanup
+  }, []);
+
+  return <h2>{time.toLocaleTimeString()}</h2>;
+}
+```
+
+This shows the real-time clock using `useState` and `useEffect`.
+
+---
+
+### **08. What is useEffect and when to use it?**
+
+`useEffect` is a React hook that lets you **run side effects** in your component — like data fetching, setting up subscriptions, DOM updates, or timers.
+
+It replaces lifecycle methods like `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` from class components.
+
+You can control when the effect runs by passing a **dependency array**.
+
+```jsx
+useEffect(() => {
+  console.log("Component mounted");
+
+  return () => {
+    console.log("Component unmounted");
+  };
+}, []); // only on mount/unmount
+```
+
+> 📦 `useEffect` is like a delivery worker — it shows up after render and can leave behind cleanup when it's done.
+
+More real-world example:
+
+```jsx
+useEffect(() => {
+  fetch("/api/data")
+    .then((res) => res.json())
+    .then((data) => setData(data));
+}, []);
+```
+
+This runs **once**, like `componentDidMount`.
+
+---
+
+### **09. What is conditional rendering in React?**
+
+**Conditional rendering** means showing or hiding parts of the UI based on a condition. In React, this is done using `if`, `ternary ( ? : )`, `&&`, or early `return`.
+
+It helps create **dynamic interfaces**, like showing login forms only if the user isn’t logged in.
+
+```jsx
+function UserProfile({ user }) {
+  if (!user) {
+    return <p>Please log in.</p>;
+  }
+
+  return (
+    <div>
+      <h2>Welcome, {user.name}</h2>
+      <p>Email: {user.email}</p>
+    </div>
+  );
+}
+```
+
+Here we check for a user before rendering their profile. This prevents errors like accessing `user.name` when `user` is `null`.
+
+---
+
+### **10. What are keys in React and why are they important?**
+
+**Keys** help React **identify which items changed, added, or removed** from a list. They're critical when rendering dynamic lists — without them, React may re-render inefficiently or wrongly reuse elements.
+
+> 🧠 Keys help React maintain stability across renders, avoiding bugs like input field focus loss or animations breaking.
+
+```jsx
+const products = [
+  { id: 1, name: "Book" },
+  { id: 2, name: "Pen" },
+];
+
+return (
+  <ul>
+    {products.map((product) => (
+      <li key={product.id}>{product.name}</li>
+    ))}
+  </ul>
+);
+```
+
+💥 **Common mistake:**
+Using the index as key (`key={index}`) is only okay **if the list never changes**. Otherwise, it causes **weird re-renders**.
