@@ -1,1 +1,445 @@
-## react basic
+# Node.js Basic Interview Questions
+
+## 1. What is Node.js?
+
+Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine that allows you to run JavaScript code on servers and computers, not just in web browsers.
+
+**Example:**
+
+```javascript
+// hello.js - Run this file with: node hello.js
+console.log("Hello from Node.js!");
+console.log("Current time:", new Date());
+```
+
+## 2. What is npm?
+
+npm (Node Package Manager) is the default package manager for Node.js that helps you install, manage, and share code libraries and tools.
+
+**Example:**
+
+```bash
+# Install a package globally
+npm install -g nodemon
+
+# Install a package locally in your project
+npm install express
+
+# Install development dependencies
+npm install --save-dev jest
+```
+
+## 3. What is a module in Node.js?
+
+A module is a reusable block of code whose exports can be imported into other modules using `require()` or `import`.
+
+**Example:**
+
+```javascript
+// math.js - Creating a module
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+module.exports = { add, subtract };
+
+// app.js - Using the module
+const { add, subtract } = require("./math");
+console.log(add(5, 3)); // 8
+console.log(subtract(10, 4)); // 6
+```
+
+## 4. How do you create a simple HTTP server in Node.js?
+
+You can create an HTTP server using the built-in `http` module to handle web requests and responses.
+
+**Example:**
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.end("<h1>Hello World from Node.js Server!</h1>");
+});
+
+server.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
+```
+
+## 5. What is package.json?
+
+package.json is a configuration file that contains metadata about your Node.js project, including dependencies, scripts, and project information.
+
+**Example:**
+
+```json
+{
+  "name": "my-node-app",
+  "version": "1.0.0",
+  "description": "A sample Node.js application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0"
+  }
+}
+```
+
+## 6. What is the difference between require() and import?
+
+`require()` is CommonJS syntax (traditional Node.js), while `import` is ES6 module syntax (modern JavaScript).
+
+**Example:**
+
+```javascript
+// CommonJS (require)
+const fs = require("fs");
+const { readFile } = require("fs");
+
+// ES6 Modules (import) - Need "type": "module" in package.json
+import fs from "fs";
+import { readFile } from "fs";
+```
+
+## 7. What is a callback in Node.js?
+
+A callback is a function passed as an argument to another function, executed after an asynchronous operation completes.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+
+// Callback function
+fs.readFile("data.txt", "utf8", (err, data) => {
+  if (err) {
+    console.error("Error reading file:", err);
+    return;
+  }
+  console.log("File content:", data);
+});
+
+console.log("This runs before file is read!");
+```
+
+## 8. What is asynchronous programming?
+
+Asynchronous programming allows multiple operations to run concurrently without blocking the main thread.
+
+**Example:**
+
+```javascript
+console.log("Start");
+
+// Asynchronous operation
+setTimeout(() => {
+  console.log("This runs after 2 seconds");
+}, 2000);
+
+console.log("End"); // This runs immediately
+
+// Output: Start, End, This runs after 2 seconds
+```
+
+## 9. What is the event loop?
+
+The event loop is Node.js's mechanism for handling asynchronous operations by continuously checking for and executing pending callbacks.
+
+**Example:**
+
+```javascript
+console.log("1: Start");
+
+setTimeout(() => console.log("2: Timeout"), 0);
+
+setImmediate(() => console.log("3: Immediate"));
+
+process.nextTick(() => console.log("4: Next Tick"));
+
+console.log("5: End");
+
+// Output: 1: Start, 5: End, 4: Next Tick, 3: Immediate, 2: Timeout
+```
+
+## 10. What is blocking vs non-blocking code?
+
+Blocking code stops execution until completion, while non-blocking code allows other operations to continue.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+
+// Blocking (synchronous)
+console.log("Before blocking read");
+const data = fs.readFileSync("file.txt", "utf8");
+console.log(data);
+console.log("After blocking read");
+
+// Non-blocking (asynchronous)
+console.log("Before non-blocking read");
+fs.readFile("file.txt", "utf8", (err, data) => {
+  console.log(data);
+});
+console.log("After non-blocking read");
+```
+
+## 11. How do you read a file in Node.js?
+
+You can read files using the `fs` module with both synchronous and asynchronous methods.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+
+// Asynchronous reading
+fs.readFile("example.txt", "utf8", (err, data) => {
+  if (err) {
+    console.error("Error:", err);
+    return;
+  }
+  console.log("File content:", data);
+});
+
+// Synchronous reading
+try {
+  const data = fs.readFileSync("example.txt", "utf8");
+  console.log("Sync content:", data);
+} catch (err) {
+  console.error("Sync error:", err);
+}
+```
+
+## 12. What is middleware?
+
+Middleware functions are functions that execute during the request-response cycle, having access to request and response objects.
+
+**Example:**
+
+```javascript
+const express = require("express");
+const app = express();
+
+// Custom middleware
+function logger(req, res, next) {
+  console.log(`${req.method} ${req.url} - ${new Date()}`);
+  next(); // Continue to next middleware
+}
+
+app.use(logger); // Use middleware globally
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(3000);
+```
+
+## 13. What is Express.js?
+
+Express.js is a minimal and flexible Node.js web application framework that provides robust features for web and mobile applications.
+
+**Example:**
+
+```javascript
+const express = require("express");
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Express!" });
+});
+
+app.post("/users", (req, res) => {
+  const user = req.body;
+  res.json({ message: "User created", user });
+});
+
+app.listen(3000, () => {
+  console.log("Express server running on port 3000");
+});
+```
+
+## 14. What is the difference between setTimeout and setImmediate?
+
+`setTimeout` schedules execution after a minimum delay, while `setImmediate` schedules execution on the next iteration of the event loop.
+
+**Example:**
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("setTimeout");
+}, 0);
+
+setImmediate(() => {
+  console.log("setImmediate");
+});
+
+console.log("End");
+
+// Output: Start, End, setImmediate, setTimeout
+```
+
+## 15. What is a Promise in Node.js?
+
+A Promise is an object representing the eventual completion or failure of an asynchronous operation.
+
+**Example:**
+
+```javascript
+const fs = require("fs").promises;
+
+// Creating a Promise
+function readFilePromise(filename) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, "utf8")
+      .then((data) => resolve(data))
+      .catch((err) => reject(err));
+  });
+}
+
+// Using Promise
+readFilePromise("example.txt")
+  .then((data) => console.log("Content:", data))
+  .catch((err) => console.error("Error:", err));
+```
+
+## 16. What is async/await?
+
+async/await is syntactic sugar for Promises, making asynchronous code look and behave more like synchronous code.
+
+**Example:**
+
+```javascript
+const fs = require("fs").promises;
+
+async function readMultipleFiles() {
+  try {
+    const file1 = await fs.readFile("file1.txt", "utf8");
+    const file2 = await fs.readFile("file2.txt", "utf8");
+
+    console.log("File 1:", file1);
+    console.log("File 2:", file2);
+  } catch (error) {
+    console.error("Error reading files:", error);
+  }
+}
+
+readMultipleFiles();
+```
+
+## 17. What is the global object in Node.js?
+
+The global object in Node.js is similar to `window` in browsers, providing access to global variables and functions.
+
+**Example:**
+
+```javascript
+// Global variables
+global.myGlobalVar = "Hello Global!";
+
+// Access in another file
+console.log(global.myGlobalVar); // Hello Global!
+
+// Common global properties
+console.log(global.process.version); // Node.js version
+console.log(global.__dirname); // Current directory
+console.log(global.__filename); // Current file
+```
+
+## 18. What is process.env?
+
+`process.env` is an object containing environment variables, commonly used for configuration settings.
+
+**Example:**
+
+```javascript
+// Set environment variables in .env file or system
+// PORT=3000
+// DATABASE_URL=mongodb://localhost:27017/mydb
+
+const port = process.env.PORT || 5000;
+const dbUrl = process.env.DATABASE_URL || "default-db-url";
+
+console.log("Server will run on port:", port);
+console.log("Database URL:", dbUrl);
+
+// Setting environment variable in code
+process.env.NODE_ENV = "development";
+```
+
+## 19. How do you handle errors in Node.js?
+
+Error handling in Node.js can be done using try-catch blocks, error callbacks, and Promise rejections.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+
+// Callback error handling
+fs.readFile("nonexistent.txt", (err, data) => {
+  if (err) {
+    console.error("Callback error:", err.message);
+    return;
+  }
+  console.log(data);
+});
+
+// Promise error handling
+fs.promises
+  .readFile("nonexistent.txt")
+  .catch((err) => console.error("Promise error:", err.message));
+
+// Async/await error handling
+async function readFileAsync() {
+  try {
+    const data = await fs.promises.readFile("nonexistent.txt");
+    console.log(data);
+  } catch (err) {
+    console.error("Async/await error:", err.message);
+  }
+}
+```
+
+## 20. What is nodemon?
+
+nodemon is a development tool that automatically restarts your Node.js application when file changes are detected.
+
+**Example:**
+
+```bash
+# Install nodemon globally
+npm install -g nodemon
+
+# Or install as dev dependency
+npm install --save-dev nodemon
+
+# Use nodemon instead of node
+nodemon app.js
+
+# Add to package.json scripts
+# "scripts": {
+#   "dev": "nodemon app.js"
+# }
+# npm run dev
+```

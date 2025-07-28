@@ -1,1 +1,227 @@
-## react basic
+# Next.js Basic Interview Questions
+
+## 1. What is Next.js?
+
+Next.js is a React framework that adds features like server-side rendering, routing, and optimization to make building web apps easier.
+
+
+
+## 2. What are the main features of Next.js?
+
+- Server-side rendering (SSR)
+- Static site generation (SSG)
+- Automatic code splitting
+- Built-in routing
+- API routes
+- Image optimization
+
+No example needed.
+
+## 3. What is server-side rendering (SSR)?
+
+SSR renders pages on the server before sending them to the browser. This improves SEO and initial load speed.
+
+```jsx
+// pages/index.js
+export async function getServerSideProps() {
+  return { props: { time: new Date().toISOString() } };
+}
+
+export default function Page({ time }) {
+  return <p>Current server time: {time}</p>;
+}
+```
+
+## 4. What is static site generation (SSG)?
+
+SSG generates HTML at build time. Pages load fast as they are pre-built.
+
+```jsx
+// pages/index.js
+export async function getStaticProps() {
+  return { props: { message: "Hello from static generation!" } };
+}
+
+export default function Page({ message }) {
+  return <p>{message}</p>;
+}
+```
+
+## 5. What is the difference between SSR and SSG?
+
+- SSR: Renders on each request (fresh data).
+- SSG: Renders once at build time (fast but static data).
+
+## 6. What is client-side rendering (CSR)?
+
+CSR renders pages in the browser after loading JavaScript. React traditionally does this.
+
+```jsx
+import { useState, useEffect } from "react";
+
+export default function Page() {
+  const [time, setTime] = useState(null);
+
+  useEffect(() => {
+    setTime(new Date().toISOString());
+  }, []);
+
+  return <p>Client time: {time}</p>;
+}
+```
+
+## 7. How does routing work in Next.js?
+
+File-based routing: create files in `pages/` and they become routes.
+
+```bash
+pages/
+  index.js     -->  "/"
+  about.js     -->  "/about"
+```
+
+## 8. What is dynamic routing in Next.js?
+
+Routes with variable parts using square brackets.
+
+```bash
+pages/
+  post/
+    [id].js   -->  "/post/1", "/post/2", etc.
+```
+
+```jsx
+import { useRouter } from "next/router";
+
+export default function Post() {
+  const { id } = useRouter().query;
+  return <p>Post ID: {id}</p>;
+}
+```
+
+## 9. What is getStaticProps?
+
+Fetches data at build time for static pages.
+
+```jsx
+export async function getStaticProps() {
+  return { props: { data: "Static data" } };
+}
+```
+
+## 10. What is getServerSideProps?
+
+Fetches data on each request for server rendering.
+
+```jsx
+export async function getServerSideProps() {
+  return { props: { data: "Server-side data" } };
+}
+```
+
+## 11. What is getStaticPaths?
+
+Tells Next.js which dynamic routes to generate at build time.
+
+```jsx
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { id: "1" } }, { params: { id: "2" } }],
+    fallback: false,
+  };
+}
+```
+
+## 12. What is incremental static regeneration (ISR)?
+
+Updates static pages after deployment without full rebuild.
+
+```jsx
+export async function getStaticProps() {
+  return {
+    props: { time: new Date().toISOString() },
+    revalidate: 10, // regenerate page every 10 seconds
+  };
+}
+```
+
+## 13. What is the App Router in Next.js 13+?
+
+New routing system using `app/` folder with React Server Components.
+
+No code example needed.
+
+## 14. What are React Server Components?
+
+Components rendered on the server only, no JavaScript sent to browser.
+
+## 15. What is the difference between page.js and layout.js?
+
+- `page.js`: Main content of a route.
+- `layout.js`: Wraps pages with common UI like header/footer.
+
+## 16. What are API routes in Next.js?
+
+Create backend endpoints inside `pages/api/`.
+
+```js
+// pages/api/hello.js
+export default function handler(req, res) {
+  res.status(200).json({ message: "Hello from API" });
+}
+```
+
+## 17. What is middleware in Next.js?
+
+Runs code before request processing (redirects, authentication, etc.).
+
+## 18. What is the Image component in Next.js?
+
+Optimizes images automatically (resize, compress, lazy load).
+
+```jsx
+import Image from "next/image";
+
+export default function Page() {
+  return <Image src="/logo.png" alt="Logo" width={100} height={100} />;
+}
+```
+
+## 19. What is the Link component in Next.js?
+
+Client-side navigation with preloading.
+
+```jsx
+import Link from "next/link";
+
+export default function Page() {
+  return <Link href="/about">Go to About</Link>;
+}
+```
+
+## 20. What is automatic code splitting in Next.js?
+
+Next.js loads only the JS needed per page automatically.
+
+## 21. What is the difference between next/image and regular img tag?
+
+`next/image` optimizes images with lazy loading and resizing. `<img>` is static.
+
+## 22. What is Head component in Next.js?
+
+Modify `<head>` (title, meta tags, scripts).
+
+```jsx
+import Head from "next/head";
+
+export default function Page() {
+  return (
+    <>
+      <Head>
+        <title>My Page</title>
+      </Head>
+      <p>Page content</p>
+    </>
+  );
+}
+```
