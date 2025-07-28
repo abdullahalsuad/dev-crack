@@ -19,7 +19,7 @@ const CTASection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <Link href="https://github.com/abdullahalsuad/dev-crack/blob/main/CONTRIBUTING.md">
+          <Link href="https://github.com/abdullahalsuad/dev-crack/blob/main/CONTRIBUTING.md" target="_blank">
             <GuideBtn />
           </Link>
 

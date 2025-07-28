@@ -6,7 +6,7 @@ const OurContributors = () => {
   const contributors = [
     {
       id: 1,
-      name: "Kawser Kabir",
+      name: "KAWSAR KABIR",
       title: "Full-Stack Developer",
       description:
         "Expert in server-side development and database optimization for scalable applications.",
@@ -34,11 +34,11 @@ const OurContributors = () => {
       description:
         "Specializes in creating beautiful, responsive interfaces and React component architecture.",
       contributions: "Html Css",
-github: "devenamulshikder",
+      github: "devenamulshikder",
       imageUrl:
         "https://i.postimg.cc/j5JfPtRj/e-favicon.png",
     },
-    
+
     {
       id: 4,
       name: "Moin Khan",
