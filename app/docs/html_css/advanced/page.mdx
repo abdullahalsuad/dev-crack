@@ -1,5 +1,3 @@
-# Advanced HTML Interview Questions
-
 ## 1. What is the purpose of ARIA (Accessible Rich Internet Applications)?
 
 ARIA attributes improve accessibility by providing extra context to screen readers.
@@ -146,4 +144,201 @@ No JS required for basic validation.
 
 <!-- External -->
 <link rel="stylesheet" href="styles.css" />
+```
+
+<div
+  style={{
+    textAlign: "center",
+    fontSize: "32px",
+    fontWeight: "bold",
+    marginBottom: "1rem",
+    marginTop: "2rem",
+  }}
+>
+  CSS Questions
+</div>
+
+## 1. What is CSS?
+
+**CSS (Cascading Style Sheets)** is a stylesheet language used to describe the **presentation** of HTML elements on a webpage.
+
+It controls:
+
+- Layout
+- Colors
+- Fonts
+- Spacing
+- Animations
+- Responsive design
+
+CSS allows developers to separate content (HTML) from design, making websites easier to maintain and style consistently.
+
+## 2. What are the advantages of using CSS?
+
+Here are some key advantages of using CSS:
+
+- **Separation of content and style**: Keeps HTML clean by separating structure from presentation.
+- **Reusability**: Styles can be reused across multiple pages using external stylesheets.
+- **Improved maintainability**: Updates to design can be done from a single CSS file.
+- **Faster page loading**: Reduces repetitive styling in HTML, resulting in smaller file sizes.
+- **Consistency**: Ensures a uniform look and feel across the entire website.
+- **Responsive design**: Enables styling for different screen sizes and devices using media queries.
+- **Accessibility**: CSS improves accessibility through layout control and screen-reader-friendly designs.
+
+## 3. What are the disadvantages of CSS?
+
+While CSS offers many benefits, there are a few disadvantages to be aware of:
+
+- **Browser compatibility issues**: Not all browsers render CSS the same way, requiring extra effort for cross-browser support.
+- **Complexity in large projects**: Managing large stylesheets can become difficult without proper structure or naming conventions.
+- **Global scope (in plain CSS)**: Styles can unintentionally affect other elements unless scoped carefully.
+- **Lack of logic**: Traditional CSS lacks programming features like loops or conditionals (though preprocessors like SASS help).
+- **Learning curve with advanced features**: Responsive design, flexbox, grid, and animations may take time to master.
+
+## 4. Explain the CSS Box Model
+
+The **CSS box model** describes how elements are structured on a web page. It consists of:
+
+- **Content**: The actual content inside the element, such as text or images.
+- **Padding**: The space between the content and the border of the element.
+- **Border**: The edge around the padding and content.
+- **Margin**: The space outside the border, separating the element from other elements.
+
+## 5. Differentiate between CSS3 and CSS2
+
+Here are the key differences between **CSS3** and **CSS2**:
+
+| Feature                       | CSS2                     | CSS3                                                         |
+| ----------------------------- | ------------------------ | ------------------------------------------------------------ |
+| **Version**                   | Older version            | Latest major version                                         |
+| **Modules**                   | Monolithic (no modules)  | Divided into modules (e.g., Flexbox, Grid, Animations)       |
+| **Media Queries**             | Not supported            | Supported for responsive design                              |
+| **Selectors**                 | Limited selector support | Advanced selectors like `:nth-child`, `:not()`               |
+| **Animations & Transitions**  | Not available            | Fully supported                                              |
+| **Flexbox & Grid**            | Not available            | Supported                                                    |
+| **Rounded Corners & Shadows** | Not supported            | Supported with properties like `border-radius`, `box-shadow` |
+
+## 6. What is the difference between `id` and `class` selectors in CSS?
+
+| Feature         | `id` Selector                  | `class` Selector                       |
+| --------------- | ------------------------------ | -------------------------------------- |
+| **Syntax**      | `#idName`                      | `.className`                           |
+| **Uniqueness**  | Must be **unique** per element | Can be **reused** on multiple elements |
+| **Specificity** | Higher specificity             | Lower specificity                      |
+| **Use case**    | Target a single unique element | Style a group of similar elements      |
+| **Example**     | `#header { color: red; }`      | `.title { font-size: 18px; }`          |
+
+### Summary:
+
+- Use `id` for unique elements (like a single header or footer).
+- Use `class` for reusable styles across multiple elements.
+
+## 7. How can CSS be integrated into an HTML page?
+
+CSS can be integrated into an HTML page in **three main ways**:
+
+1. **Inline CSS**
+
+   - Applied directly to an HTML element using the `style` attribute.
+   - Example:
+     ```html
+     <p style="color: blue;">This is a blue paragraph.</p>
+     ```
+
+2. **Internal CSS**
+
+   - Defined within a `<style>` tag inside the `<head>` section of the HTML file.
+   - Example:
+     ```html
+     <head>
+       <style>
+         p {
+           color: green;
+         }
+       </style>
+     </head>
+     ```
+
+3. **External CSS**
+   - Written in a separate `.css` file and linked to the HTML file using the `<link>` tag.
+   - Example:
+     ```html
+     <head>
+       <link rel="stylesheet" href="styles.css" />
+     </head>
+     ```
+
+### Best Practice:
+
+Use **external CSS** for better maintainability and reusability across multiple pages.
+
+## 8. How does Flexbox work in CSS?
+
+**Flexbox** (Flexible Box Layout) is a CSS layout module designed to arrange items in a container, even when their size is unknown or dynamic.
+
+### Key Concepts:
+
+- The container is made a flex container by setting `display: flex;`.
+- Flex items inside the container can be laid out **horizontally or vertically**.
+- Flexbox manages the **alignment**, **direction**, **spacing**, and **order** of items easily.
+
+### Common Flexbox properties:
+
+- `flex-direction`: Defines the main axis (`row`, `column`, `row-reverse`, `column-reverse`).
+- `justify-content`: Aligns items along the main axis (`flex-start`, `center`, `space-between`, etc.).
+- `align-items`: Aligns items along the cross axis (`stretch`, `center`, `flex-start`, etc.).
+- `flex-wrap`: Controls whether items wrap onto multiple lines.
+- `flex-grow`, `flex-shrink`, `flex-basis`: Control how items grow, shrink, and their initial size.
+
+### Example:
+
+```css
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+## 9. How can you use CSS to control image repetition?
+
+In CSS, you control background image repetition using the `background-repeat` property.
+
+### Common values:
+
+- `repeat` (default): The background image repeats both horizontally and vertically.
+- `repeat-x`: The image repeats only horizontally.
+- `repeat-y`: The image repeats only vertically.
+- `no-repeat`: The image does not repeat.
+- `space`: The image is repeated as much as possible without clipping, with space between.
+- `round`: The image is repeated and scaled to fill the space without clipping.
+
+### Example:
+
+```css
+.element {
+  background-image: url("image.png");
+  background-repeat: no-repeat;
+}
+```
+
+## 10. Explain Responsive Web Design
+
+**Responsive Web Design (RWD)** is an approach to web development that ensures websites **adapt smoothly** to different screen sizes and devices (desktops, tablets, mobiles).
+
+### Key principles:
+
+- **Fluid grids:** Layouts use relative units like percentages instead of fixed pixels.
+- **Flexible images:** Images scale within their containing elements to prevent overflow.
+- **Media queries:** CSS rules apply conditionally based on device characteristics like width, height, resolution, etc.
+
+### Example of a media query:
+
+```css
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
 ```

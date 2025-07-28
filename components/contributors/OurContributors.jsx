@@ -34,10 +34,11 @@ const OurContributors = () => {
       description:
         "Specializes in creating beautiful, responsive interfaces and React component architecture.",
       contributions: "Html Css",
-
-      github: "devenamulshikder",
-      imageUrl: "https://avatars.githubusercontent.com/u/151938626?v=4",
+github: "devenamulshikder",
+      imageUrl:
+        "https://i.postimg.cc/j5JfPtRj/e-favicon.png",
     },
+    
     {
       id: 4,
       name: "Moin Khan",
@@ -45,7 +46,6 @@ const OurContributors = () => {
       description:
         "Specializes in creating beautiful, responsive interfaces and React component architecture.",
       contributions: "Express Mongoose",
-
       github: "nmkhans",
       imageUrl: "https://avatars.githubusercontent.com/u/82835684?v=4",
     },
