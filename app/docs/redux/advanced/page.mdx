@@ -1,1 +1,152 @@
-## reactjs advanced
+### **1. What are Redux Middlewares and how do they work?**
+
+**Explanation:**
+Middlewares in Redux intercept actions before they reach the reducer. They allow for logging, async operations, error handling, etc. Middleware functions have access to `dispatch` and `getState`, and they can modify or delay actions.
+
+**Example:**
+
+```js
+const logger = (store) => (next) => (action) => {
+  console.log("Dispatching:", action);
+  return next(action);
+};
+```
+
+---
+
+### **2. What is the purpose of Redux Thunk?**
+
+**Explanation:**
+Redux Thunk allows you to write action creators that return a function instead of an action. This function can dispatch multiple actions and access the state asynchronously — useful for API calls or delayed logic.
+
+**Example:**
+
+```js
+const fetchUsers = () => {
+  return async (dispatch) => {
+    const res = await fetch("/api/users");
+    const data = await res.json();
+    dispatch({ type: "SET_USERS", payload: data });
+  };
+};
+```
+
+---
+
+### **3. How does Redux Toolkit simplify Redux development?**
+
+**Explanation:**
+Redux Toolkit (RTK) abstracts away boilerplate code, provides built-in `createSlice`, `createAsyncThunk`, and immutability with Immer. It enforces best practices and makes Redux easier and more readable.
+
+**Example:**
+
+```js
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: 0,
+  reducers: {
+    increment: (state) => state + 1,
+  },
+});
+```
+
+---
+
+### **4. How does Immer work in Redux Toolkit?**
+
+**Explanation:**
+Immer lets you write "mutating" logic in reducers, but under the hood it keeps the state immutable by tracking changes and returning a new object. RTK uses Immer by default inside `createSlice`.
+
+**Example:**
+
+```js
+reducers: {
+  increment: (state) => {
+    state.count += 1; // Looks like mutation, but it's safe!
+  };
+}
+```
+
+---
+
+### **5. What is createAsyncThunk in Redux Toolkit?**
+
+**Explanation:**
+`createAsyncThunk` is used to handle async logic like API calls. It auto-generates action types for pending, fulfilled, and rejected states, helping you manage loading, success, and error cases easily.
+
+**Example:**
+
+```js
+export const fetchPosts = createAsyncThunk("posts/fetch", async () => {
+  const res = await fetch("/api/posts");
+  return await res.json();
+});
+```
+
+---
+
+### **6. What are selectors in Redux and why use reselect?**
+
+**Explanation:**
+Selectors are functions that retrieve specific parts of the state. Reselect is a library to create memoized selectors — it avoids recomputing derived data unless input state changes, improving performance.
+
+**Example:**
+
+```js
+const selectPosts = (state) => state.posts;
+const selectPublished = createSelector([selectPosts], (posts) =>
+  posts.filter((p) => p.published)
+);
+```
+
+---
+
+### **7. Explain the Redux DevTools Extension.**
+
+**Explanation:**
+Redux DevTools let you inspect actions, state changes, and time-travel debug your Redux app. You connect it via middleware or with Redux Toolkit’s `configureStore` which supports it out of the box.
+
+**Example:**
+
+```js
+const store = configureStore({ reducer: rootReducer });
+```
+
+---
+
+### **8. What is the difference between Redux and Context API?**
+
+**Explanation:**
+Context API is simpler and good for low-frequency updates and static global state. Redux is better for complex apps with frequent state changes, time-travel debugging, and middleware support.
+
+**Example:**
+Use Redux for apps with async API calls and dev tooling needs; use Context for theme or auth status.
+
+---
+
+### **9. How do you persist Redux state?**
+
+**Explanation:**
+You can persist Redux state using libraries like `redux-persist`, which stores parts of your state in `localStorage`, `sessionStorage`, etc., and rehydrates them on app reload.
+
+**Example:**
+
+```js
+import { persistStore, persistReducer } from "redux-persist";
+```
+
+---
+
+### **10. How do you handle side effects in Redux besides Thunk?**
+
+**Explanation:**
+Other side-effect libraries include `redux-saga` and `redux-observable`. `redux-saga` uses generator functions for more complex async flows, making it easy to cancel, debounce, and coordinate actions.
+
+**Example (redux-saga):**
+
+```js
+function* fetchUser() {
+  const user = yield call(api.fetchUser);
+  yield put({ type: "USER_RECEIVED", user });
+}
+```

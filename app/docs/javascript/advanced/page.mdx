@@ -1,157 +1,259 @@
-# JavaScript Advanced Interview Questions
+## 26. What is Currying?
 
-## 1. What is the Event Loop and Call Stack?
+**Answer:** Currying is a functional programming technique that transforms a function taking multiple arguments into a sequence of functions, each taking a single argument. Instead of calling f(a, b, c), you call f(a)(b)(c). This enables partial application, where you can fix some arguments and create specialized functions. Currying promotes function reusability, composition, and helps create more modular, testable code. It's particularly useful for creating configuration functions and building function pipelines.
 
-JavaScript is single-threaded and uses the call stack and event loop to manage async tasks.
+```javascript
+// Regular function
+function add(a, b, c) {
+  return a + b + c;
+}
 
-```js
-console.log("1");
-setTimeout(() => console.log("2"), 0);
-Promise.resolve().then(() => console.log("3"));
-console.log("4");
-
-// Output: 1, 4, 3, 2
-```
-
----
-
-## 2. What is a closure and how is it useful?
-
-A closure is a function that remembers variables from its outer scope.
-
-```js
-function outer() {
-  let count = 0;
-  return function () {
-    count++;
-    return count;
+// Curried function
+function addCurried(a) {
+  return function (b) {
+    return function (c) {
+      return a + b + c;
+    };
   };
 }
 
-const counter = outer();
-console.log(counter()); // 1
-console.log(counter()); // 2
+// Arrow function version
+const addArrow = (a) => (b) => (c) => a + b + c;
+
+console.log(addCurried(1)(2)(3)); // 6
+console.log(addArrow(1)(2)(3)); // 6
 ```
 
 ---
 
-## 3. Explain `this` in different contexts.
+## 27. Debouncing and Throttling?
 
-`this` refers to different things depending on how a function is called.
+**Answer:** These are techniques to control the rate of function execution, crucial for performance optimization. Debouncing delays function execution until after a specified quiet period, restarting the timer on each new call. It's perfect for search input fields where you want to wait until the user stops typing. Throttling limits function execution to at most once per specified time interval, ignoring additional calls within that period. It's ideal for scroll events or API calls where you want consistent, limited frequency.
 
-```js
-const obj = {
-  name: "Alice",
-  greet() {
+```javascript
+// Debouncing - wait for pause
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+// Throttling - limit frequency
+function throttle(func, delay) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      func.apply(this, args);
+    }
+  };
+}
+
+const debouncedSearch = debounce((query) => console.log(query), 300);
+const throttledScroll = throttle(() => console.log("scroll"), 100);
+```
+
+---
+
+## 28. Object.freeze() vs Object.seal()?
+
+**Answer:** Both methods restrict object modifications but at different levels. Object.freeze() makes an object completely immutable - you cannot add, delete, or modify properties, and existing properties become non-writable and non-configurable. Object.seal() prevents adding or deleting properties but allows modification of existing property values. Sealed objects can still have their property values changed, while frozen objects cannot. Both only affect the immediate properties, not nested objects (shallow operation).
+
+```javascript
+const obj = { name: "John", age: 30 };
+
+// Object.seal - can modify existing properties
+const sealed = Object.seal({ ...obj });
+sealed.name = "Jane"; // allowed
+sealed.city = "NY"; // not allowed
+delete sealed.age; // not allowed
+
+// Object.freeze - cannot modify anything
+const frozen = Object.freeze({ ...obj });
+frozen.name = "Bob"; // ignored (strict mode: error)
+frozen.city = "LA"; // ignored
+```
+
+---
+
+## 29. What is the `new` keyword?
+
+**Answer:** The 'new' keyword creates a new instance of an object from a constructor function. It performs four steps: creates an empty object, sets the object's prototype to the constructor's prototype property, calls the constructor function with 'this' bound to the new object, and returns the new object (unless constructor explicitly returns another object). This mechanism enables object-oriented programming in JavaScript, allowing you to create multiple instances with shared methods through the prototype chain.
+
+```javascript
+function Person(name) {
+  this.name = name;
+  this.greet = function () {
     return `Hello, ${this.name}`;
+  };
+}
+
+// What 'new' does:
+// 1. Creates empty object
+// 2. Sets prototype
+// 3. Binds 'this' to new object
+// 4. Returns object (unless constructor returns object)
+
+const person = new Person("John");
+console.log(person.greet()); // "Hello, John"
+
+// Without 'new'
+const person2 = Person("Jane"); // undefined (no return)
+```
+
+---
+
+## 30. Merge Objects Shallowly vs Deeply?
+
+**Answer:** Shallow merging combines objects only at the top level, replacing nested objects entirely rather than merging their properties. Deep merging recursively combines all levels of nested objects and arrays. Shallow merge is faster and simpler, using spread operator or Object.assign(). Deep merge requires recursive algorithms and handles complex cases like arrays, dates, and circular references. The choice depends on your data structure - use shallow for flat objects, deep for complex nested structures where you want to preserve nested properties.
+
+```javascript
+const obj1 = { a: 1, b: { c: 2 } };
+const obj2 = { b: { d: 3 }, e: 4 };
+
+// Shallow merge
+const shallow = { ...obj1, ...obj2 };
+// Result: { a: 1, b: { d: 3 }, e: 4 } - obj1.b.c lost
+
+// Deep merge
+function deepMerge(target, source) {
+  for (let key in source) {
+    if (source[key] && typeof source[key] === "object") {
+      target[key] = target[key] || {};
+      deepMerge(target[key], source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+
+const deep = deepMerge({ ...obj1 }, obj2);
+// Result: { a: 1, b: { c: 2, d: 3 }, e: 4 }
+```
+
+---
+
+## 31. Is JavaScript Single Threaded?
+
+**Answer:** Yes, JavaScript is single-threaded, meaning it has one main execution thread that processes code sequentially. However, it achieves concurrency through the event loop and Web APIs (in browsers) or libuv (in Node.js). While the JavaScript engine runs on a single thread, the runtime environment provides multi-threaded capabilities for I/O operations, timers, and HTTP requests. This architecture prevents blocking the main thread during long-running operations, keeping the user interface responsive and enabling asynchronous programming patterns.
+
+```javascript
+console.log("1"); // Main thread
+
+// Web API handles timing
+setTimeout(() => console.log("2"), 0);
+
+// Main thread continues
+console.log("3");
+
+// Output: 1, 3, 2
+// JavaScript engine: single thread
+// Browser/Node: multi-threaded (Web APIs, libuv)
+```
+
+---
+
+## 32. Event Propagation - Bubbling vs Capturing?
+
+**Answer:** Event propagation describes how events travel through the DOM tree in three phases: capturing (top-down), target (at the element), and bubbling (bottom-up). During capturing phase, the event travels from the document root down to the target element. During bubbling phase, it travels back up from target to root. By default, event listeners are registered for the bubbling phase. You can control propagation using stopPropagation() to halt the process or addEventListener's third parameter to listen during capturing phase.
+
+```javascript
+// HTML: <div id="outer"><div id="inner">Click</div></div>
+
+document.getElementById("outer").addEventListener(
+  "click",
+  () => {
+    console.log("Outer");
   },
+  false
+); // bubbling (default)
+
+document.getElementById("inner").addEventListener(
+  "click",
+  (e) => {
+    console.log("Inner");
+    e.stopPropagation(); // stops bubbling
+  },
+  false
+);
+
+// With capturing (third parameter: true)
+document.getElementById("outer").addEventListener(
+  "click",
+  () => {
+    console.log("Outer Capturing");
+  },
+  true
+); // fires first during capture phase
+```
+
+---
+
+## 33. Difference between == and ===?
+
+**Answer:** The == operator performs loose equality comparison with type coercion, automatically converting operands to the same type before comparison. The === operator performs strict equality comparison without type coercion, requiring both value and type to be identical. Type coercion in == can lead to unexpected results and bugs, making === the preferred choice for predictable behavior. The == operator follows complex coercion rules that can be confusing, while === is straightforward and explicit about what it's comparing.
+
+```javascript
+console.log(5 == "5"); // true (type coercion)
+console.log(5 === "5"); // false (different types)
+
+console.log(null == undefined); // true
+console.log(null === undefined); // false
+
+console.log(0 == false); // true
+console.log(0 === false); // false
+
+// Always prefer === for predictable behavior
+```
+
+---
+
+## 34. Difference between null and undefined?
+
+**Answer:** undefined means a variable has been declared but not assigned a value, or a function doesn't return anything. null is an intentional assignment representing "no value" or "empty". undefined is the default value for uninitialized variables, missing function parameters, and non-existent object properties. null must be explicitly assigned and represents a deliberate absence of value. Both are falsy values, but typeof null returns "object" (a known quirk), while typeof undefined returns "undefined".
+
+```javascript
+let a; // undefined (declared but not assigned)
+let b = null; // null (intentionally empty)
+
+console.log(typeof undefined); // "undefined"
+console.log(typeof null); // "object" (known quirk)
+
+console.log(undefined == null); // true
+console.log(undefined === null); // false
+
+function test(param = "default") {
+  console.log(param);
+}
+test(undefined); // "default"
+test(null); // null
+```
+
+---
+
+## 35. Function Declaration vs Function Expression?
+
+**Answer:** Function declarations are hoisted completely, meaning you can call them before they're defined in the code. They create a named function that's available throughout their entire scope. Function expressions are not hoisted; the variable is hoisted but remains undefined until the assignment executes. This includes anonymous functions assigned to variables and named function expressions. Function declarations are better for main program functions, while expressions are useful for conditional function creation and callbacks.
+
+```javascript
+// Function Declaration - hoisted
+sayHello(); // works
+function sayHello() {
+  console.log("Hello!");
+}
+
+// Function Expression - not hoisted
+sayGoodbye(); // TypeError: not a function
+var sayGoodbye = function () {
+  console.log("Goodbye!");
 };
 
-console.log(obj.greet()); // Hello, Alice
-```
-
-Arrow functions do not have their own `this`.
-
----
-
-## 4. What is a Promise? How does async/await work?
-
-A Promise represents a future value.
-
-```js
-function getData() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve("Data loaded"), 1000);
-  });
-}
-
-async function fetchData() {
-  const result = await getData();
-  console.log(result);
-}
-```
-
----
-
-## 5. What is a generator function?
-
-A generator returns an iterator and uses `yield` to pause execution.
-
-```js
-function* gen() {
-  yield 1;
-  yield 2;
-}
-
-const it = gen();
-console.log(it.next().value); // 1
-```
-
----
-
-## 6. What are proxies in JavaScript?
-
-Proxies allow custom behavior for fundamental operations like getting and setting properties.
-
-```js
-const obj = { name: "Test" };
-const proxy = new Proxy(obj, {
-  get(target, prop) {
-    return prop in target ? target[prop] : "Not Found";
-  },
-});
-
-console.log(proxy.name); // Test
-console.log(proxy.age); // Not Found
-```
-
----
-
-## 7. What are Symbols and why use them?
-
-Symbols are unique and immutable and often used to avoid key collisions.
-
-```js
-const ID = Symbol("id");
-const user = { [ID]: 123 };
-
-console.log(user[ID]); // 123
-```
-
----
-
-## 8. What is the difference between microtask and macrotask queues?
-
-- Microtasks (e.g. Promises) are processed before macrotasks (e.g. setTimeout).
-
-```js
-setTimeout(() => console.log("timeout"), 0);
-Promise.resolve().then(() => console.log("promise"));
-
-// Output: promise, timeout
-```
-
----
-
-## 9. What is functional programming?
-
-Functional programming emphasizes pure functions and immutability.
-
-```js
-const double = (x) => x * 2;
-const nums = [1, 2, 3];
-const result = nums.map(double); // [2, 4, 6]
-```
-
----
-
-## 10. What is tail call optimization?
-
-Tail call optimization (TCO) is a technique where the JS engine can reuse stack frames for recursive calls. Not widely supported.
-
-```js
-function factorial(n, acc = 1) {
-  if (n === 0) return acc;
-  return factorial(n - 1, n * acc); // tail-recursive
-}
+// Named Function Expression
+const factorial = function fact(n) {
+  return n <= 1 ? 1 : n * fact(n - 1);
+};
 ```

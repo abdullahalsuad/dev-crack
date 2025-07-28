@@ -1,67 +1,59 @@
+import Link from "next/link";
 import React from "react";
 import { FaHtml5, FaNodeJs } from "react-icons/fa";
-import { IoLogoCss3 } from "react-icons/io";
+import { FaSquareJs } from "react-icons/fa6";
 import { RiNextjsFill, RiReactjsFill } from "react-icons/ri";
 import { SiExpress, SiMongodb, SiMongoose } from "react-icons/si";
 
 // Tech List Extracted
 const techList = [
   {
-    name: "HTML",
-    level: "Beginner",
-    levelColor: "bg-green-600",
+    name: "HTML + CSS ",
     icon: <FaHtml5 />,
     desc: "Fundamental markup language questions covering semantic HTML, accessibility, and modern standards.",
-    questions: 50,
+    questions_link: "/docs/html_css/basic",
   },
   {
-    name: "CSS",
-    levelColor: "bg-yellow-500",
-    icon: <IoLogoCss3 />,
-    desc: "Styling questions including Flexbox, Grid, animations, and responsive design principles.",
-    questions: 75,
+    name: "JavaScript",
+    icon: <FaSquareJs />,
+    desc: "JavaScript makes web pages interactive by handling events, animations, and responsiveness dynamically.",
+    questions_link: "/docs/javascript/basic",
   },
   {
     name: "React",
-    levelColor: "bg-red-600",
     icon: <RiReactjsFill />,
     desc: "Component-based questions covering hooks, state management, lifecycle, and performance optimization.",
-    questions: 100,
+    questions_link: "/docs/react/basic",
   },
   {
     name: "Node.js",
-    levelColor: "bg-red-600",
     icon: <FaNodeJs />,
     desc: "Server-side JavaScript questions including APIs, middleware, streams, and event-driven architecture.",
-    questions: 85,
+    questions_link: "/docs/redux/basic",
   },
   {
     name: "Next.js",
-    levelColor: "bg-red-600",
     icon: <RiNextjsFill />,
     desc: "Full-stack React framework questions covering SSR, SSG, routing, and performance optimization.",
-    questions: 60,
+    questions_link: "/docs/nextjs/basic",
   },
   {
     name: "Express",
-    levelColor: "bg-yellow-500",
     icon: <SiExpress />,
     desc: "Web framework questions including routing, middleware, error handling, and RESTful APIs.",
-    questions: 70,
+    questions_link: "/docs/expressjs/basic",
   },
   {
     name: "MongoDB",
-    levelColor: "bg-yellow-500",
     icon: <SiMongodb />,
     desc: "NoSQL database questions covering queries, indexing, aggregation, and data modeling.",
-    questions: 65,
+    questions_link: "/docs/mongodb/basic",
   },
   {
     name: "Mongoose",
-    levelColor: "bg-yellow-500",
     icon: <SiMongoose />,
     desc: "ODM questions including schemas, validation, middleware, and population techniques.",
-    questions: 45,
+    questions_link: "/docs/mongoose/basic",
   },
 ];
 
@@ -95,12 +87,14 @@ const QuestionSection = () => {
               </div>
               <h3 className="text-xl font-bold mb-2">{tech.name}</h3>
               <p className="text-gray-400 text-sm mb-4">{tech.desc}</p>
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-emerald-400 font-semibold">
-                  {tech.questions} questions
-                </span>
-                <span className="text-emerald-400">→</span>
-              </div>
+              <Link href={tech.questions_link}>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-emerald-400 font-semibold">
+                    Read Now
+                  </span>
+                  <span className="text-emerald-400">→</span>
+                </div>
+              </Link>
             </div>
           ))}
         </div>

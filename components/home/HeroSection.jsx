@@ -67,7 +67,7 @@ const HeroSection = () => {
         </div>
 
         {/* Statistics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-30">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-30 ">
           {stats.map(({ id, value, label }) => (
             <div
               key={id}
@@ -77,11 +77,11 @@ const HeroSection = () => {
             >
               <h3
                 id={`stat-label-${id}`}
-                className="text-emerald-400 text-4xl font-bold mb-2"
+                className="text-emerald-400 text-4xl  mb-2 font-extrabold"
               >
                 {value}
               </h3>
-              <p className="text-gray-400 text-lg">{label}</p>
+              <p className="text-gray-400 text-lg ">{label}</p>
             </div>
           ))}
         </div>

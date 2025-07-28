@@ -1,1 +1,791 @@
-# react intermediate
+# Node.js Intermediate Interview Questions
+
+## 1. What is clustering in Node.js?
+
+Clustering allows you to create multiple worker processes that share the same server port, improving performance on multi-core systems.
+
+**Example:**
+
+```javascript
+const cluster = require("cluster");
+const http = require("http");
+const numCPUs = require("os").cpus().length;
+
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
+
+  // Fork workers
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`Worker ${worker.process.pid} died`);
+    cluster.fork(); // Restart worker
+  });
+} else {
+  // Worker process
+  http
+    .createServer((req, res) => {
+      res.writeHead(200);
+      res.end(`Hello from worker ${process.pid}\n`);
+    })
+    .listen(8000);
+
+  console.log(`Worker ${process.pid} started`);
+}
+```
+
+## 2. What is the Buffer class?
+
+Buffer is a global class for handling binary data directly in Node.js, useful for working with files, network protocols, and databases.
+
+**Example:**
+
+```javascript
+// Creating buffers
+const buf1 = Buffer.alloc(10); // Creates 10-byte buffer filled with zeros
+const buf2 = Buffer.from("Hello World", "utf8");
+const buf3 = Buffer.from([1, 2, 3, 4, 5]);
+
+console.log(buf1); // <Buffer 00 00 00 00 00 00 00 00 00 00>
+console.log(buf2); // <Buffer 48 65 6c 6c 6f 20 57 6f 72 6c 64>
+console.log(buf2.toString()); // Hello World
+
+// Buffer operations
+buf2.write("Hi", 0, 2);
+console.log(buf2.toString()); // Hi World
+
+// Buffer concatenation
+const combined = Buffer.concat([buf2, buf3]);
+console.log(combined);
+```
+
+## 3. What are Streams in Node.js?
+
+Streams are objects that let you read data from a source or write data to a destination in a continuous fashion, handling data piece by piece.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+const { Transform } = require("stream");
+
+// Readable stream
+const readStream = fs.createReadStream("input.txt");
+
+// Writable stream
+const writeStream = fs.createWriteStream("output.txt");
+
+// Transform stream (uppercase text)
+const upperCaseTransform = new Transform({
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase());
+    callback();
+  },
+});
+
+// Pipeline
+readStream.pipe(upperCaseTransform).pipe(writeStream);
+
+// Stream events
+readStream.on("data", (chunk) => {
+  console.log(`Received ${chunk.length} bytes`);
+});
+
+readStream.on("end", () => {
+  console.log("No more data to read");
+});
+```
+
+## 4. What is the difference between readFile and createReadStream?
+
+`readFile` loads the entire file into memory at once, while `createReadStream` reads the file in chunks, making it memory-efficient for large files.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+
+// readFile - loads entire file into memory
+fs.readFile("largefile.txt", "utf8", (err, data) => {
+  if (err) throw err;
+  console.log("File size:", data.length);
+  // Entire file is in memory
+});
+
+// createReadStream - reads file in chunks
+const stream = fs.createReadStream("largefile.txt", {
+  encoding: "utf8",
+  highWaterMark: 1024, // 1KB chunks
+});
+
+let totalSize = 0;
+stream.on("data", (chunk) => {
+  totalSize += chunk.length;
+  console.log(`Chunk size: ${chunk.length}`);
+});
+
+stream.on("end", () => {
+  console.log(`Total size: ${totalSize}`);
+});
+```
+
+## 5. What is the purpose of module.exports?
+
+`module.exports` is the object that's returned when a module is required in another file. It defines what a module exposes to other modules.
+
+**Example:**
+
+```javascript
+// calculator.js
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const PI = 3.14159;
+
+// Different ways to export
+module.exports = {
+  add,
+  subtract,
+  PI,
+};
+
+// Or export individually
+// module.exports.add = add;
+// module.exports.subtract = subtract;
+
+// Or export a class
+class Calculator {
+  add(a, b) {
+    return a + b;
+  }
+  subtract(a, b) {
+    return a - b;
+  }
+}
+
+module.exports = Calculator;
+
+// app.js
+const { add, subtract, PI } = require("./calculator");
+// Or: const Calculator = require('./calculator');
+```
+
+## 6. What is the difference between dependencies and devDependencies?
+
+Dependencies are packages required for your application to run in production, while devDependencies are only needed during development.
+
+**Example:**
+
+```json
+{
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongoose": "^6.0.0",
+    "lodash": "^4.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0",
+    "jest": "^28.0.0",
+    "eslint": "^8.0.0"
+  }
+}
+```
+
+```bash
+# Install production dependencies only
+npm install --production
+
+# Install specific dependency types
+npm install express --save
+npm install jest --save-dev
+```
+
+## 7. How do you debug Node.js applications?
+
+Node.js debugging can be done using built-in debugger, console methods, or external tools like VS Code debugger.
+
+**Example:**
+
+```javascript
+// Using console methods
+console.log("Debug: Variable value", variable);
+console.error("Error occurred:", error);
+console.table(arrayOfObjects);
+console.time("operation");
+// ... some operation
+console.timeEnd("operation");
+
+// Using built-in debugger
+function problematicFunction(data) {
+  debugger; // Breakpoint
+  const result = data.map((item) => item * 2);
+  return result;
+}
+
+// Run with debugger: node inspect app.js
+
+// Using assert for debugging
+const assert = require("assert");
+assert.strictEqual(add(2, 3), 5, "Addition should work correctly");
+```
+
+## 8. What is the purpose of the os module?
+
+The `os` module provides operating system-related utilities and information about the system where Node.js is running.
+
+**Example:**
+
+```javascript
+const os = require("os");
+
+console.log("Platform:", os.platform()); // darwin, linux, win32
+console.log("CPU Architecture:", os.arch()); // x64, arm64
+console.log("CPU Info:", os.cpus());
+console.log("Total Memory:", os.totalmem() / 1024 / 1024 / 1024, "GB");
+console.log("Free Memory:", os.freemem() / 1024 / 1024 / 1024, "GB");
+console.log("Home Directory:", os.homedir());
+console.log("Hostname:", os.hostname());
+console.log("Network Interfaces:", os.networkInterfaces());
+console.log("Uptime:", os.uptime(), "seconds");
+
+// Useful for system monitoring
+function getSystemInfo() {
+  return {
+    platform: os.platform(),
+    memory: {
+      total: os.totalmem(),
+      free: os.freemem(),
+      used: os.totalmem() - os.freemem(),
+    },
+    cpus: os.cpus().length,
+    uptime: os.uptime(),
+  };
+}
+```
+
+## 9. What is child_process in Node.js?
+
+The `child_process` module allows you to spawn child processes, execute system commands, and run other programs from your Node.js application.
+
+**Example:**
+
+```javascript
+const { spawn, exec, execFile, fork } = require("child_process");
+
+// Using exec for simple commands
+exec("ls -la", (error, stdout, stderr) => {
+  if (error) {
+    console.error("Error:", error);
+    return;
+  }
+  console.log("Directory listing:", stdout);
+});
+
+// Using spawn for streaming data
+const ls = spawn("ls", ["-la"]);
+ls.stdout.on("data", (data) => {
+  console.log(`stdout: ${data}`);
+});
+
+// Fork for running Node.js files
+const child = fork("./worker.js");
+child.send({ message: "Hello from parent" });
+child.on("message", (msg) => {
+  console.log("Message from child:", msg);
+});
+
+// worker.js
+process.on("message", (msg) => {
+  console.log("Received:", msg);
+  process.send({ response: "Hello from child" });
+});
+```
+
+## 10. What is the difference between process.nextTick and setImmediate?
+
+`process.nextTick` queues callbacks to execute before the next iteration of the event loop, while `setImmediate` queues them for the next iteration.
+
+**Example:**
+
+```javascript
+console.log("Start");
+
+setImmediate(() => console.log("setImmediate 1"));
+process.nextTick(() => console.log("nextTick 1"));
+setTimeout(() => console.log("setTimeout"), 0);
+process.nextTick(() => console.log("nextTick 2"));
+setImmediate(() => console.log("setImmediate 2"));
+
+console.log("End");
+
+// Output:
+// Start
+// End
+// nextTick 1
+// nextTick 2
+// setImmediate 1
+// setImmediate 2
+// setTimeout
+```
+
+## 11. What is Event Emitter in Node.js?
+
+EventEmitter is a class that facilitates communication between objects in Node.js through events. Many Node.js core modules extend EventEmitter.
+
+**Example:**
+
+```javascript
+const EventEmitter = require("events");
+
+class MyEmitter extends EventEmitter {}
+const myEmitter = new MyEmitter();
+
+// Register event listeners
+myEmitter.on("event", (data) => {
+  console.log("Event received:", data);
+});
+
+myEmitter.once("oneTime", () => {
+  console.log("This will only run once");
+});
+
+// Emit events
+myEmitter.emit("event", { message: "Hello World" });
+myEmitter.emit("oneTime");
+myEmitter.emit("oneTime"); // Won't trigger again
+
+// Error handling
+myEmitter.on("error", (err) => {
+  console.error("An error occurred:", err);
+});
+
+// Custom event emitter example
+class Logger extends EventEmitter {
+  log(message) {
+    console.log(message);
+    this.emit("logged", { message, timestamp: new Date() });
+  }
+}
+
+const logger = new Logger();
+logger.on("logged", (data) => {
+  console.log("Log event:", data);
+});
+logger.log("Test message");
+```
+
+## 12. What is Worker Threads in Node.js?
+
+Worker threads allow you to run JavaScript in parallel, useful for CPU-intensive tasks without blocking the main thread.
+
+**Example:**
+
+```javascript
+// main.js
+const {
+  Worker,
+  isMainThread,
+  parentPort,
+  workerData,
+} = require("worker_threads");
+
+if (isMainThread) {
+  // Main thread
+  const worker = new Worker(__filename, {
+    workerData: { num: 42 },
+  });
+
+  worker.on("message", (result) => {
+    console.log("Result from worker:", result);
+  });
+
+  worker.on("error", (error) => {
+    console.error("Worker error:", error);
+  });
+
+  worker.on("exit", (code) => {
+    console.log("Worker exited with code:", code);
+  });
+} else {
+  // Worker thread
+  function fibonacci(n) {
+    if (n < 2) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+
+  const result = fibonacci(workerData.num);
+  parentPort.postMessage(result);
+}
+```
+
+## 13. What is path module in Node.js?
+
+The `path` module provides utilities for working with file and directory paths in a cross-platform manner.
+
+**Example:**
+
+```javascript
+const path = require("path");
+
+// Path manipulation
+console.log(path.join("/users", "john", "documents", "file.txt"));
+// /users/john/documents/file.txt
+
+console.log(path.resolve("file.txt"));
+// /current/working/directory/file.txt
+
+console.log(path.relative("/users/john", "/users/john/documents"));
+// documents
+
+// Path parsing
+const filePath = "/users/john/documents/file.txt";
+console.log(path.dirname(filePath)); // /users/john/documents
+console.log(path.basename(filePath)); // file.txt
+console.log(path.extname(filePath)); // .txt
+
+// Path object
+const parsed = path.parse(filePath);
+console.log(parsed);
+// {
+//   root: '/',
+//   dir: '/users/john/documents',
+//   base: 'file.txt',
+//   ext: '.txt',
+//   name: 'file'
+// }
+
+// Cross-platform separators
+console.log(path.sep); // / on Unix, \ on Windows
+```
+
+## 14. What is URL module in Node.js?
+
+The URL module provides utilities for URL resolution and parsing, helping to work with web addresses.
+
+**Example:**
+
+```javascript
+const url = require("url");
+const { URL } = require("url");
+
+// Legacy API
+const myUrl = "https://example.com:8080/path?name=john&age=30#section";
+const parsed = url.parse(myUrl, true);
+
+console.log(parsed.protocol); // https:
+console.log(parsed.hostname); // example.com
+console.log(parsed.port); // 8080
+console.log(parsed.pathname); // /path
+console.log(parsed.query); // { name: 'john', age: '30' }
+
+// Modern URL API
+const myURL = new URL(myUrl);
+console.log(myURL.protocol); // https:
+console.log(myURL.hostname); // example.com
+console.log(myURL.searchParams.get("name")); // john
+
+// URL manipulation
+myURL.searchParams.set("newParam", "value");
+myURL.pathname = "/newpath";
+console.log(myURL.toString());
+
+// URL validation
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+```
+
+## 15. What is crypto module in Node.js?
+
+The crypto module provides cryptographic functionality including hashing, encryption, and random number generation.
+
+**Example:**
+
+```javascript
+const crypto = require("crypto");
+
+// Hashing
+const hash = crypto.createHash("sha256");
+hash.update("Hello World");
+console.log("SHA256:", hash.digest("hex"));
+
+// HMAC
+const hmac = crypto.createHmac("sha256", "secret-key");
+hmac.update("Hello World");
+console.log("HMAC:", hmac.digest("hex"));
+
+// Random bytes
+const randomBytes = crypto.randomBytes(16);
+console.log("Random bytes:", randomBytes.toString("hex"));
+
+// Password hashing with salt
+function hashPassword(password) {
+  const salt = crypto.randomBytes(16).toString("hex");
+  const hash = crypto
+    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .toString("hex");
+  return { salt, hash };
+}
+
+function verifyPassword(password, salt, hash) {
+  const hashVerify = crypto
+    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .toString("hex");
+  return hash === hashVerify;
+}
+
+// Encryption/Decryption
+function encrypt(text, password) {
+  const algorithm = "aes-256-ctr";
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipher(algorithm, password);
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+  return { iv: iv.toString("hex"), content: encrypted.toString("hex") };
+}
+```
+
+## 16. What is util module in Node.js?
+
+The util module provides utility functions that are useful for debugging and working with JavaScript objects and functions.
+
+**Example:**
+
+```javascript
+const util = require("util");
+const fs = require("fs");
+
+// Promisify callback functions
+const readFile = util.promisify(fs.readFile);
+
+async function readFileAsync() {
+  try {
+    const data = await readFile("file.txt", "utf8");
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Object inspection
+const obj = {
+  name: "John",
+  details: {
+    age: 30,
+    hobbies: ["reading", "coding"],
+  },
+};
+
+console.log(util.inspect(obj, { colors: true, depth: null }));
+
+// Type checking
+console.log(util.isArray([1, 2, 3])); // true
+console.log(util.isDate(new Date())); // true
+
+// String formatting (deprecated but still used)
+const formatted = util.format("Hello %s, you are %d years old", "John", 30);
+console.log(formatted);
+
+// Inherits (for prototype inheritance)
+function Parent() {}
+Parent.prototype.greet = function () {
+  console.log("Hello from parent");
+};
+
+function Child() {}
+util.inherits(Child, Parent);
+
+const child = new Child();
+child.greet(); // Hello from parent
+```
+
+## 17. What is querystring module in Node.js?
+
+The querystring module provides utilities for parsing and formatting URL query strings.
+
+**Example:**
+
+```javascript
+const querystring = require("querystring");
+
+// Parse query string
+const query = "name=john&age=30&hobbies=reading&hobbies=coding";
+const parsed = querystring.parse(query);
+console.log(parsed);
+// { name: 'john', age: '30', hobbies: ['reading', 'coding'] }
+
+// Stringify object to query string
+const obj = {
+  name: "jane",
+  age: 25,
+  city: "New York",
+};
+const stringified = querystring.stringify(obj);
+console.log(stringified); // name=jane&age=25&city=New%20York
+
+// Custom separators and equals
+const customQuery = "name:john;age:30;city:NYC";
+const customParsed = querystring.parse(customQuery, ";", ":");
+console.log(customParsed); // { name: 'john', age: '30', city: 'NYC' }
+
+// URL encoding/decoding
+const encoded = querystring.escape("hello world & more");
+console.log(encoded); // hello%20world%20%26%20more
+
+const decoded = querystring.unescape(encoded);
+console.log(decoded); // hello world & more
+
+// Working with Express.js
+// req.query is automatically parsed, but you can use querystring for custom parsing
+```
+
+## 18. What is zlib module in Node.js?
+
+The zlib module provides compression functionality using Gzip, Deflate, and Brotli algorithms.
+
+**Example:**
+
+```javascript
+const zlib = require("zlib");
+const fs = require("fs");
+
+// Compress data
+const input = "This is a long string that we want to compress to save space";
+
+zlib.gzip(input, (err, compressed) => {
+  if (err) throw err;
+  console.log("Original size:", input.length);
+  console.log("Compressed size:", compressed.length);
+
+  // Decompress
+  zlib.gunzip(compressed, (err, decompressed) => {
+    if (err) throw err;
+    console.log("Decompressed:", decompressed.toString());
+  });
+});
+
+// Stream compression
+const readStream = fs.createReadStream("input.txt");
+const writeStream = fs.createWriteStream("output.txt.gz");
+const gzipStream = zlib.createGzip();
+
+readStream.pipe(gzipStream).pipe(writeStream);
+
+// Synchronous compression
+const syncCompressed = zlib.gzipSync(input);
+const syncDecompressed = zlib.gunzipSync(syncCompressed);
+console.log("Sync result:", syncDecompressed.toString());
+```
+
+## 19. What is DNS module in Node.js?
+
+The DNS module provides functions for performing DNS lookups and reverse lookups using the underlying operating system facilities.
+
+**Example:**
+
+```javascript
+const dns = require("dns");
+
+// DNS lookup
+dns.lookup("google.com", (err, address, family) => {
+  if (err) throw err;
+  console.log("Address:", address); // IPv4 address
+  console.log("Family:", family); // 4 or 6 (IPv4 or IPv6)
+});
+
+// Resolve with specific record type
+dns.resolve4("google.com", (err, addresses) => {
+  if (err) throw err;
+  console.log("IPv4 addresses:", addresses);
+});
+
+dns.resolveMx("google.com", (err, addresses) => {
+  if (err) throw err;
+  console.log("MX records:", addresses);
+});
+
+// Reverse DNS lookup
+dns.reverse("8.8.8.8", (err, hostnames) => {
+  if (err) throw err;
+  console.log("Hostnames for 8.8.8.8:", hostnames);
+});
+
+// Promise-based DNS (Node.js 10+)
+const dnsPromises = dns.promises;
+
+async function lookupDomain(domain) {
+  try {
+    const result = await dnsPromises.lookup(domain);
+    console.log(`${domain} resolves to:`, result);
+  } catch (error) {
+    console.error("DNS lookup failed:", error);
+  }
+}
+
+lookupDomain("github.com");
+```
+
+## 20. What is performance monitoring in Node.js?
+
+Performance monitoring involves tracking your application's performance metrics like memory usage, CPU usage, and response times.
+
+**Example:**
+
+```javascript
+const fs = require("fs");
+const { performance, PerformanceObserver } = require("perf_hooks");
+
+// Performance timing
+const start = performance.now();
+
+// Some operation
+setTimeout(() => {
+  const end = performance.now();
+  console.log(`Operation took ${end - start} milliseconds`);
+}, 100);
+
+// Performance marks and measures
+performance.mark("start-operation");
+// ... some code
+setTimeout(() => {
+  performance.mark("end-operation");
+  performance.measure("operation-duration", "start-operation", "end-operation");
+
+  const obs = new PerformanceObserver((list) => {
+    const entries = list.getEntries();
+    entries.forEach((entry) => {
+      console.log(`${entry.name}: ${entry.duration}ms`);
+    });
+  });
+  obs.observe({ entryTypes: ["measure"] });
+}, 50);
+
+// Memory usage monitoring
+function logMemoryUsage() {
+  const usage = process.memoryUsage();
+  console.log({
+    rss: `${Math.round(usage.rss / 1024 / 1024)} MB`, // Resident Set Size
+    heapTotal: `${Math.round(usage.heapTotal / 1024 / 1024)} MB`,
+    heapUsed: `${Math.round(usage.heapUsed / 1024 / 1024)} MB`,
+    external: `${Math.round(usage.external / 1024 / 1024)} MB`,
+  });
+}
+
+// Monitor every 5 seconds
+setInterval(logMemoryUsage, 5000);
+
+// Process monitoring
+process.on("exit", (code) => {
+  console.log(`Process exited with code ${code}`);
+});
+
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception:", error);
+  process.exit(1);
+});
+```

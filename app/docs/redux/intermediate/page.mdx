@@ -1,1 +1,177 @@
-# react intermediate
+### 1. **What is Redux Thunk?**
+
+**Explanation:**
+Redux Thunk is a middleware that allows you to **write functions inside action creators** to handle asynchronous logic (like API calls). Normally, Redux only allows synchronous actions (plain objects). Thunk lets you delay the dispatch of an action or dispatch only if a certain condition is met.
+
+**Example:**
+
+```js
+// Action Creator using Redux Thunk
+const fetchUser = () => {
+  return async (dispatch) => {
+    dispatch({ type: "USER_LOADING" });
+    const res = await fetch("/api/user");
+    const data = await res.json();
+    dispatch({ type: "USER_SUCCESS", payload: data });
+  };
+};
+```
+
+---
+
+### 2. **What are the benefits of using Redux?**
+
+**Explanation:**
+
+- **Centralized State:** All app state lives in one place, making debugging easier.
+- **Predictability:** State changes are predictable due to pure reducer functions.
+- **Middleware Support:** You can extend Redux with logging, crash reporting, async APIs, etc.
+
+**Example Use:** In a large app like an LMS or eCommerce site, Redux helps manage state across login, cart, products, and user data in a centralized way.
+
+---
+
+### 3. **How is Redux different from Context API?**
+
+**Explanation:**
+
+- **Context API** is good for light state like theme or language.
+- **Redux** is designed for **complex state logic**, **data flows**, and **middleware**.
+- Redux offers **time-travel debugging, dev tools, and better performance** in deep component trees.
+
+**Example:**
+For a theme toggle, use Context API.
+For a blog app with posts, comments, likes, and user roles—Redux is better.
+
+---
+
+### 4. **What are action creators?**
+
+**Explanation:**
+Action creators are functions that return action objects. They make your code cleaner and reusable. Instead of hardcoding action objects everywhere, wrap them in functions.
+
+**Example:**
+
+```js
+// Without action creator
+dispatch({ type: "INCREMENT" });
+
+// With action creator
+const increment = () => ({ type: "INCREMENT" });
+dispatch(increment());
+```
+
+---
+
+### 5. **What is the role of `Provider` in Redux?**
+
+**Explanation:**
+The `Provider` component is used to **pass the Redux store to all child components**. Without it, components cannot access the Redux store using hooks like `useSelector` or `useDispatch`.
+
+**Example:**
+
+```jsx
+import { Provider } from "react-redux";
+import store from "./store";
+
+<Provider store={store}>
+  <App />
+</Provider>;
+```
+
+---
+
+### 6. **What are `useSelector` and `useDispatch`?**
+
+**Explanation:**
+
+- `useSelector()` lets you **read a specific piece of state** from the Redux store.
+- `useDispatch()` returns the **dispatch function** so you can send actions to the reducer.
+
+**Example:**
+
+```js
+import { useSelector, useDispatch } from "react-redux";
+
+const count = useSelector((state) => state.counter);
+const dispatch = useDispatch();
+
+<button onClick={() => dispatch({ type: "INCREMENT" })}>+</button>;
+```
+
+---
+
+### 7. **How do you structure a Redux project?**
+
+**Explanation:**
+A clean project structure helps maintain large-scale apps. You separate concerns like actions, reducers, and API calls.
+
+**Example Directory Structure:**
+
+```
+/src
+  /redux
+    - actions/
+    - reducers/
+    - store.js
+    - types.js
+```
+
+Each feature (like auth, user, post) can have its own sub-folder for scalability.
+
+---
+
+### 8. **What is Redux DevTools Extension?**
+
+**Explanation:**
+Redux DevTools lets you **see each dispatched action**, **current state**, and even **time-travel** between state changes. It's helpful for debugging and development.
+
+**Example Integration:**
+
+```js
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+```
+
+You can then view Redux actions in your browser extension.
+
+---
+
+### 9. **How do you handle async API calls in Redux?**
+
+**Explanation:**
+To handle async calls, you use middleware like `redux-thunk`. This allows dispatching an action **after an async call finishes**.
+
+**Example:**
+
+```js
+const fetchTodos = () => {
+  return async (dispatch) => {
+    dispatch({ type: "TODOS_LOADING" });
+    const response = await fetch("/api/todos");
+    const todos = await response.json();
+    dispatch({ type: "TODOS_SUCCESS", payload: todos });
+  };
+};
+```
+
+---
+
+### 10. **What are selectors in Redux?**
+
+**Explanation:**
+Selectors are **functions used to get specific slices of the state**. They make your components cleaner and support memoization (performance boost).
+
+**Example:**
+
+```js
+// Selector
+const selectActiveUsers = (state) => state.users.filter((user) => user.active);
+
+// Usage
+const activeUsers = useSelector(selectActiveUsers);
+```
+
+You can also use libraries like `reselect` for memoized selectors.

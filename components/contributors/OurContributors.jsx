@@ -10,7 +10,7 @@ const OurContributors = () => {
       title: "Full-Stack Developer",
       description:
         "Expert in server-side development and database optimization for scalable applications.",
-      contributions: 203,
+      contributions: "Js React Redux",
 
       github: "kawsarkabir",
       imageUrl: "https://avatars.githubusercontent.com/u/92666144?v=4",
@@ -21,29 +21,39 @@ const OurContributors = () => {
       title: "Programmer",
       description:
         "Specializes in creating beautiful, responsive interfaces and React component architecture.",
-      contributions: 127,
+      contributions: "Node.js Next.js",
 
       github: "abdullahalsuad",
       imageUrl:
         "https://i.ibb.co/LXh2sMvm/Whats-App-Image-2025-02-24-at-14-52-49-69d17215.jpg",
     },
+    {
+      id: 3,
+      name: "Enamul Shikder",
+      title: "Front-End Web Developer",
+      description:
+        "Specializes in creating beautiful, responsive interfaces and React component architecture.",
+      contributions: "Html Css",
 
-    // {
-    //   id: 3,
-    //   name: "David Kim",
-    //   title: "Full Stack Developer",
-    //   description:
-    //     "Bridges frontend and backend development with expertise in modern web frameworks.",
-    //   contributions: 89,
-    //   joined: "Feb 2024",
-    //   github: "@davidkim",
-    //   imageUrl: "https://placehold.co/100x100/1a202c/ffffff?text=DK", // Placeholder image
-    // },
+      github: "devenamulshikder",
+      imageUrl: "https://avatars.githubusercontent.com/u/151938626?v=4",
+    },
+    {
+      id: 4,
+      name: "Moin Khan",
+      title: "Frontend focused Full stack developer",
+      description:
+        "Specializes in creating beautiful, responsive interfaces and React component architecture.",
+      contributions: "Express Mongoose",
+
+      github: "nmkhans",
+      imageUrl: "https://avatars.githubusercontent.com/u/82835684?v=4",
+    },
   ];
 
   return (
     <section
-      className="bg-black text-white py-50 px-4 font-inter"
+      className="bg-black text-white py-30 px-4 font-inter"
       style={{
         backgroundImage: `radial-gradient(circle 500px at 50% 300px, rgba(16,185,129,0.35), transparent)`,
       }}
