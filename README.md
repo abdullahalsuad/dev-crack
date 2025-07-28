@@ -1,93 +1,79 @@
-<h1 align="center">📚 Dev Crack: Interview Question Hub</h1>
+<h1 align="center">📚 Dev Crack: Crack Your Developer Interviews</h1>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Next.js-15-blue?logo=next.js" alt="Next.js" />
-  <img src="https://img.shields.io/badge/MDX-Docs-orange?logo=mdx" alt="MDX" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
-</p>
+<div align="center">
 
-> **Dev Crack** is your one-stop hub for curated interview questions and answers on Node.js, HTML, CSS, and more. Perfect for quick revision, deep dives, and sharing knowledge!
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/abdullahalsuad/dev-crack/pulls)
+[![Stars](https://img.shields.io/github/stars/abdullahalsuad/dev-crack)](https://github.com/abdullahalsuad/dev-crack/stargazers)
 
----
+</div>
 
-## Features
+<!-- About -->
 
-- ✨ Well-organized Q&A for Node.js, HTML, CSS (more coming soon!)
-- 📝 Written in MDX for easy editing and contributions
-- ⚡ Powered by Next.js 13 and Nextra for blazing-fast docs
-- 🎨 Styled with Tailwind CSS for a modern look
+> **Stop scrambling through endless resources.** Dev Crack brings together the most asked interview questions in one place, organized by technology and difficulty level. Whether you're preparing for a quick phone screen or a deep technical interview, we've got you covered.
 
----
+> Want to Contribute ? Check out our [Contributing Guide](CONTRIBUTING.md) to get started!
 
-## Getting Started
+### **Visit:** [DEV Crack](https://abdullahalsuad.github.io/dev-crack)
 
-### 1. Clone the Repository
 
-```sh
-git clone https://github.com/abdullahalsuad/dev-crack.git
-cd dev-crack
-```
+<!-- Tech e Coved  -->
 
-### 2. Install Dependencies
+## 📚 Tech Stack Covered
 
-```sh
-npm install
-# or
-pnpm install
-```
+| 🧱 Category        | 🏷️ Badges                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **🎨 Frontend**    | ![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black) ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=white) ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)                                              |
+| **🔧 Backend**     | ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                            |
+| **🛢️ Database**    | ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white) ![Mongoose](https://img.shields.io/badge/Mongoose-880000?logo=mongoose&logoColor=white)                                                                                                                                                                                                                                                                                                                                                                         |
+| **✨ Coming Soon** | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwind-css&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white) ![GraphQL](https://img.shields.io/badge/GraphQL-E10098?logo=graphql&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) |
 
-### 3. Run the Development Server
+<!-- Features -->
 
-```sh
-npm run dev
-# or
-pnpm dev
-```
+## ✨ Features That Make You Shine
 
-Visit [http://localhost:3000](http://localhost:3000) to see the app in action!
+- 🚀 **Quick Revision Mode** - Perfect for last-minute prep
+- 📖 **Detailed Explanations** - Not just answers, but understanding
+- 🎯 **Real Interview Questions** - Collected from actual interviews
+- 🔄 **Multiple Approaches** - See different ways to solve problems
+- 📱 **Mobile Friendly** - Study anywhere, anytime
+- 🌍 **Community Driven** - Constantly updated by developers like you
 
----
-
-## Contributing
-
-We love contributions! To keep things smooth:
-
-1. **Fork** the repo and **clone** your fork.
-2. **Create a new branch** for your feature or fix:
-   ```sh
-   git checkout -b your-feature-name
-   ```
-3. **Commit** your changes and **push** to your branch.
-4. **Open a Pull Request** describing your changes.
-
-> **Note:** Please do not commit directly to the `main` branch. Always use a feature branch!
-
----
-
-## Why Dev Crack?
+## 🎯 Why Dev Crack?
 
 - **For Interviewees:** Quick revision before your big day!
 - **For Interviewers:** Ready-made questions to grill or guide.
 - **For Learners:** Expand your knowledge with concise explanations.
 
----
+<br/>
 
-## Tech Stack
+> Want to Contribute Check out our [Contributing Guide](CONTRIBUTING.md) to get started!
 
-- [Next.js](https://nextjs.org/)
-- [Nextra](https://nextra.site/)
-- [MDX](https://mdxjs.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
+## 📄 License
 
----
+MIT © [Abdullah Al Suad](https://github.com/abdullahalsuad)
 
-## License
+<!-- Support -->
 
-MIT © [Abdullah AlSuad](https://github.com/abdullahalsuad)
+## 💖 Show Your Support
+
+If Dev Crack helped you land your dream job or just made your interview prep easier:
+
+- ⭐ **Star this repository**
+- 🔄 **Share with fellow developers**
+
+## 🙌 Need Help?
+
+If you have any questions, feel free to open a [discussion](https://github.com/abdullahalsuad/dev-crack/discussions) or reach out via [Issues](https://github.com/abdullahalsuad/dev-crack/issues).
+
+**Join Our Discord Community**: [Join DEV ZeroOne](https://discord.gg/VRPSPcak)
+
+<br/>
+<br/>
 
 ---
 
 <p align="center">
+  <strong>Built by developers, for developers 🚀</strong><br>
   <b>Happy Learning & Good Luck with Your Interviews!</b>
 </p>
