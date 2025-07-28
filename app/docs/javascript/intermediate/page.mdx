@@ -1,4 +1,4 @@
-## 16. setTimeout vs setInterval?
+## 1. setTimeout vs setInterval?
 
 **Answer:** setTimeout executes a function once after a specified delay, while setInterval executes a function repeatedly at specified time intervals. setTimeout is useful for one-time delayed execution, while setInterval is used for recurring tasks. Important differences: setInterval doesn't wait for function completion before scheduling the next call, potentially causing overlapping executions. setTimeout with recursion gives more control over timing and prevents overlapping, making it often preferable for repeated tasks.
 
@@ -15,7 +15,7 @@ setTimeout(() => clearInterval(interval), 5000);
 
 ---
 
-## 17. What is Higher Order Functions?
+## 2. What is Higher Order Functions?
 
 **Answer:** Higher Order Functions are functions that either take other functions as arguments, return functions as their result, or both. They enable functional programming patterns like map, filter, reduce, and enable powerful abstractions. HOFs promote code reusability, composability, and separation of concerns by allowing you to pass behavior as parameters. They're fundamental to JavaScript's functional programming capabilities and are widely used in array methods, event handlers, and callback patterns.
 
@@ -38,7 +38,7 @@ console.log(double(5)); // 10
 
 ---
 
-## 18. map(), filter(), forEach() methods?
+## 3. map(), filter(), forEach() methods?
 
 **Answer:** These are essential array methods for functional programming. map() transforms each element and returns a new array of the same length. filter() selects elements based on a condition and returns a new array with matching elements. forEach() iterates through elements for side effects but returns undefined, not creating a new array. Map and filter are pure functions that don't modify the original array, while forEach is used when you need side effects like logging or DOM manipulation.
 
@@ -57,7 +57,7 @@ numbers.forEach((x) => console.log(x)); // logs each number
 
 ---
 
-## 19. apply(), call(), bind() differences?
+## 4. apply(), call(), bind() differences?
 
 **Answer:** These methods explicitly set the 'this' context of a function. call() immediately invokes the function with 'this' set to the first argument and remaining arguments passed individually. apply() works like call() but takes arguments as an array. bind() doesn't invoke the function immediately but returns a new function with 'this' permanently bound to the specified value. Bind is useful for event handlers and partial application, while call/apply are for immediate invocation with specific context.
 
@@ -81,7 +81,7 @@ console.log(boundGreet("?")); // "Hey John?"
 
 ---
 
-## 20. Deep Copy vs Shallow Copy?
+## 5. Deep Copy vs Shallow Copy?
 
 **Answer:** Shallow copy creates a new object but copies only the first level of properties; nested objects are still referenced. Deep copy recursively copies all levels, creating completely independent objects. Shallow copying is faster and sufficient when objects don't have nested structures. Deep copying is necessary when you want complete independence from the original object. Methods include spread operator and Object.assign() for shallow, JSON.parse(JSON.stringify()) or custom recursive functions for deep copying.
 
@@ -101,7 +101,7 @@ console.log(original.b.c); // 2 (not affected)
 
 ---
 
-## 21. localStorage vs sessionStorage vs cookies?
+## 6. localStorage vs sessionStorage vs cookies?
 
 **Answer:** These are different client-side storage mechanisms with varying capabilities and lifetimes. localStorage persists data until explicitly cleared, survives browser restarts, and has ~5-10MB capacity per domain. sessionStorage lasts only for the browser session, is cleared when tab closes, with similar capacity to localStorage. Cookies are sent with every HTTP request, have 4KB limit, can have expiration dates, and work across all browsers. localStorage/sessionStorage are for client-side data, cookies for client-server communication.
 
@@ -119,7 +119,7 @@ document.cookie = "username=john; expires=Thu, 18 Dec 2024 12:00:00 UTC";
 
 ---
 
-## 22. Primitive vs Reference?
+## 7. Primitive vs Reference?
 
 **Answer:** Primitives (number, string, boolean, null, undefined, symbol, bigint) are stored directly in memory and passed by value. When assigned or passed to functions, the actual value is copied, so modifications don't affect the original. Reference types (objects, arrays, functions) store memory addresses pointing to the actual data. When assigned, the reference is copied, not the data, so multiple variables can point to the same object, and modifications through any reference affect all others.
 
@@ -139,7 +139,7 @@ console.log(arr2); // [1, 2, 3]
 
 ---
 
-## 23. What is a Symbol?
+## 8. What is a Symbol?
 
 **Answer:** Symbol is a primitive data type introduced in ES6 that creates unique identifiers. Every Symbol() call returns a unique symbol, even with the same description. Symbols are primarily used as unique property keys for objects, preventing property name collisions. They're not enumerable in for...in loops or Object.keys(), making them useful for creating "private" properties. Symbol.for() creates global symbols that can be shared across different parts of code, while well-known symbols like Symbol.iterator define standard behaviors.
 
@@ -157,5 +157,3 @@ const obj = {
 console.log(Object.keys(obj)); // []
 console.log(obj[sym1]); // 'value1'
 ```
-
----
