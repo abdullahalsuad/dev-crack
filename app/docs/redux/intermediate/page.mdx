@@ -1,4 +1,4 @@
-### 1. **What is Redux Thunk?**
+## 1. **What is Redux Thunk?**
 
 **Explanation:**
 Redux Thunk is a middleware that allows you to **write functions inside action creators** to handle asynchronous logic (like API calls). Normally, Redux only allows synchronous actions (plain objects). Thunk lets you delay the dispatch of an action or dispatch only if a certain condition is met.
@@ -19,7 +19,7 @@ const fetchUser = () => {
 
 ---
 
-### 2. **What are the benefits of using Redux?**
+## 2. **What are the benefits of using Redux?**
 
 **Explanation:**
 
@@ -31,7 +31,7 @@ const fetchUser = () => {
 
 ---
 
-### 3. **How is Redux different from Context API?**
+## 3. **How is Redux different from Context API?**
 
 **Explanation:**
 
@@ -45,7 +45,7 @@ For a blog app with posts, comments, likes, and user roles—Redux is better.
 
 ---
 
-### 4. **What are action creators?**
+## 4. **What are action creators?**
 
 **Explanation:**
 Action creators are functions that return action objects. They make your code cleaner and reusable. Instead of hardcoding action objects everywhere, wrap them in functions.
@@ -63,7 +63,7 @@ dispatch(increment());
 
 ---
 
-### 5. **What is the role of `Provider` in Redux?**
+## 5. **What is the role of `Provider` in Redux?**
 
 **Explanation:**
 The `Provider` component is used to **pass the Redux store to all child components**. Without it, components cannot access the Redux store using hooks like `useSelector` or `useDispatch`.
@@ -81,7 +81,7 @@ import store from "./store";
 
 ---
 
-### 6. **What are `useSelector` and `useDispatch`?**
+## 6. **What are `useSelector` and `useDispatch`?**
 
 **Explanation:**
 
@@ -101,7 +101,7 @@ const dispatch = useDispatch();
 
 ---
 
-### 7. **How do you structure a Redux project?**
+## 7. **How do you structure a Redux project?**
 
 **Explanation:**
 A clean project structure helps maintain large-scale apps. You separate concerns like actions, reducers, and API calls.
@@ -121,7 +121,7 @@ Each feature (like auth, user, post) can have its own sub-folder for scalability
 
 ---
 
-### 8. **What is Redux DevTools Extension?**
+## 8. **What is Redux DevTools Extension?**
 
 **Explanation:**
 Redux DevTools lets you **see each dispatched action**, **current state**, and even **time-travel** between state changes. It's helpful for debugging and development.
@@ -139,7 +139,7 @@ You can then view Redux actions in your browser extension.
 
 ---
 
-### 9. **How do you handle async API calls in Redux?**
+## 9. **How do you handle async API calls in Redux?**
 
 **Explanation:**
 To handle async calls, you use middleware like `redux-thunk`. This allows dispatching an action **after an async call finishes**.
@@ -159,7 +159,7 @@ const fetchTodos = () => {
 
 ---
 
-### 10. **What are selectors in Redux?**
+## 10. **What are selectors in Redux?**
 
 **Explanation:**
 Selectors are **functions used to get specific slices of the state**. They make your components cleaner and support memoization (performance boost).

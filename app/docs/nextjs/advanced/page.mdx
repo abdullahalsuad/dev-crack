@@ -1,49 +1,63 @@
-# Next.js Advanced Interview Questions
-
 ## 1. What is the export feature in Next.js?
+
 `next export` generates a static HTML version of your app for hosting without a server. It’s ideal for CDNs but doesn’t support server-side features like `getServerSideProps`. Use it for fully static sites.
 
 ## 2. What is a custom server in Next.js?
+
 A custom server (e.g., using Express) replaces Next.js’s default server. It allows custom routing or middleware but may disable optimizations like automatic static generation. Use with caution for specific needs.
 
 ## 3. What is bundle analyzer in Next.js?
+
 `@next/bundle-analyzer` visualizes your app’s JavaScript bundle size. Enable it in `next.config.js` to identify large dependencies and optimize for faster load times by reducing bundle bloat.
 
 ## 4. What is performance optimization in Next.js?
+
 Performance optimization leverages Next.js features like code splitting, `next/image` for image optimization, static generation (SSG), and incremental static regeneration (ISR). Fine-tune caching and minimize client-side JavaScript for speed.
 
 ## 5. What is rewrite in Next.js?
+
 Rewrites map a URL to another without changing the browser’s URL. Configure in `next.config.js` (`rewrites` function) for proxying requests or masking internal routes, useful for APIs or legacy URLs.
 
 ## 6. What is preview mode in Next.js?
+
 Preview mode bypasses static generation to show draft content from a CMS. Implement it with an API route (`/api/preview`) and secure it with tokens for controlled access.
 
 ## 7. What is the difference between shallow and deep routing?
+
 Shallow routing (`router.push` with `shallow: true`) updates the URL without triggering data fetching (`getStaticProps`, `getServerSideProps`). Deep routing runs full page lifecycle methods, causing data refetching.
 
 ## 8. What is `next.config.js`?
+
 `next.config.js` customizes Next.js behavior. Configure Webpack, redirects, rewrites, i18n, or environment settings. It’s a powerful tool for tailoring the build and runtime environment.
 
 ## 9. What is Webpack customization in Next.js?
+
 Modify Webpack in `next.config.js` using the `webpack` function. Add custom loaders (e.g., for SVGs), plugins, or optimize asset handling for advanced build requirements.
 
 ## 10. What is progressive web app (PWA) support in Next.js?
+
 Use the `next-pwa` plugin to make your app a PWA. It adds service workers for offline support, caching, and app-like features (e.g., install prompts). Configure in `next.config.js`.
 
 ## 11. What is sitemap generation in Next.js?
+
 Sitemaps improve SEO by listing your site’s URLs. Use `next-sitemap` for automatic generation or create a static `sitemap.xml` in `public`. Dynamic sitemaps can integrate with CMS data.
 
 ## 12. What is `robots.txt` in Next.js?
+
 `robots.txt` controls search engine crawling. Place a static file in `public` or generate it dynamically via an API route. Advanced setups can tailor crawling rules per environment.
 
 ## 13. What is error tracking in Next.js?
+
 Integrate tools like Sentry to monitor production errors. Capture client and server errors in `_app.js` or API routes, with detailed stack traces for debugging complex issues.
 
 ## 14. What is the difference between `getInitialProps` and `getServerSideProps`?
+
 `getInitialProps` is a legacy method that runs on both server and client, causing hydration issues. `getServerSideProps` is server-only, optimized for SSR, and preferred for modern Next.js apps.
 
 ## 15. What is edge runtime in Next.js?
+
 Edge runtime runs code at CDN edge nodes for low-latency responses. Used in API routes or middleware (`runtime: 'edge'`), it’s lightweight but lacks Node.js APIs, requiring careful dependency management.
 
 ## 16. What is the future of Next.js?
+
 Next.js is adopting React Server Components for better server-side rendering, enhancing ISR, and improving edge runtime capabilities. Expect tighter Vercel integration, TypeScript improvements, and focus on developer experience.

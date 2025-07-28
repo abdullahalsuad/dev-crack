@@ -1,4 +1,4 @@
-### 1. What is Redux?
+## 1. What is Redux?
 
 **Answer:** Redux is a predictable state management library for JavaScript apps, commonly used with React.
 It stores the entire application state in a single JavaScript object called the **store**.
@@ -6,7 +6,7 @@ Components read from the store and dispatch actions to update it.
 
 ---
 
-### 2. What are the core principles of Redux?
+## 2. What are the core principles of Redux?
 
 **Answer:**
 
@@ -16,7 +16,7 @@ Components read from the store and dispatch actions to update it.
 
 ---
 
-### 3. What is a store in Redux?
+## 3. What is a store in Redux?
 
 **Answer:**
 The **store** holds the entire app state and provides methods to access (`getState()`), update (`dispatch()`), and listen (`subscribe()`) to state changes.
@@ -28,7 +28,7 @@ const store = createStore(reducer);
 
 ---
 
-### 4. What is an action in Redux?
+## 4. What is an action in Redux?
 
 **Answer:**
 An **action** is a plain JS object that has a `type` field and optionally a `payload`.
@@ -40,7 +40,7 @@ It describes **what happened**, not how the state should change.
 
 ---
 
-### 5. What is a reducer?
+## 5. What is a reducer?
 
 **Answer:**
 A reducer is a pure function that takes the previous state and an action, then returns the new state.
@@ -55,7 +55,7 @@ function counter(state = 0, action) {
 
 ---
 
-### 6. How do you update state in Redux?
+## 6. How do you update state in Redux?
 
 **Answer:**
 By **dispatching an action** to the store. The reducer handles the action and returns a new state.
@@ -66,7 +66,7 @@ store.dispatch({ type: "INCREMENT" });
 
 ---
 
-### 7. What is `combineReducers`?
+## 7. What is `combineReducers`?
 
 **Answer:**
 Redux allows splitting reducers into smaller functions and combining them with `combineReducers`.
@@ -79,7 +79,7 @@ const rootReducer = combineReducers({ auth: authReducer, user: userReducer });
 
 ---
 
-### 8. What is `dispatch()` in Redux?
+## 8. What is `dispatch()` in Redux?
 
 **Answer:**
 `dispatch()` sends an action to the reducer to update the state.
@@ -91,7 +91,7 @@ store.dispatch({ type: "LOGIN_SUCCESS" });
 
 ---
 
-### 9. How do you access state in Redux?
+## 9. How do you access state in Redux?
 
 **Answer:**
 Use `store.getState()` or in React use `useSelector()` hook.
@@ -102,7 +102,7 @@ const counter = useSelector((state) => state.counter);
 
 ---
 
-### 10. What is middleware in Redux?
+## 10. What is middleware in Redux?
 
 **Answer:**
 Middleware intercepts dispatched actions before they reach reducers.

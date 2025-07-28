@@ -1,9 +1,9 @@
-# MongoDB Complete Guide - Basic to Advanced
-
 ## 1. What is MongoDB?
+
 MongoDB is a NoSQL database that stores data in documents that look like JSON instead of tables.
 
 **Example:**
+
 ```javascript
 // Traditional SQL table
 | id | name | age |
@@ -19,9 +19,11 @@ MongoDB is a NoSQL database that stores data in documents that look like JSON in
 ```
 
 ## 2. What is a document in MongoDB?
+
 A document is like a row in a table, but it can have different fields. It's stored in JSON-like format called BSON.
 
 **Example:**
+
 ```javascript
 // Document 1
 {
@@ -41,22 +43,26 @@ A document is like a row in a table, but it can have different fields. It's stor
 ```
 
 ## 3. What is a collection in MongoDB?
+
 A collection is like a table in SQL databases. It holds many documents of similar type.
 
 **Example:**
+
 ```javascript
 // Collection: "users"
 [
-  { "_id": 1, "name": "Alice", "age": 30 },
-  { "_id": 2, "name": "Bob", "age": 25 },
-  { "_id": 3, "name": "Charlie", "age": 35 }
-]
+  { _id: 1, name: "Alice", age: 30 },
+  { _id: 2, name: "Bob", age: 25 },
+  { _id: 3, name: "Charlie", age: 35 },
+];
 ```
 
 ## 4. What is the difference between SQL and NoSQL?
+
 SQL uses tables with fixed columns. NoSQL uses flexible documents that can have different fields.
 
 **Example:**
+
 ```javascript
 // SQL (fixed structure)
 CREATE TABLE users (
@@ -71,9 +77,11 @@ CREATE TABLE users (
 ```
 
 ## 5. How do you create a database in MongoDB?
+
 Use the command: `use database_name`. MongoDB creates it when you insert the first document.
 
 **Example:**
+
 ```javascript
 use mystore
 // Database "mystore" will be created when first document is inserted
@@ -81,43 +89,49 @@ db.products.insertOne({name: "Laptop", price: 999})
 ```
 
 ## 6. How do you insert a document in MongoDB?
+
 Use `insertOne()` for one document or `insertMany()` for multiple documents.
 
 **Example:**
+
 ```javascript
 // Insert one document
 db.users.insertOne({
   name: "Alice",
   age: 30,
-  email: "alice@email.com"
-})
+  email: "alice@email.com",
+});
 
 // Insert multiple documents
 db.users.insertMany([
   { name: "Bob", age: 25 },
-  { name: "Charlie", age: 35 }
-])
+  { name: "Charlie", age: 35 },
+]);
 ```
 
 ## 7. How do you find documents in MongoDB?
+
 Use `find()` to get all documents or `findOne()` to get the first matching document.
 
 **Example:**
+
 ```javascript
 // Find all documents
-db.users.find()
+db.users.find();
 
 // Find specific documents
-db.users.find({ age: 30 })
+db.users.find({ age: 30 });
 
 // Find one document
-db.users.findOne({ name: "Alice" })
+db.users.findOne({ name: "Alice" });
 ```
 
-## 8. What is _id in MongoDB?
+## 8. What is \_id in MongoDB?
+
 `_id` is a unique identifier that MongoDB automatically creates for every document.
 
 **Example:**
+
 ```javascript
 // Auto-generated _id
 {
@@ -135,33 +149,29 @@ db.users.insertOne({
 ```
 
 ## 9. How do you update documents in MongoDB?
+
 Use `updateOne()` to update one document or `updateMany()` to update multiple documents.
 
 **Example:**
+
 ```javascript
 // Update one document
-db.users.updateOne(
-  { name: "Alice" },
-  { $set: { age: 31 } }
-)
+db.users.updateOne({ name: "Alice" }, { $set: { age: 31 } });
 
 // Update multiple documents
-db.users.updateMany(
-  { age: { $lt: 30 } },
-  { $set: { status: "young" } }
-)
+db.users.updateMany({ age: { $lt: 30 } }, { $set: { status: "young" } });
 ```
 
 ## 10. How do you delete documents in MongoDB?
+
 Use `deleteOne()` to delete one document or `deleteMany()` to delete multiple documents.
 
 **Example:**
+
 ```javascript
 // Delete one document
-db.users.deleteOne({ name: "Alice" })
+db.users.deleteOne({ name: "Alice" });
 
 // Delete multiple documents
-db.users.deleteMany({ age: { $lt: 18 } })
+db.users.deleteMany({ age: { $lt: 18 } });
 ```
-
-
