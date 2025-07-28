@@ -1,4 +1,4 @@
-## 26. What is Currying?
+## 1. What is Currying?
 
 **Answer:** Currying is a functional programming technique that transforms a function taking multiple arguments into a sequence of functions, each taking a single argument. Instead of calling f(a, b, c), you call f(a)(b)(c). This enables partial application, where you can fix some arguments and create specialized functions. Currying promotes function reusability, composition, and helps create more modular, testable code. It's particularly useful for creating configuration functions and building function pipelines.
 
@@ -26,7 +26,7 @@ console.log(addArrow(1)(2)(3)); // 6
 
 ---
 
-## 27. Debouncing and Throttling?
+## 2. Debouncing and Throttling?
 
 **Answer:** These are techniques to control the rate of function execution, crucial for performance optimization. Debouncing delays function execution until after a specified quiet period, restarting the timer on each new call. It's perfect for search input fields where you want to wait until the user stops typing. Throttling limits function execution to at most once per specified time interval, ignoring additional calls within that period. It's ideal for scroll events or API calls where you want consistent, limited frequency.
 
@@ -58,7 +58,7 @@ const throttledScroll = throttle(() => console.log("scroll"), 100);
 
 ---
 
-## 28. Object.freeze() vs Object.seal()?
+## 3. Object.freeze() vs Object.seal()?
 
 **Answer:** Both methods restrict object modifications but at different levels. Object.freeze() makes an object completely immutable - you cannot add, delete, or modify properties, and existing properties become non-writable and non-configurable. Object.seal() prevents adding or deleting properties but allows modification of existing property values. Sealed objects can still have their property values changed, while frozen objects cannot. Both only affect the immediate properties, not nested objects (shallow operation).
 
@@ -79,7 +79,7 @@ frozen.city = "LA"; // ignored
 
 ---
 
-## 29. What is the `new` keyword?
+## 4. What is the `new` keyword?
 
 **Answer:** The 'new' keyword creates a new instance of an object from a constructor function. It performs four steps: creates an empty object, sets the object's prototype to the constructor's prototype property, calls the constructor function with 'this' bound to the new object, and returns the new object (unless constructor explicitly returns another object). This mechanism enables object-oriented programming in JavaScript, allowing you to create multiple instances with shared methods through the prototype chain.
 
@@ -106,7 +106,7 @@ const person2 = Person("Jane"); // undefined (no return)
 
 ---
 
-## 30. Merge Objects Shallowly vs Deeply?
+## 5. Merge Objects Shallowly vs Deeply?
 
 **Answer:** Shallow merging combines objects only at the top level, replacing nested objects entirely rather than merging their properties. Deep merging recursively combines all levels of nested objects and arrays. Shallow merge is faster and simpler, using spread operator or Object.assign(). Deep merge requires recursive algorithms and handles complex cases like arrays, dates, and circular references. The choice depends on your data structure - use shallow for flat objects, deep for complex nested structures where you want to preserve nested properties.
 
@@ -137,7 +137,7 @@ const deep = deepMerge({ ...obj1 }, obj2);
 
 ---
 
-## 31. Is JavaScript Single Threaded?
+## 6. Is JavaScript Single Threaded?
 
 **Answer:** Yes, JavaScript is single-threaded, meaning it has one main execution thread that processes code sequentially. However, it achieves concurrency through the event loop and Web APIs (in browsers) or libuv (in Node.js). While the JavaScript engine runs on a single thread, the runtime environment provides multi-threaded capabilities for I/O operations, timers, and HTTP requests. This architecture prevents blocking the main thread during long-running operations, keeping the user interface responsive and enabling asynchronous programming patterns.
 
@@ -157,7 +157,7 @@ console.log("3");
 
 ---
 
-## 32. Event Propagation - Bubbling vs Capturing?
+## 7. Event Propagation - Bubbling vs Capturing?
 
 **Answer:** Event propagation describes how events travel through the DOM tree in three phases: capturing (top-down), target (at the element), and bubbling (bottom-up). During capturing phase, the event travels from the document root down to the target element. During bubbling phase, it travels back up from target to root. By default, event listeners are registered for the bubbling phase. You can control propagation using stopPropagation() to halt the process or addEventListener's third parameter to listen during capturing phase.
 
@@ -193,7 +193,7 @@ document.getElementById("outer").addEventListener(
 
 ---
 
-## 33. Difference between == and ===?
+## 8. Difference between == and ===?
 
 **Answer:** The == operator performs loose equality comparison with type coercion, automatically converting operands to the same type before comparison. The === operator performs strict equality comparison without type coercion, requiring both value and type to be identical. Type coercion in == can lead to unexpected results and bugs, making === the preferred choice for predictable behavior. The == operator follows complex coercion rules that can be confusing, while === is straightforward and explicit about what it's comparing.
 
@@ -212,7 +212,7 @@ console.log(0 === false); // false
 
 ---
 
-## 34. Difference between null and undefined?
+## 9. Difference between null and undefined?
 
 **Answer:** undefined means a variable has been declared but not assigned a value, or a function doesn't return anything. null is an intentional assignment representing "no value" or "empty". undefined is the default value for uninitialized variables, missing function parameters, and non-existent object properties. null must be explicitly assigned and represents a deliberate absence of value. Both are falsy values, but typeof null returns "object" (a known quirk), while typeof undefined returns "undefined".
 
@@ -235,7 +235,7 @@ test(null); // null
 
 ---
 
-## 35. Function Declaration vs Function Expression?
+## 10. Function Declaration vs Function Expression?
 
 **Answer:** Function declarations are hoisted completely, meaning you can call them before they're defined in the code. They create a named function that's available throughout their entire scope. Function expressions are not hoisted; the variable is hoisted but remains undefined until the assignment executes. This includes anonymous functions assigned to variables and named function expressions. Function declarations are better for main program functions, while expressions are useful for conditional function creation and callbacks.
 
