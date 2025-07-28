@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 // Banner component instance
-const banner = <Banner storageKey="some-key">Hello</Banner>;
+const banner = <Banner storageKey="some-key">We Are Launched v1.0</Banner>;
 
 // Navbar component instance
 const navbar = (
