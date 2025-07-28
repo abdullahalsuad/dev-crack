@@ -28,17 +28,16 @@ const OurContributors = () => {
         "https://i.ibb.co/LXh2sMvm/Whats-App-Image-2025-02-24-at-14-52-49-69d17215.jpg",
     },
 
-    // {
-    //   id: 3,
-    //   name: "David Kim",
-    //   title: "Full Stack Developer",
-    //   description:
-    //     "Bridges frontend and backend development with expertise in modern web frameworks.",
-    //   contributions: 89,
-    //   joined: "Feb 2024",
-    //   github: "@davidkim",
-    //   imageUrl: "https://placehold.co/100x100/1a202c/ffffff?text=DK", // Placeholder image
-    // },
+    {
+      id: 3,
+      name: "Enamul Shikder",
+      title: "Full Stack Developer",
+      description:
+        "Bridges frontend and backend development with expertise in modern web frameworks.",
+      contributions: 89,
+      github: "devenamulshikder",
+      imageUrl: "https://i.postimg.cc/j5JfPtRj/e-favicon.png", // Placeholder image
+    },
   ];
 
   return (

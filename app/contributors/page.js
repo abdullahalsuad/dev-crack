@@ -19,3 +19,4 @@ const Contributors = () => {
 };
 
 export default Contributors;
+  
