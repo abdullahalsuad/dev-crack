@@ -1,1 +1,280 @@
-## reactjs advanced
+# MongoDB Advanced Interview Questions
+
+## 1. What is the difference between find() and findOne()?
+
+`find()` returns all matching documents. `findOne()` returns only the first matching document.
+
+**Example:**
+
+```javascript
+// find() returns cursor with all matches
+const allUsers = db.users.find({ age: { $gte: 25 } });
+// Returns: cursor with multiple documents
+
+// findOne() returns single document
+const oneUser = db.users.findOne({ age: { $gte: 25 } });
+// Returns: { "_id": ..., "name": "Alice", "age": 30 }
+```
+
+## 2. What is upsert in MongoDB?
+
+Upsert updates a document if it exists, or creates a new one if it doesn't exist.
+
+**Example:**
+
+```javascript
+// Without upsert - fails if document doesn't exist
+db.users.updateOne(
+  { email: "new@email.com" },
+  { $set: { name: "New User", age: 25 } }
+); // Returns: { matchedCount: 0, modifiedCount: 0 }
+
+// With upsert - creates if doesn't exist
+db.users.updateOne(
+  { email: "new@email.com" },
+  { $set: { name: "New User", age: 25 } },
+  { upsert: true }
+); // Creates new document if not found
+```
+
+## 3. What is the $set operator?
+
+`$set` updates specific fields in a document without changing other fields.
+
+**Example:**
+
+```javascript
+// Document before
+{ "_id": 1, "name": "Alice", "age": 30, "email": "alice@email.com" }
+
+// Update with $set
+db.users.updateOne(
+  { "_id": 1 },
+  { $set: { age: 31, city: "New York" } }
+)
+
+// Document after
+{ "_id": 1, "name": "Alice", "age": 31, "email": "alice@email.com", "city": "New York" }
+```
+
+## 4. What is the $push operator?
+
+`$push` adds new elements to an array field in a document.
+
+**Example:**
+
+```javascript
+// Document before
+{ "_id": 1, "name": "Alice", "skills": ["JavaScript"] }
+
+// Add to array
+db.users.updateOne(
+  { "_id": 1 },
+  { $push: { skills: "Python" } }
+)
+
+// Document after
+{ "_id": 1, "name": "Alice", "skills": ["JavaScript", "Python"] }
+
+// Push multiple values
+db.users.updateOne(
+  { "_id": 1 },
+  { $push: { skills: { $each: ["React", "Node.js"] } } }
+)
+```
+
+## 5. What is GridFS?
+
+GridFS stores large files (bigger than 16MB) by splitting them into smaller chunks.
+
+**Example:**
+
+```javascript
+// Store a large file
+mongofiles -d mydb put largefile.pdf
+
+// GridFS creates two collections:
+// fs.files - metadata
+{
+  "_id": ObjectId("..."),
+  "filename": "largefile.pdf",
+  "length": 25000000,
+  "chunkSize": 261120,
+  "uploadDate": ISODate("...")
+}
+
+// fs.chunks - file data
+{
+  "_id": ObjectId("..."),
+  "files_id": ObjectId("..."),
+  "n": 0,
+  "data": BinData(...)
+}
+```
+
+## 6. What is the difference between MongoDB and MySQL?
+
+MongoDB stores JSON-like documents. MySQL stores data in tables with rows and columns.
+
+**Example:**
+
+```javascript
+// MySQL
+CREATE TABLE users (
+  id INT PRIMARY KEY,
+  name VARCHAR(100),
+  age INT
+);
+INSERT INTO users VALUES (1, 'Alice', 30);
+
+// MongoDB
+db.users.insertOne({
+  _id: ObjectId("..."),
+  name: "Alice",
+  age: 30,
+  preferences: {
+    theme: "dark",
+    language: "en"
+  },
+  hobbies: ["reading", "coding"]
+})
+```
+
+## 7. What is BSON?
+
+BSON (Binary JSON) is how MongoDB stores documents. It's faster than regular JSON.
+
+**Example:**
+
+```javascript
+// JSON (text format)
+{
+  "name": "Alice",
+  "age": 30,
+  "created": "2023-01-15T10:30:00Z"
+}
+
+// BSON (binary format with types)
+{
+  "name": String("Alice"),
+  "age": Int32(30),
+  "created": Date("2023-01-15T10:30:00Z"),
+  "_id": ObjectId("507f1f77bcf86cd799439011")
+}
+```
+
+## 8. What is the explain() method?
+
+`explain()` shows how MongoDB executes a query and helps optimize performance.
+
+**Example:**
+
+```javascript
+// Basic explain
+db.users.find({ age: 30 }).explain()
+
+// Detailed execution stats
+db.users.find({ age: 30 }).explain("executionStats")
+// Returns:
+{
+  "executionStats": {
+    "totalDocsExamined": 1000,
+    "totalDocsReturned": 50,
+    "executionTimeMillis": 15,
+    "indexesUsed": ["age_1"]
+  }
+}
+```
+
+## 9. What is a capped collection?
+
+A capped collection has a fixed size. When it's full, old documents are automatically deleted.
+
+**Example:**
+
+```javascript
+// Create capped collection (max 1MB, 1000 documents)
+db.createCollection("logs", {
+  capped: true,
+  size: 1048576, // 1MB
+  max: 1000, // max documents
+});
+
+// Insert logs
+db.logs.insertOne({ message: "User login", timestamp: new Date() });
+// When limit reached, oldest documents are automatically removed
+```
+
+## 10. What is the difference between embedded and referenced documents?
+
+Embedded documents are stored inside other documents. Referenced documents are stored separately and linked by ID.
+
+**Example:**
+
+```javascript
+// Embedded documents (nested)
+{
+  "_id": 1,
+  "name": "Alice",
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "zip": "10001"
+  }
+}
+
+// Referenced documents (separate collections)
+// Users collection
+{ "_id": 1, "name": "Alice", "addressId": ObjectId("...") }
+
+// Addresses collection
+{
+  "_id": ObjectId("..."),
+  "street": "123 Main St",
+  "city": "New York",
+  "zip": "10001"
+}
+
+// Query with reference
+db.users.aggregate([
+  { $lookup: {
+    from: "addresses",
+    localField: "addressId",
+    foreignField: "_id",
+    as: "address"
+  }}
+])
+```
+
+---
+
+## Quick Reference Commands
+
+```javascript
+// Database operations
+use mydb
+show dbs
+db.dropDatabase()
+
+// Collection operations
+show collections
+db.createCollection("users")
+db.users.drop()
+
+// CRUD operations
+db.users.insertOne({name: "Alice"})
+db.users.find({age: {$gte: 25}})
+db.users.updateOne({name: "Alice"}, {$set: {age: 31}})
+db.users.deleteOne({name: "Alice"})
+
+// Indexing
+db.users.createIndex({name: 1})
+db.users.getIndexes()
+db.users.dropIndex({name: 1})
+
+// Aggregation
+db.users.aggregate([
+  {$match: {age: {$gte: 25}}},
+  {$group: {_id: "$department", count: {$sum: 1}}}
+])
+```
