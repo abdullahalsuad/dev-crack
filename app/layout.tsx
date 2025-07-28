@@ -5,6 +5,8 @@ import "nextra-theme-docs/style.css";
 import CustomFooter from "../components/shared/CustomFooter";
 
 import "./index.css";
+import Image from "next/image";
+import navLogo from "./assets/DEV_Crack_logo.png";
 
 export const metadata = {
   title: "Dev Crack",
@@ -16,7 +18,7 @@ const banner = <Banner storageKey="some-key">We Are Launched v1.0</Banner>;
 // Navbar component instance
 const navbar = (
   <Navbar
-    logo={<b>DEV Crack</b>}
+    logo={<Image alt="logo" src={navLogo} height={90} width={100} />}
     logoLink={"/"}
     projectLink="https://github.com/abdullahalsuad/dev-crack"
     chatLink="https://discord.gg/Gzht2qKAn8"
