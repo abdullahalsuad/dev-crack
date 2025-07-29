@@ -601,3 +601,164 @@ app.listen(port, () => {
 - The cors middleware adds headers to allow cross-origin requests.
 - A frontend app on `http://example.com` can now fetch data from `http://localhost:3000/data`.
 - You can customize CORS (e.g., allow specific domains) by passing options to `cors()`.
+
+---
+
+## 17. What is `app.listen()`?
+
+`app.listen(port, [callback])` is an Express method that starts your server, making it listen for incoming HTTP requests on a specified port. The optional callback function runs when the server starts successfully.
+
+**Why is it important?**
+
+It’s the final step to make your app accessible to clients (e.g., browsers or API clients).
+
+📦 **Example:**
+
+```js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Server is up!");
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `app.listen(3000, ...)` binds the server to port 3000.
+- The callback logs a message when the server starts.
+- Visiting `http://localhost:3000` shows: Server is up!.
+
+---
+
+## 18. How do you serve HTML files in Express?
+
+To serve HTML files in Express, you use `res.sendFile()` to send a specific file to the client. The path module is often used to create absolute file paths to avoid errors across different operating systems.
+
+🔹 **Steps:**
+
+1. Create an HTML file in your project (e.g., `public/index.html`).
+2. Use `res.sendFile()` with the absolute path to the file.
+3. Optionally, use `express.static()` to serve the entire folder containing the HTML file.
+
+📦 **Example:**
+
+- Create public/index.html:
+
+```html
+<h1>My Express Website</h1>
+<p>Welcome to my page!</p>
+```
+
+- Set up your Express app: javascript
+
+```js
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+res.sendFile(path.join(\_\_dirname, 'public', 'index.html'));
+});
+
+app.listen(port, () => {
+console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `path.join(\_\_dirname, 'public', 'index.html')` creates the absolute path to index.html.
+- Visiting `http://localhost:3000` displays the HTML
+- content: My Express Website and Welcome to my page!.
+
+---
+
+## 19. What is the purpose of `next()` in middleware?
+
+In Express middleware, `next()` is a function that passes control to the next middleware or route handler in the chain. If you don’t call `next()`, the request will hang, and the client won’t receive a response.
+
+**Why is it needed?**
+
+Middleware often performs tasks (e.g., logging, authentication) and then hands off the request to the next handler.
+`next()` ensures the request continues processing.
+
+📦 **Example:**
+
+```js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+// Middleware 1
+app.use((req, res, next) => {
+  console.log("Middleware 1: Logging request");
+  next(); // Move to the next middleware
+});
+
+// Middleware 2
+app.use((req, res, next) => {
+  console.log("Middleware 2: Adding timestamp");
+  req.timestamp = new Date();
+  next(); // Move to the route
+});
+
+// Route
+app.get("/", (req, res) => {
+  res.send(`Request processed at: ${req.timestamp}`);
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- Middleware 1 logs a message and calls `next()` to pass control.
+- Middleware 2 adds a timestamp to req and calls `next()`.
+- The route uses the timestamp and sends a response.
+- Visiting `http://localhost:3000` shows something like: `Request processed at: 2025-07-28T16:34:00.000Z`.
+
+---
+
+## 20. How do you handle 404 errors in Express?
+
+A 404 error occurs when a client requests a route that doesn’t exist. In Express, you handle 404 errors by adding a middleware function at the end of your middleware and route stack. This middleware catches any unmatched requests and sends a 404 response.
+
+🔹 **Steps:**
+
+1. Place the 404 middleware after all routes.
+2. Use `res.status(404)` to set the HTTP status and send a response.
+
+📦 **Example:**
+
+```js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Home page");
+});
+
+// 404 middleware (must be last)
+app.use((req, res) => {
+  res.status(404).send("Page not found!");
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- Visiting `http://localhost:3000/` shows: Home page.
+- Visiting `http://localhost:3000/random` (an undefined route) shows: Page not found! with a 404 status code.
