@@ -1,1 +1,408 @@
-## comming soon
+## 1. What is a template engine in Express?
+
+A template engine in Express is a tool that lets you create dynamic HTML pages by combining HTML with data (e.g., from a database or user input). Unlike static HTML, template engines allow you to insert variables, loops, or conditions into your HTML, making your pages dynamic.
+
+**Why use a template engine?**
+
+- Generate HTML dynamically (e.g., display a user’s name).
+- Reuse HTML templates for multiple pages.
+- Simplify building web apps with dynamic content.
+
+📦 **Example (using EJS):**
+
+1. Install EJS:
+
+```bash
+npm install ejs
+```
+
+2. Set up `app.js`:
+
+```javascript
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  res.render("index", { name: "Alice" });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+3. Create `views/index.ejs`:
+
+```html
+<h1>Hello, <%= name %>!</h1>
+```
+
+⚙️ **How it works:**
+
+- `app.set('view engine', 'ejs')` tells Express to use EJS as the template engine.
+- `res.render('index', { name: 'Alice' })` renders `index.ejs`, replacing `<%= name %>` with "Alice".
+- Visiting http://localhost:3000 shows: `<h1>Hello, Alice!</h1>`.
+
+---
+
+## 2. How do you set a template engine in Express?
+
+To use a template engine in Express, you need to configure Express to recognize the engine and specify where to find template files. The most common template engines are EJS, Pug, and Handlebars. Here, we’ll use EJS as an example.
+
+🔹 **Steps:**
+
+1. Install the template engine (e.g., `npm install ejs`).
+2. Set the view engine with `app.set('view engine', 'ejs')`.
+3. Create a `views` folder and add template files (e.g., `.ejs` files).
+4. Use `res.render()` to render templates with data.
+
+📦 **Example:**
+
+1. Install EJS:
+
+```bash
+npm install ejs
+```
+
+2. Create `app.js`:
+
+```javascript
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.set("view engine", "ejs");
+```
+
+3. Create `views/home.ejs`:
+
+```html
+<h1><%= title %></h1>
+<p>Welcome, <%= user %>!</p>
+```
+
+4. Use it in `app.js`:
+
+```javascript
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  res.render("home", { title: "My App", user: "Bob" });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `app.set('view engine', 'ejs')` configures Express to use EJS.
+- Express looks for templates in the `views` folder by default.
+- `res.render('home', { title: 'My App', user: 'Bob' })` renders `home.ejs` with the provided data.
+- Visiting http://localhost:3000 shows: `<h1>My App</h1><p>Welcome, Bob!</p>`.
+
+---
+
+## 3. What is cookie-parser?
+
+cookie-parser is an Express middleware that parses cookies sent in HTTP requests and makes them available in `req.cookies` as a JavaScript object. Cookies are small pieces of data stored in the client’s browser, often used for user authentication, session management, or storing preferences.
+
+**Why use it?**
+
+Simplifies reading cookies from requests.
+Essential for features like user sessions or tracking.
+
+📦 **Example:**
+
+1. Install cookie-parser:
+
+```bash
+npm install cookie-parser
+```
+
+2. Set up app.js:
+
+```js
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const app = express();
+const port = 3000;
+
+app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.cookie("username", "Alice"); // Set a cookie
+  res.send(
+    `Cookie set! Current cookies: ${JSON.stringify(req.cookies)}`
+  );
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `app.use(cookieParser())` enables cookie parsing.
+- `res.cookie('username', 'Alice')` sets a cookie named username with value Alice.
+- `req.cookies` contains all cookies sent by the client.
+- Visiting http://localhost:3000 shows: Cookie set! Current cookies: `{"username":"Alice"}`.
+
+---
+
+## 4. How do you handle file uploads in Express?
+
+To handle file uploads in Express, you use the multer middleware, which processes multipart form data (e.g., files uploaded via forms). It saves files to your server and provides details about them in `req.file` or `req.files`.
+
+🔹 **Steps:**
+
+- Install multer: `npm install multer`.
+- Configure multer to specify where to save files and how to name them.
+- Create a route to handle file uploads.
+- Use an HTML form to send files.
+
+📦 **Example:**
+
+1. Install multer:
+
+```bash
+npm install multer
+```
+
+2. Create app.js:
+
+```js
+const express = require("express");
+const multer = require("multer");
+const app = express();
+const port = 3000;
+
+const upload = multer({ dest: "uploads/" });
+
+app.get("/", (req, res) => {
+  res.send(`
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="photo">
+      <button type="submit">Upload</button>
+    </form>
+  `);
+});
+
+app.post("/upload", upload.single("photo"), (req, res) => {
+  res.send(`File uploaded: ${req.file.filename}`);
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `multer({ dest: 'uploads/' })` saves uploaded files to an uploads folder.
+- `upload.single('photo')` processes a single file upload with the name photo.
+- The form at `/` lets users upload a file.
+- Visiting http://localhost:3000, uploading a file, and submitting shows: `File uploaded: <random-filename>`.
+
+---
+
+## 5. What is a session in Express?
+
+A session in Express is a way to store user data on the server across multiple requests, allowing you to maintain state (e.g., keeping a user logged in). The express-session middleware manages sessions by storing data in memory or a database and linking it to the client via a cookie.
+
+**Why use sessions?**
+
+- Track user activity (e.g., login status).
+- Store temporary data, like a shopping cart.
+
+📦 **Example:**
+
+1. Install express-session:
+
+```bash
+npm install express-session
+```
+
+2. Set up app.js:
+
+```js
+const express = require("express");
+const session = require("express-session");
+const app = express();
+const port = 3000;
+
+app.use(
+  session({
+    secret: "my-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.get("/", (req, res) => {
+  req.session.views = (req.session.views || 0) + 1;
+  res.send(`You visited this page ${req.session.views} times`);
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `app.use(session({...}))` sets up session management with a secret key.
+- `req.session.views` stores the number of page visits for the user.
+- Visiting http://localhost:3000 multiple times increments the count: "You visited this page 1 times", "You visited this page 2 times", etc.
+
+---
+
+## 6. What is the difference between `res.send()` and `res.json()`?
+
+Both `res.send()` and `res.json()` send responses to the client in Express, but they differ in how they handle data and headers:
+
+- `res.send()`: Sends any type of data (string, HTML, object, etc.) and sets the Content-Type header based on the data type.
+
+- `res.json()`: Converts the data to JSON, sets the Content-Type to application/json, and sends it.
+  When to use each?
+
+Use `res.send()` for simple responses like strings or HTML.
+Use `res.json() for` APIs where JSON data is expected.
+
+📦 **Example:**
+
+```js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/send", (req, res) => {
+  res.send("Hello, this is a string!");
+});
+
+app.get("/json", (req, res) => {
+  res.json({ message: "This is JSON data", user: "Alice" });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- http://localhost:3000/send: Shows `"Hello, this is a string!"` with Content-Type: text/html.
+- http://localhost:3000/json: Shows `{"message":"This is JSON data","user":"Alice"}` with Content-Type: application/json.
+
+---
+
+## 7. How do you validate input in Express?
+
+Input validation in Express ensures that data sent by clients (e.g., in forms or API requests) meets your requirements (e.g., valid email, required fields). Libraries like express-validator or joi simplify this by providing tools to check and sanitize data.
+
+🔹 **Steps: (using express-validator)**:
+
+- Install express-validator: `npm install express-validator`.
+- Add validation middleware to your route.
+- Check for errors and respond accordingly.
+
+📦 **Example:**
+
+1. Install express-validator:
+
+```bash
+npm install express-validator
+```
+
+2. Set up app.js:
+
+```js
+const express = require("express");
+const { body, validationResult } = require("express-validator");
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.post(
+  "/register",
+  body("email").isEmail(),
+  body("password").isLength({ min: 6 }),
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    res.send(`Welcome, ${req.body.email}!`);
+  }
+);
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `body('email').isEmail()` checks if email is a valid email.
+- `body('password').isLength({ min: 6 })` ensures password is at least 6 characters.
+- Send a POST request to http://localhost:3000/register with JSON like `{"email": "test@example.com", "password": "123456"}` to get: `Welcome, test@example.com!`.
+- If you send `{"email": "invalid", "password": "123"}`, you get a 400 error with validation details.
+
+---
+
+## 8. What is rate limiting in Express?
+
+Rate limiting in Express restricts the number of requests a client (e.g., a user or bot) can make to your server in a given time period. This prevents abuse, like spamming your API. The express-rate-limit middleware is commonly used to enforce these limits.
+
+**Why use it?**
+
+- Protects your server from overload or denial-of-service attacks.
+- Ensures fair usage of your API.
+
+📦 **Example:**
+
+1. Install express-rate-limit:
+
+```bash
+npm install express-rate-limit
+```
+
+2. Set up app.js:
+
+```js
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const app = express();
+const port = 3000;
+
+const limiter = rateLimit({
+windowMs: 15 _ 60 _ 1000, // 15 minutes
+max: 5 // 5 requests per IP
+});
+
+app.use(limiter);
+
+app.get('/', (req, res) => {
+res.send('Hello, this is a rate-limited route!');
+});
+
+app.listen(port, () => {
+console.log(`Server running at http://localhost:${port}`);
+});
+```
+
+⚙️ **How it works:**
+
+- `rateLimit({ windowMs: 15 _ 60 _ 1000, max: 5 }) `limits each IP to 5 requests every 15 minutes.
+- Visiting http://localhost:3000 more than 5 times in 15 minutes returns a `429 (Too Many Requests) error`.
+- The response for successful requests is: `Hello, this is a rate-limited route!`.
