@@ -1,1 +1,89 @@
-# react intermediate
+# Next.js Intermediate Interview Questions
+
+## 1. What is `_app.js`?
+
+`_app.js` wraps all pages in your Next.js app. Use it to add global layouts, apply consistent styles (e.g., CSS imports), or set up state management like Redux. It’s the entry point for customizing page rendering.
+
+## 2. What is `_document.js`?
+
+`_document.js` lets you customize the HTML structure of your app. Add meta tags, custom fonts, or scripts in the `<head>` or `<body>`. It’s only rendered server-side, so it’s great for static HTML changes.
+
+## 3. What are environment variables in Next.js?
+
+Environment variables store settings like API keys in `.env.local`. Access them with `process.env.VARIABLE_NAME`. Next.js loads them automatically, making it easy to manage app configurations.
+
+## 4. What is the difference between public and private environment variables?
+
+Private variables (e.g., `DB_KEY`) are server-only and secure. Public variables (e.g., `NEXT_PUBLIC_API_URL`) are exposed in the browser, used for non-sensitive data like public API endpoints.
+
+## 5. What is CSS-in-JS in Next.js?
+
+CSS-in-JS lets you write styles in JavaScript files. Use libraries like `styled-components` to style components dynamically. Next.js supports this with minimal setup for server-side rendering.
+
+## 6. What is CSS Modules in Next.js?
+
+CSS Modules scope styles locally. Create a file like `styles.module.css`, import it (`import styles from './styles.module.css'`), and use classes like `className={styles.myClass}` for conflict-free styling.
+
+## 7. What is Tailwind CSS integration in Next.js?
+
+Tailwind CSS uses utility classes for fast styling. Install Tailwind, configure it in `tailwind.config.js`, and import it in `_app.js`. It’s a popular choice for rapid UI development.
+
+## 8. What is the difference between development and production mode?
+
+Development mode (`next dev`) offers hot reloading and error overlays for debugging. Production mode (`next build && next start`) optimizes your app for speed, minifying code and assets.
+
+## 9. What is hot reloading in Next.js?
+
+Hot reloading updates your app in the browser when you save code changes, keeping the app’s state intact. It’s enabled in development mode to speed up coding.
+
+## 10. What is fast refresh in Next.js?
+
+Fast refresh improves hot reloading by preserving React component state and showing better error messages. It makes development smoother and is enabled by default in Next.js 10+.
+
+## 11. What is deployment in Next.js?
+
+Deployment puts your app online. Use platforms like Vercel or Netlify, which support Next.js apps easily. Run `next build` and deploy the output to a Node.js or static host.
+
+## 12. What is Vercel and its relation to Next.js?
+
+Vercel created Next.js and offers a platform for easy deployment. It supports Next.js features like static generation and serverless functions out of the box.
+
+## 13. What is the build process in Next.js?
+
+The build process (`next build`) compiles your app, optimizes assets, and creates a `.next` folder with production-ready files. It prepares your app for deployment.
+
+## 14. What is internationalization (i18n) in Next.js?
+
+i18n lets your app support multiple languages. Configure `next.config.js` with `i18n` to enable locale-based routing (e.g., `/en/about`) and automatic language detection.
+
+## 15. What is TypeScript support in Next.js?
+
+Next.js supports TypeScript with zero configuration. Use `.ts` or `.tsx` files, and Next.js handles type checking and compilation, improving code safety and developer experience.
+
+## 16. What is ESLint integration in Next.js?
+
+Next.js includes ESLint to catch code errors and enforce style rules. Run `next lint` to check your code and keep it clean and consistent.
+
+## 17. What is caching in Next.js?
+
+Caching speeds up your app by storing page and API responses. Next.js uses automatic caching for static pages and incremental static regeneration (ISR) for dynamic content.
+
+## 18. What is redirect in Next.js?
+
+Redirects send users to a new URL. Set them up in `next.config.js` or use `getServerSideProps` to redirect dynamically, like redirecting `/old` to `/new`.
+
+## 19. What is custom 404 page in Next.js?
+
+Create a `404.js` file in the `pages` folder to show a custom page when users visit a non-existent route. It’s easy to style and improves user experience.
+
+## 20. What is custom error page in Next.js?
+
+Create an `_error.js` file in `pages` to handle server errors (e.g., 500). Customize the error page to show user-friendly messages for unexpected issues.
+
+## 21. What is analytics integration in Next.js?
+
+Add analytics (e.g., Google Analytics) to track user behavior. Include tracking scripts in `_app.js` or use `next/script` to load them efficiently.
+
+## 22. What is testing in Next.js?
+
+Test your app with Jest and React Testing Library. Write tests for components, pages, and API routes to ensure your app works as expected.

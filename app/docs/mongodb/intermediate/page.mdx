@@ -1,1 +1,167 @@
-# react intermediate
+# MongoDB Intermediate Interview Questions
+
+## 1. What is an index in MongoDB?
+An index makes searches faster by creating shortcuts to find data quickly.
+
+**Example:**
+```javascript
+// Without index - slow search through all documents
+db.users.find({ email: "alice@email.com" }) // Scans all documents
+
+// With index - fast lookup
+db.users.createIndex({ email: 1 })
+db.users.find({ email: "alice@email.com" }) // Uses index
+```
+
+## 2. How do you create an index in MongoDB?
+Use `createIndex()`: `db.collection.createIndex({field: 1})` where 1 means ascending order.
+
+**Example:**
+```javascript
+// Single field index
+db.users.createIndex({ name: 1 })
+
+// Compound index
+db.users.createIndex({ name: 1, age: -1 })
+
+// Text index for search
+db.products.createIndex({ title: "text", description: "text" })
+```
+
+## 3. What is aggregation in MongoDB?
+Aggregation processes data and returns computed results, like grouping and counting.
+
+**Example:**
+```javascript
+// Count users by age group
+db.users.aggregate([
+  {
+    $group: {
+      _id: {
+        $cond: [{ $gte: ["$age", 30] }, "adult", "young"]
+      },
+      count: { $sum: 1 }
+    }
+  }
+])
+// Result: [{ "_id": "adult", "count": 5 }, { "_id": "young", "count": 3 }]
+```
+
+## 4. What is the aggregation pipeline?
+The aggregation pipeline is a series of stages that process documents step by step.
+
+**Example:**
+```javascript
+db.orders.aggregate([
+  { $match: { status: "completed" } },    // Stage 1: Filter
+  { $group: {                             // Stage 2: Group
+    _id: "$customerId",
+    totalSpent: { $sum: "$amount" }
+  }},
+  { $sort: { totalSpent: -1 } },          // Stage 3: Sort
+  { $limit: 5 }                           // Stage 4: Limit
+])
+```
+
+## 5. What is sharding in MongoDB?
+Sharding splits large databases across multiple servers to handle more data and users.
+
+**Example:**
+```javascript
+// Enable sharding for database
+sh.enableSharding("mystore")
+
+// Shard a collection based on user_id
+sh.shardCollection("mystore.users", { user_id: 1 })
+
+// Data automatically distributed:
+// Server 1: user_id 1-1000
+// Server 2: user_id 1001-2000
+// Server 3: user_id 2001-3000
+```
+
+### 16. What is replication in MongoDB?
+Replication creates copies of your database on different servers for backup and reliability.
+
+**Example:**
+```javascript
+// Replica set configuration
+{
+  "_id": "myReplicaSet",
+  "members": [
+    { "_id": 0, "host": "server1:27017", "priority": 2 },  // Primary
+    { "_id": 1, "host": "server2:27017", "priority": 1 },  // Secondary
+    { "_id": 2, "host": "server3:27017", "priority": 1 }   // Secondary
+  ]
+}
+```
+
+## 7. What is a replica set?
+A replica set is a group of MongoDB servers that keep copies of the same data.
+
+**Example:**
+```javascript
+// Initialize replica set
+rs.initiate({
+  _id: "myReplicaSet",
+  members: [
+    { _id: 0, host: "localhost:27017" },
+    { _id: 1, host: "localhost:27018" },
+    { _id: 2, host: "localhost:27019" }
+  ]
+})
+
+// Check replica set status
+rs.status()
+```
+
+## 8. What are the different types of indexes in MongoDB?
+Single field, compound (multiple fields), multikey (arrays), text, and geospatial indexes.
+
+**Example:**
+```javascript
+// Single field index
+db.users.createIndex({ name: 1 })
+
+// Compound index
+db.users.createIndex({ name: 1, age: -1 })
+
+// Multikey index (for arrays)
+db.users.createIndex({ skills: 1 })
+
+// Text index
+db.products.createIndex({ title: "text" })
+
+// Geospatial index
+db.places.createIndex({ location: "2dsphere" })
+```
+
+## 9. What is the limit() method?
+`limit()` controls how many documents are returned from a query.
+
+**Example:**
+```javascript
+// Get first 5 users
+db.users.find().limit(5)
+
+// Get 10 users, skip first 20 (pagination)
+db.users.find().skip(20).limit(10)
+
+// Combined with sort
+db.users.find().sort({ age: -1 }).limit(3) // Top 3 oldest users
+```
+
+## 10. What is the sort() method?
+`sort()` arranges documents in ascending (1) or descending (-1) order by specified fields.
+
+**Example:**
+```javascript
+// Sort by age ascending
+db.users.find().sort({ age: 1 })
+
+// Sort by age descending
+db.users.find().sort({ age: -1 })
+
+// Multiple field sort
+db.users.find().sort({ age: -1, name: 1 }) // Age desc, then name asc
+```

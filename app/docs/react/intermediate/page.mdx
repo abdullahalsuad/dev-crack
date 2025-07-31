@@ -1,1 +1,212 @@
-# react intermediate
+## **01. What are controlled vs uncontrolled components?**
+
+- **Controlled components** have their form data controlled by React via `useState`.
+- **Uncontrolled components** use `ref` to access DOM elements directly — React doesn’t manage the input’s state.
+- Controlled inputs are preferred in most React apps because they provide more control and validation.
+
+**Example (Controlled):**
+
+```jsx
+const [name, setName] = useState("");
+<input value={name} onChange={(e) => setName(e.target.value)} />;
+```
+
+**Example (Uncontrolled):**
+
+```jsx
+const nameRef = useRef();
+<input ref={nameRef} />;
+```
+
+---
+
+## **02. What is the Virtual DOM and how does React use it?**
+
+- The **Virtual DOM** is a lightweight JavaScript copy of the actual DOM.
+- React updates the Virtual DOM first, then calculates the **difference (diffing)** with the real DOM and updates only the changed parts — this makes rendering efficient.
+- It improves performance by reducing direct DOM manipulation.
+
+  **Real Scenario:** React can re-render a button's text without re-rendering the entire page.
+
+---
+
+## **03. What is lifting state up in React?**
+
+- Lifting state up means **moving state to the nearest common ancestor** of multiple components that need access to the same data.
+- This avoids prop-drilling and keeps a **single source of truth**.
+- Useful when two sibling components need to share or modify common data.
+
+```jsx
+function Parent() {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <ChildA count={count} />
+      <ChildB setCount={setCount} />
+    </>
+  );
+}
+```
+
+---
+
+## **04. What is React Context API and when to use it?**
+
+- Context API allows **global state management** without prop-drilling.
+- You can wrap your app with `Provider` and access the data anywhere via `useContext`.
+- Use it for theme toggling, user auth data, or language settings.
+
+```jsx
+const ThemeContext = createContext();
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Home />
+    </ThemeContext.Provider>
+  );
+}
+function Home() {
+  const theme = useContext(ThemeContext);
+}
+```
+
+---
+
+## **05. What is prop drilling and how can we avoid it?**
+
+- **Prop drilling** happens when you pass data through many nested components even if only the last one needs it.
+- It makes code harder to maintain.
+- You can avoid it using **Context API**, **Redux**, or **custom hooks**.
+
+---
+
+## **06. What is useRef and how is it used?**
+
+- `useRef` returns a mutable ref object that persists across renders.
+- Commonly used to **access DOM elements** directly or **store values without causing re-renders**.
+
+```jsx
+const inputRef = useRef();
+<input ref={inputRef} />
+<button onClick={() => inputRef.current.focus()}>Focus</button>
+```
+
+---
+
+## **07. What is memoization in React and how to do it?**
+
+- Memoization avoids **re-rendering a component unnecessarily** when props haven't changed.
+- `React.memo` is used for component memoization.
+- `useMemo` and `useCallback` are used inside components for memoizing values and functions.
+
+```jsx
+const MemoComponent = React.memo(({ value }) => {
+  return <div>{value}</div>;
+});
+```
+
+---
+
+## **08. What is useCallback and why is it important?**
+
+- `useCallback(fn, deps)` returns a **memoized version** of the function.
+- Useful when passing functions to child components to **avoid unnecessary re-renders**.
+- Especially important when components are wrapped in `React.memo`.
+
+```jsx
+const handleClick = useCallback(() => doSomething(), []);
+```
+
+---
+
+## **09. What is useMemo and when should you use it?**
+
+- `useMemo(cb, deps)` memoizes the **result** of a calculation.
+- It prevents expensive computations from running every render.
+- Great for heavy operations like filtering large lists.
+
+```jsx
+const filtered = useMemo(() => items.filter((i) => i.done), [items]);
+```
+
+---
+
+## **10. How does React handle form validation?**
+
+- You can do **manual validation** in `onChange` or `onSubmit`.
+- Libraries like **Formik**, **React Hook Form**, or **Yup** help build scalable validations.
+
+```jsx
+if (!email.includes("@")) setError("Invalid email");
+```
+
+---
+
+## **11. What is the difference between useEffect and useLayoutEffect?**
+
+- `useEffect` runs **after paint**, `useLayoutEffect` runs **before paint**.
+- Use `useLayoutEffect` when you need to **measure DOM layout** or **synchronize with animations**.
+
+⚠️ `useLayoutEffect` blocks the paint, so overuse may cause performance issues.
+
+---
+
+## **12. How does React handle reconciliation?**
+
+- Reconciliation is React’s algorithm to **update the UI efficiently**.
+- It uses **keys** to compare Virtual DOM elements.
+- If keys match, it reuses the DOM nodes. If not, it removes and re-renders.
+
+That’s why unique keys (not index) matter in dynamic lists.
+
+---
+
+## **13. What is a higher-order component (HOC)?**
+
+- A **HOC** is a function that takes a component and returns a new one with **added logic**.
+- Example use cases: auth checks, error boundaries, or styling logic.
+
+```jsx
+function withLogger(Component) {
+  return function Wrapper(props) {
+    console.log("Rendering...");
+    return <Component {...props} />;
+  };
+}
+```
+
+---
+
+## **14. How can we handle errors in React?**
+
+- You can use **Error Boundaries** for UI-level errors.
+- They catch errors in the component tree and render fallback UIs.
+- Use `componentDidCatch` in class components or libraries like `react-error-boundary`.
+
+  **Example (class):**
+
+```jsx
+class ErrorBoundary extends React.Component {
+  componentDidCatch(error, info) {
+    console.error(error);
+  }
+  render() {
+    return this.props.children;
+  }
+}
+```
+
+---
+
+## **15. What is lazy loading in React?**
+
+- **Lazy loading** allows components to load only when needed, reducing initial bundle size.
+- Use `React.lazy()` and `Suspense` for component-level code-splitting.
+
+```jsx
+const LazyPage = React.lazy(() => import("./HeavyPage"));
+
+<Suspense fallback={<Loader />}>
+  <LazyPage />
+</Suspense>;
+```

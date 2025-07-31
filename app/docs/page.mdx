@@ -1,344 +1,131 @@
-# একজন জাভাস্ক্রিপ্ট ফোকাসড সফটওয়্যার ইঞ্জিনিয়ার হওয়ার পূর্ণাঙ্গ রোডম্যাপ (বাংলায়)
+import { FaDiscord } from "react-icons/fa";
+
+# Crack Your First Tech Interview
+
+Welcome to the **DEV Crack Interview Q&A Hub** — built specifically for **freshers** preparing for web development roles.
+
+We've organized interview questions and answers into three skill levels:  
+**Basic → Intermediate → Advanced**  
+So you can **learn step-by-step**, build confidence, and perform like a pro in real interviews.
 
 ---
 
-## 1. Syntax & Semantics
+## What’s Inside
 
-**Core Syntax Structure:**
+For each core topic, you’ll find:
 
-- [ ] Variables (var, let, const)
-- [ ] Data Types (string, number, boolean, null, undefined, symbol, bigint)
-- [ ] Conditionals (if/else, switch)
-- [ ] Loops (for, while, do-while, for...in, for...of)
-- [ ] Functions (declaration, expression, arrow functions, IIFE)
-- [ ] Scope & Hoisting
-
-**Advanced Concepts:**
-
-- [ ] Closures
-- [ ] Lexical scope
-- [ ] Execution context & Call stack
-- [ ] Event loop & Task queue (microtask vs macrotask)
-- [ ] Garbage Collection
-- [ ] Prototypes & Prototype Chain
-- [ ] `this` binding, call, apply, bind
-- [ ] ES Modules (import/export) vs CommonJS (require/module.exports)
+- **Basic**: Must-know concepts & definitions
+- **Intermediate**: Real-world questions, logic, and usage
+- **Advanced**: Edge cases, tricky logic, system-level thinking
 
 ---
 
-## 2. Standard Library & Built-in APIs
+## Topics We Cover
 
-**Core Modules/APIs:**
+### 🔹 HTML & CSS
 
-- [ ] `Array`, `Object`, `Math`, `Date`, `JSON`
-- [ ] `Map`, `Set`, `WeakMap`, `WeakSet`
-- [ ] `Promise`, `Symbol`, `Proxy`, `Reflect`
-- [ ] `Intl`, `URL`, `Blob`, `File`, `FormData`
-- [ ] `fetch`, `AbortController`
-- [ ] `setTimeout`, `setInterval`, `clearTimeout`, `clearInterval`
-
-**Node.js Built-ins (if using Node):**
-
-- [ ] `fs`, `path`, `http`, `os`, `events`, `crypto`, `stream`, `util`
-- [ ] `process`, `child_process`
+- [Basic](/docs/html_css/basic): Semantic tags, structure, form elements, CSS selectors
+- [Intermediate](/docs/html_css/intermediate): Flexbox, Grid, responsive design, positioning, z-index
+- [Advanced](/docs/html_css/advanced): Accessibility, specificity, BEM, CSS performance tips
 
 ---
 
-## 3. Error Handling & Debugging
+### 🔹 JavaScript
 
-**Error Types:**
-
-- [ ] SyntaxError, TypeError, ReferenceError, RangeError, etc.
-
-**Handling Techniques:**
-
-- [ ] `try/catch/finally`
-- [ ] Custom Error Classes
-- [ ] Graceful degradation
-
-**Debugging Tools:**
-
-- [ ] Browser DevTools (breakpoints, step over, call stack, watches)
-- [ ] `console.log`, `console.table`, `console.trace`
-- [ ] Node.js Debugger (`node inspect`)
-- [ ] VS Code Debugging Configuration
+- [Basic](/docs/javascript/basic): Variables, data types, conditionals, loops, functions
+- [Intermediate](/docs/javascript/intermediate): Closures, DOM manipulation, callbacks, event bubbling
+- [Advanced](/docs/javascript/advanced): Async/await, prototypes, memory, this, hoisting, execution context
 
 ---
 
-## 4. Performance Optimization
+### 🔹 React JS
 
-**Concepts:**
-
-- [ ] Big O notation (time & space complexity)
-- [ ] Algorithm efficiency
-- [ ] Memory leaks and how to prevent them
-
-**Optimization Techniques:**
-
-- [ ] Debouncing & Throttling
-- [ ] Lazy loading (code splitting, image defer)
-- [ ] Avoiding unnecessary re-renders (React)
-- [ ] Efficient DOM manipulation (virtual DOM, document fragments)
-
-**Tools:**
-
-- [ ] Chrome Performance Profiler
-- [ ] Lighthouse
-- [ ] Web Vitals (FCP, LCP, TTI)
+- [Basic](/docs/react/basic): JSX, components, props, state, events
+- [Intermediate](/docs/react/intermediate): Hooks (`useEffect`, `useContext`), forms, lists, conditional rendering
+- [Advanced](/docs/react/advanced): Performance, memoization, custom hooks, lifting state, context API
 
 ---
 
-## 5. Design Patterns & Best Practices
+### 🔹 Redux JS
 
-**Principles:**
-
-- [ ] DRY (Don’t Repeat Yourself)
-- [ ] KISS (Keep It Simple, Stupid)
-- [ ] YAGNI (You Aren’t Gonna Need It)
-- [ ] SOLID (adapted to JS/OOP)
-- [ ] Separation of Concerns
-
-**Common Patterns:**
-
-- [ ] Module pattern
-- [ ] Singleton
-- [ ] Observer pattern
-- [ ] Factory pattern
-- [ ] Decorator pattern
-- [ ] Middleware pattern (common in Express.js, Redux)
-
-**Coding Practices:**
-
-- [ ] Consistent naming conventions
-- [ ] Pure functions where applicable
-- [ ] Avoid global scope pollution
-- [ ] Commenting where necessary (not too much)
+- [Basic](/docs/redux/basic): Store, reducer, actions, state flow
+- [Intermediate](/docs/redux/intermediate): Redux Toolkit, async actions, middleware
+- [Advanced](/docs/redux/advanced): Large-scale structure, reusability, state optimization
 
 ---
 
-## 6. Asynchronous Programming, Concurrency & Parallelism
+### 🔹 Next JS
 
-**Concepts:**
-
-- [ ] Event loop & Callback queue
-- [ ] Callback hell
-- [ ] Promises
-- [ ] Async/Await
-
-**Advanced Asynchronous Tools:**
-
-- [ ] `Promise.all`, `Promise.race`, `Promise.any`, `Promise.allSettled`
-- [ ] Generators + async iterators
-- [ ] Web Workers
-- [ ] Node.js Streams
+- [Basic](/docs/nextjs/basic): File-based routing, pages, assets, layout
+- [Intermediate](/docs/nextjs/intermediate): SSR, SSG, CSR, data fetching
+- [Advanced](/docs/nextjs/advanced): API routes, middleware, performance tuning, SEO strategies
 
 ---
 
-## 7. Tooling & Ecosystem
+### 🔹 Node JS
 
-**Package Management:**
-
-- [ ] npm, yarn, pnpm
-- [ ] package.json structure
-- [ ] versioning & lock files
-
-**Build Tools:**
-
-- [ ] Vite, Webpack, esbuild, Rollup
-- [ ] Babel (transpilation)
-
-**Code Quality:**
-
-- [ ] ESLint, Prettier
-- [ ] Husky + lint-staged
-- [ ] Commitizen + conventional commits
-
-**Environment:**
-
-- [ ] .env files & dotenv
-- [ ] Cross-env for environment variables
+- [Basic](/docs/nodejs/basic): Intro to backend, file system, modules
+- [Intermediate](/docs/nodejs/intermediate): Events, streams, error handling
+- [Advanced](/docs/nodejs/advanced): Auth, performance, CLI tools, deployment basics
 
 ---
 
-## 8. Testing & Deployment
+### 🔹 Express JS
 
-**Testing Types:**
-
-- [ ] Unit testing (Jest, Vitest)
-- [ ] Integration testing
-- [ ] E2E testing (Playwright, Cypress)
-
-**Concepts:**
-
-- [ ] Test Coverage
-- [ ] Mocks, Spies, Fakes
-- [ ] TDD / BDD
-
-**Deployment Knowledge:**
-
-- [ ] Static Site Hosting (Vercel, Netlify)
-- [ ] CI/CD Basics (GitHub Actions, GitLab CI)
-- [ ] Docker (optional but helpful)
+- [Basic](/docs/expressjs/basic): Routing, request/response, basic middleware
+- [Intermediate](/docs/expressjs/intermediate): CRUD APIs, JWT, error handling, CORS
+- [Advanced](/docs/expressjs/advanced): Scalable structure, rate limiting, file uploads
 
 ---
 
-## 9. Project Experience
+### 🔹 MongoDB
 
-**Soft Skills from Projects:**
-
-- [ ] Writing maintainable, modular, scalable code
-- [ ] Git branching, rebasing, resolving conflicts
-- [ ] Writing documentation for others
-- [ ] Working in teams using PRs, Issues, Kanban
-- [ ] Estimating tasks, debugging in production
-
-**Hard Skills from Projects:**
-
-- [ ] State management (Redux, Zustand, Context API)
-- [ ] API consumption (REST, GraphQL)
-- [ ] Authentication flows (JWT, OAuth2, Clerk/Auth0)
-- [ ] Form handling & validation (React Hook Form, Yup)
+- [Basic](/docs/mongodb/basic): Collections, documents, CRUD
+- [Intermediate](/docs/mongodb/intermediate): Queries, indexing, aggregation basics
+- [Advanced](/docs/mongodb/advanced): Schema design, performance, data modeling
 
 ---
 
-## 10. Language Internals & Execution Model
+### 🔹 Mongoose
 
-**JS Runtime Environment:**
-
-- [ ] Browser vs Node.js differences
-- [ ] Global Object, `window` vs `global`
-
-**Interpreter Model:**
-
-- [ ] JIT Compilation (V8 engine)
-- [ ] Memory management and garbage collection
-- [ ] How closures preserve memory
-
-**Scope & Execution:**
-
-- [ ] Call stack
-- [ ] Memory heap
-- [ ] Event loop
-- [ ] Callback queue, microtask queue
+- [Basic](/docs/mongoose/basic): Schema, models, connection
+- [Intermediate](/docs/mongoose/intermediate): Validation, population, middleware
+- [Advanced](/docs/mongoose/advanced): Optimizing queries, relational data, advanced patterns
 
 ---
 
-## 11. Software Architecture & System Design
+## Who Should Use This?
 
-**Frontend Architecture:**
-
-- [ ] Component-driven development
-- [ ] Atomic design principles
-- [ ] Micro Frontends
-
-**Backend/System Architecture:**
-
-- [ ] Monolith vs Microservices (Node.js-based)
-- [ ] RESTful design, GraphQL schemas
-- [ ] Caching (Redis), Rate limiting
-
-**Database Design:**
-
-- [ ] MongoDB (NoSQL) or PostgreSQL (SQL)
-- [ ] Indexing, Pagination, Joins (if applicable)
-
-**System Design Patterns:**
-
-- [ ] Load balancer, CDN, reverse proxy
-- [ ] Pub/Sub architecture
-- [ ] WebSockets & real-time systems
+- Final year students & fresh graduates
+- Self-taught developers & bootcamp learners
+- Career switchers learning full-stack
+- Anyone preparing for entry-level developer roles
 
 ---
 
-## 12. Git & Collaboration Workflow
+## Need Help?
 
-**Core Commands:**
+> Learning alone is hard. But you’re not alone.
 
-- [ ] clone, commit, push, pull, fetch, merge, rebase, stash
+Join our supportive developer community on **Discord** — ask questions, get feedback, and connect with others on the same journey.
 
-**Branching Strategies:**
-
-- [ ] Feature branches
-- [ ] GitFlow
-- [ ] Trunk-based development
-
-**Code Reviews & PRs:**
-
-- [ ] Writing meaningful commit messages
-- [ ] Reviewing others’ code
-- [ ] Resolving merge conflicts
+[Join Our Discord Server](https://discord.gg/JXjceurNJA)
 
 ---
 
-## 13. Security Best Practices
+## How to Start
 
-**Frontend/Web:**
-
-- [ ] Avoiding XSS, CSRF, Clickjacking
-- [ ] HTTPS & SSL
-- [ ] Content Security Policy (CSP)
-
-**Authentication:**
-
-- [ ] JWT, OAuth2
-- [ ] Secure cookie management (httpOnly, sameSite)
-- [ ] Rate limiting & brute force protection
-
-**Node.js Specific:**
-
-- [ ] Helmet.js, CORS
-- [ ] Validating user inputs (e.g. `zod`, `joi`)
+1. Pick a topic from the list above.
+2. Start with **basic**, go through **intermediate**, then finish **advanced**.
+3. Take notes and speak answers out loud like a real interview.
+4. Bookmark tricky questions. Revisit regularly.
+5. Practice mock interviews with friends or mentors.
 
 ---
 
-## 14. Documentation & Communication
-
-**Code-level Docs:**
-
-- [ ] JSDoc / TypeScript types
-- [ ] Readable, clean code > too many comments
-
-**Project-level Docs:**
-
-- [ ] README, CONTRIBUTING.md
-- [ ] API Docs (Swagger/OpenAPI)
-
-**Soft Skills:**
-
-- [ ] Explaining technical problems clearly
-- [ ] Active listening in team discussions
-- [ ] Writing technical posts or documentation
+> _"First interviews are tough — preparation makes the difference."_  
+> — **Team DEV Crack**
 
 ---
 
-## 15. Domain Knowledge
-
-**Optional but Valuable:**
-
-- [ ] E-commerce (cart, checkout, payment flow)
-- [ ] SaaS (multi-tenancy, subscriptions)
-- [ ] Real-time apps (chat, notifications)
-- [ ] Booking/reservation systems
-- [ ] Payment Gateway Integrations (Stripe, PayPal)
-
----
-
-## 16. Learning Mindset & Adaptability
-
-**Stay Up to Date:**
-
-- [ ] Follow changelogs (e.g. ECMAScript updates)
-- [ ] Read MDN, dev.to, JavaScript Weekly
-
-**Learn New Tools Quickly:**
-
-- [ ] Adapt to React/Vue/Svelte depending on need
-- [ ] Learn a testing tool, a CI system, or a backend stack when needed
-
-**Growth Practices:**
-
-- [ ] Build projects
-- [ ] Pair programming
-- [ ] Read others’ code
-
----
+Ready to dive in? Let’s do this 💪

@@ -1,1 +1,240 @@
-## reactjs advanced
+**01. What is React Fiber and how does it improve performance?**
+React Fiber is the complete rewrite of the React core algorithm introduced in React 16. Its goal was to enable incremental rendering — splitting work into chunks that can be paused, aborted, or reused.
+This allows React to prioritize updates (e.g., animations over data fetching), leading to smoother UIs even during heavy computations.
+
+```js
+// Fiber lets React interrupt long render trees:
+function App() {
+  return (
+    <>
+      <HeavyComponent /> {/* Rendered in chunks */}
+      <LowPriorityComponent /> {/* Deprioritized */}
+    </>
+  );
+}
+```
+
+---
+
+**02. Explain the concept of Concurrent Rendering in React.**
+Concurrent Rendering allows React to prepare multiple versions of the UI at the same time. It improves responsiveness by making rendering interruptible, allowing higher-priority updates (like user input) to happen without blocking.
+
+```js
+import { startTransition } from "react";
+
+startTransition(() => {
+  // Low-priority update
+  setSearchQuery(inputValue);
+});
+```
+
+This separates urgent state (like typing) from non-urgent UI (like filtering), resulting in a smoother user experience.
+
+---
+
+**03. How does React handle reconciliation?**
+Reconciliation is the process React uses to update the DOM efficiently. React compares the new Virtual DOM with the previous one using a diffing algorithm. It updates only the parts of the DOM that have changed.
+
+React uses keys to track which items changed in a list:
+
+```js
+const list = items.map((item) => <li key={item.id}>{item.name}</li>);
+```
+
+Wrong or missing keys can lead to incorrect UI behavior or performance issues.
+
+---
+
+**04. What are React Server Components (RSC)?**
+Server Components allow you to render parts of your app on the server — reducing bundle size and improving performance. Unlike SSR, they don’t ship their code to the client.
+
+```tsx
+// server component
+export default async function ProductList() {
+  const products = await getProducts();
+  return (
+    <div>
+      {products.map((p) => (
+        <div>{p.name}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+They work seamlessly with client components and can reduce unnecessary data fetching or JS parsing in the browser.
+
+---
+
+**05. Explain the difference between useEffect and useLayoutEffect.**
+
+- `useEffect`: Runs **after the paint**. Good for data fetching and non-blocking side effects.
+- `useLayoutEffect`: Runs **before the paint**, blocking the browser. Good for measuring DOM size/position.
+
+```js
+useLayoutEffect(() => {
+  const width = ref.current.offsetWidth;
+}, []);
+```
+
+Use `useLayoutEffect` sparingly, as it can block rendering and hurt performance.
+
+---
+
+**06. What is Suspense and how does it work with data fetching?**
+Suspense lets you "pause" rendering while data is loading, until the required data is ready. This is especially powerful when combined with frameworks like Relay or React Query.
+
+```jsx
+<Suspense fallback={<Loading />}>
+  <Profile />
+</Suspense>
+```
+
+`Profile` might throw a Promise internally to tell React it’s not ready, and React will show the fallback.
+
+---
+
+**07. How does React's batching work, and what changed in React 18?**
+Batching means React groups multiple state updates into one render to improve performance.
+
+In React 18, automatic batching was extended beyond event handlers (e.g., in timeouts, fetches, etc.):
+
+```js
+setTimeout(() => {
+  setCount((c) => c + 1);
+  setName("Alice");
+  // React 18: These updates are batched automatically
+}, 1000);
+```
+
+This reduces unnecessary re-renders and improves rendering efficiency.
+
+---
+
+**08. What are Custom Hooks and how do you structure them effectively?**
+Custom Hooks encapsulate reusable logic using other hooks. They help abstract away complexity, such as API fetching, form state, or timers.
+
+```js
+function useTimer(delay) {
+  const [time, setTime] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setTime((t) => t + 1), delay);
+    return () => clearInterval(id);
+  }, [delay]);
+  return time;
+}
+```
+
+Custom Hooks can also return multiple values or objects to make them easier to consume.
+
+---
+
+**09. Explain the useImperativeHandle hook.**
+`useImperativeHandle` lets you customize what values are exposed to parent components when using `ref`. This is useful for building controlled components.
+
+```js
+useImperativeHandle(ref, () => ({
+  focus: () => inputRef.current.focus(),
+}));
+```
+
+This protects internal implementation and offers a clean interface to interact with complex child components.
+
+---
+
+**10. What is the Virtual DOM and how does it differ from the real DOM?**
+The Virtual DOM is an in-memory representation of the actual DOM. React uses it to compute the minimal set of changes needed to update the UI, improving performance.
+
+Rather than manipulating the DOM directly, React:
+
+1. Creates a new Virtual DOM
+2. Diffs it with the previous version
+3. Applies changes to the real DOM in batch
+
+This makes updates faster and reduces layout thrashing.
+
+---
+
+**11. How do React Hooks avoid stale closures in async calls?**
+React Hooks use closures, so stale values can occur in asynchronous logic.
+
+```js
+useEffect(() => {
+  const currentCount = count;
+  const id = setTimeout(() => {
+    console.log(currentCount); // might be stale!
+  }, 1000);
+}, [count]);
+```
+
+To fix this, use refs or always use the latest value inside the effect, or cancel old timers when re-running the effect.
+
+---
+
+**12. What are Render Props and when should you use them?**
+Render Props is a pattern where a component takes a function as a prop and uses it to render something.
+
+```js
+function MouseTracker({ render }) {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  return (
+    <div onMouseMove={(e) => setPosition({ x: e.clientX, y: e.clientY })}>
+      {render(position)}
+    </div>
+  );
+}
+```
+
+Useful when sharing logic (like mouse, scroll, drag) between components. However, Hooks are often preferred now.
+
+---
+
+**13. How does Context API avoid prop drilling?**
+Context provides a way to pass data deep through the component tree without manually passing props.
+
+```js
+const ThemeContext = React.createContext();
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Child />
+    </ThemeContext.Provider>
+  );
+}
+
+function Child() {
+  const theme = useContext(ThemeContext);
+  return <div className={theme}>Hello</div>;
+}
+```
+
+Context is good for global states like themes, auth, or locale, but overuse can lead to unnecessary re-renders.
+
+---
+
+**14. What are some strategies to optimize React performance?**
+
+- **Memoization**: use `React.memo`, `useMemo`, `useCallback`
+- **Code-splitting**: Lazy load components with `React.lazy`
+- **Virtualization**: Use libraries like `react-window` for large lists
+- **Avoid unnecessary state updates**: Keep local state where needed
+- **Use keys properly**: Prevent remounting
+
+Example:
+
+```js
+const MemoizedComponent = React.memo(Component);
+```
+
+---
+
+**15. How do React DevTools detect unnecessary re-renders?**
+React DevTools highlights components that re-render with no prop/state changes. It can track renders, show why a component re-rendered, and suggest optimizations.
+
+You can also use `why-did-you-render` to log re-renders:
+
+```js
+import whyDidYouRender from "@welldone-software/why-did-you-render";
+whyDidYouRender(React, { trackAllPureComponents: true });
+```

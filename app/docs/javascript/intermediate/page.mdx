@@ -1,147 +1,159 @@
-# JavaScript intermediate Interview Questions
+## 1. setTimeout vs setInterval?
 
-## 1. What are higher-order functions?
+**Answer:** setTimeout executes a function once after a specified delay, while setInterval executes a function repeatedly at specified time intervals. setTimeout is useful for one-time delayed execution, while setInterval is used for recurring tasks. Important differences: setInterval doesn't wait for function completion before scheduling the next call, potentially causing overlapping executions. setTimeout with recursion gives more control over timing and prevents overlapping, making it often preferable for repeated tasks.
 
-A higher-order function is a function that takes another function as an argument or returns a function.
+```javascript
+// setTimeout - runs once after delay
+setTimeout(() => console.log("Once"), 1000);
 
-```js
-function greet(fn) {
-  return fn();
+// setInterval - runs repeatedly
+const interval = setInterval(() => console.log("Repeat"), 1000);
+
+// Clear interval
+setTimeout(() => clearInterval(interval), 5000);
+```
+
+---
+
+## 2. What is Higher Order Functions?
+
+**Answer:** Higher Order Functions are functions that either take other functions as arguments, return functions as their result, or both. They enable functional programming patterns like map, filter, reduce, and enable powerful abstractions. HOFs promote code reusability, composability, and separation of concerns by allowing you to pass behavior as parameters. They're fundamental to JavaScript's functional programming capabilities and are widely used in array methods, event handlers, and callback patterns.
+
+```javascript
+// Takes function as argument
+function operate(a, b, operation) {
+  return operation(a, b);
 }
 
-function sayHello() {
-  return "Hello!";
+// Returns function
+function multiplier(factor) {
+  return function (number) {
+    return number * factor;
+  };
 }
 
-console.log(greet(sayHello)); // Hello!
+const double = multiplier(2);
+console.log(double(5)); // 10
 ```
 
 ---
 
-## 2. What is the difference between `map()`, `filter()`, and `reduce()`?
+## 3. map(), filter(), forEach() methods?
 
-- `map()`: Transforms each element.
-- `filter()`: Filters elements by condition.
-- `reduce()`: Reduces array to a single value.
+**Answer:** These are essential array methods for functional programming. map() transforms each element and returns a new array of the same length. filter() selects elements based on a condition and returns a new array with matching elements. forEach() iterates through elements for side effects but returns undefined, not creating a new array. Map and filter are pure functions that don't modify the original array, while forEach is used when you need side effects like logging or DOM manipulation.
 
-```js
-const nums = [1, 2, 3, 4];
+```javascript
+const numbers = [1, 2, 3, 4, 5];
 
-console.log(nums.map((n) => n * 2)); // [2, 4, 6, 8]
-console.log(nums.filter((n) => n > 2)); // [3, 4]
-console.log(nums.reduce((acc, n) => acc + n, 0)); // 10
+// map - transforms each element
+const doubled = numbers.map((x) => x * 2); // [2, 4, 6, 8, 10]
+
+// filter - selects elements
+const evens = numbers.filter((x) => x % 2 === 0); // [2, 4]
+
+// forEach - iterates (no return value)
+numbers.forEach((x) => console.log(x)); // logs each number
 ```
 
 ---
 
-## 3. What is the difference between `for...in` and `for...of`?
+## 4. apply(), call(), bind() differences?
 
-- `for...in`: Iterates over keys (index or property names).
-- `for...of`: Iterates over values.
+**Answer:** These methods explicitly set the 'this' context of a function. call() immediately invokes the function with 'this' set to the first argument and remaining arguments passed individually. apply() works like call() but takes arguments as an array. bind() doesn't invoke the function immediately but returns a new function with 'this' permanently bound to the specified value. Bind is useful for event handlers and partial application, while call/apply are for immediate invocation with specific context.
 
-```js
-const arr = ["a", "b"];
+```javascript
+const person = { name: "John" };
 
-for (let key in arr) {
-  console.log(key); // 0, 1
+function greet(greeting, punctuation) {
+  return `${greeting} ${this.name}${punctuation}`;
 }
 
-for (let value of arr) {
-  console.log(value); // a, b
-}
+// call - immediate invocation with arguments
+console.log(greet.call(person, "Hello", "!")); // "Hello John!"
+
+// apply - immediate invocation with array
+console.log(greet.apply(person, ["Hi", "."])); // "Hi John."
+
+// bind - returns new function
+const boundGreet = greet.bind(person, "Hey");
+console.log(boundGreet("?")); // "Hey John?"
 ```
 
 ---
 
-## 4. What are template literals?
+## 5. Deep Copy vs Shallow Copy?
 
-Template literals use backticks `` ` `` and support interpolation with `${}`.
+**Answer:** Shallow copy creates a new object but copies only the first level of properties; nested objects are still referenced. Deep copy recursively copies all levels, creating completely independent objects. Shallow copying is faster and sufficient when objects don't have nested structures. Deep copying is necessary when you want complete independence from the original object. Methods include spread operator and Object.assign() for shallow, JSON.parse(JSON.stringify()) or custom recursive functions for deep copying.
 
-```js
-const name = "Kawsar";
-console.log(`Hello, ${name}!`); // Hello, Kawsar!
+```javascript
+const original = { a: 1, b: { c: 2 } };
+
+// Shallow copy
+const shallow = { ...original };
+shallow.b.c = 3;
+console.log(original.b.c); // 3 (affected)
+
+// Deep copy
+const deep = JSON.parse(JSON.stringify(original));
+deep.b.c = 4;
+console.log(original.b.c); // 2 (not affected)
 ```
 
 ---
 
-## 5. What is destructuring?
+## 6. localStorage vs sessionStorage vs cookies?
 
-Destructuring extracts values from arrays or objects.
+**Answer:** These are different client-side storage mechanisms with varying capabilities and lifetimes. localStorage persists data until explicitly cleared, survives browser restarts, and has ~5-10MB capacity per domain. sessionStorage lasts only for the browser session, is cleared when tab closes, with similar capacity to localStorage. Cookies are sent with every HTTP request, have 4KB limit, can have expiration dates, and work across all browsers. localStorage/sessionStorage are for client-side data, cookies for client-server communication.
 
-```js
-const user = { name: "Alice", age: 25 };
-const { name, age } = user;
+```javascript
+// localStorage - persists until cleared
+localStorage.setItem("user", "John");
+console.log(localStorage.getItem("user")); // "John"
 
-const nums = [1, 2];
-const [a, b] = nums;
+// sessionStorage - persists for session
+sessionStorage.setItem("temp", "data");
+
+// cookies - sent with requests, can expire
+document.cookie = "username=john; expires=Thu, 18 Dec 2024 12:00:00 UTC";
 ```
 
 ---
 
-## 6. What are default parameters?
+## 7. Primitive vs Reference?
 
-Allows setting default values for function parameters.
+**Answer:** Primitives (number, string, boolean, null, undefined, symbol, bigint) are stored directly in memory and passed by value. When assigned or passed to functions, the actual value is copied, so modifications don't affect the original. Reference types (objects, arrays, functions) store memory addresses pointing to the actual data. When assigned, the reference is copied, not the data, so multiple variables can point to the same object, and modifications through any reference affect all others.
 
-```js
-function greet(name = "Guest") {
-  return `Hello, ${name}`;
-}
-console.log(greet()); // Hello, Guest
+```javascript
+// Primitive
+let a = 10;
+let b = a; // value copied
+a = 20;
+console.log(b); // 10
+
+// Reference
+let arr1 = [1, 2];
+let arr2 = arr1; // reference copied
+arr1.push(3);
+console.log(arr2); // [1, 2, 3]
 ```
 
 ---
 
-## 7. What is optional chaining?
+## 8. What is a Symbol?
 
-Safely access deeply nested object properties.
+**Answer:** Symbol is a primitive data type introduced in ES6 that creates unique identifiers. Every Symbol() call returns a unique symbol, even with the same description. Symbols are primarily used as unique property keys for objects, preventing property name collisions. They're not enumerable in for...in loops or Object.keys(), making them useful for creating "private" properties. Symbol.for() creates global symbols that can be shared across different parts of code, while well-known symbols like Symbol.iterator define standard behaviors.
 
-```js
-const user = { profile: { name: "Tom" } };
-console.log(user?.profile?.name); // Tom
-console.log(user?.address?.city); // undefined
-```
+```javascript
+const sym1 = Symbol("id");
+const sym2 = Symbol("id");
+console.log(sym1 === sym2); // false (unique)
 
----
-
-## 8. What is short-circuit evaluation?
-
-Logical operators return the first truthy/falsy value.
-
-```js
-const name = null;
-console.log(name || "Default"); // Default
-console.log(true && "Hello"); // Hello
-```
-
----
-
-## 9. What are rest and spread operators?
-
-- **Spread** `...` expands elements.
-- **Rest** `...` collects them.
-
-```js
-const nums = [1, 2, 3];
-const newNums = [...nums, 4]; // spread
-
-function sum(...args) {
-  return args.reduce((a, b) => a + b);
-}
-```
-
----
-
-## 10. What is the difference between function declaration and expression?
-
-- **Declaration** is hoisted.
-- **Expression** is not.
-
-```js
-function add(a, b) {
-  return a + b;
-}
-
-const multiply = function (a, b) {
-  return a * b;
+const obj = {
+  [sym1]: "value1",
+  [sym2]: "value2",
 };
+
+// Symbols not enumerable
+console.log(Object.keys(obj)); // []
+console.log(obj[sym1]); // 'value1'
 ```
