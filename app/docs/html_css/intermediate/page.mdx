@@ -155,3 +155,87 @@ The `<body>` tag, on the other hand, contains **all the visible content** of the
   - `<strong>`: Indicates **strong importance**.
   - `<em>`: Indicates **emphasis**.
   - ✅ These are better for **accessibility** and **SEO**.
+
+## 13. How to handle events in HTML?
+
+In HTML, **events** are actions that occur in the browser, such as clicks, key presses, page loads, etc. You can handle these events using **event attributes** directly in HTML elements.
+
+### Common Event Attributes:
+
+- `onclick`: Triggered when an element is clicked.
+- `onmouseover`: Triggered when the mouse hovers over an element.
+- `onchange`: Triggered when the value of an input element changes.
+- `onload`: Triggered when the page finishes loading.
+
+### Example:
+
+```html
+<button onclick="alert('Button clicked!')">Click Me</button>
+```
+
+## 14. What is new about the relationship between the `<header>` and `<h1>` tags in HTML5?
+
+In **HTML5**, the `<header>` tag is a new semantic element that represents the **introductory content** or a **section heading** for a page or part of a page.
+
+What’s new is that you can now use **multiple `<header>` tags** throughout the page, and each can contain its own `<h1>` tag.
+
+### Key Points:
+
+- In **HTML4**, only one `<h1>` per page was recommended for structure and accessibility.
+- In **HTML5**, multiple `<h1>` tags are valid when scoped within separate `<header>` elements inside different sections or articles.
+
+### Example:
+
+```html
+<header>
+  <h1>Main Site Title</h1>
+</header>
+
+<section>
+  <header>
+    <h1>Article Title</h1>
+  </header>
+</section>
+```
+
+## 15. What is the difference between `<figure>` tag and `<img>` tag?
+
+The `<img>` and `<figure>` tags serve different purposes in HTML5.
+
+### `<img>` Tag:
+
+- Used to **embed an image** into a web page.
+- It’s a **self-closing** tag.
+- Contains attributes like `src`, `alt`, `width`, and `height`.
+
+### `<figure>` Tag:
+
+- Introduced in **HTML5** as a **semantic container** for self-contained content like images, diagrams, illustrations, or code snippets.
+- Typically used **with `<figcaption>`** to add a caption or description to the content.
+- Helps with **semantic meaning**, accessibility, and SEO.
+
+### Example:
+
+```html
+<figure>
+  <img src="mountain.jpg" alt="Snowy mountain" />
+  <figcaption>Mount Everest, the highest mountain in the world.</figcaption>
+</figure>
+```
+
+## 16. Are the `<datalist>` tag and `<select>` tag the same?
+
+No, the `<datalist>` and `<select>` tags are **not the same**, although both provide a list of options to the user.
+
+### `<select>` Tag:
+
+- Creates a **dropdown menu** with predefined options.
+- The user can only choose from the listed options.
+- Example:
+
+```html
+<select>
+  <option value="HTML">HTML</option>
+  <option value="CSS">CSS</option>
+</select>
+```

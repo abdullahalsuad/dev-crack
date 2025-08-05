@@ -149,4 +149,85 @@ Use the `<table>`, `<tr>`, `<th>`, and `<td>` tags.
 ```
 ---
 
-## 12. 
+## 12. What are HTML Entities?
+
+In HTML, some characters are **reserved** (like `<`, `>`, `/`, `&`) and cannot be used directly because they conflict with the syntax of the language.
+
+To display these characters on a webpage, we use **HTML Entities**.
+
+### Common Examples:
+
+| Character            | Entity Name | Entity Number |
+|----------------------|-------------|----------------|
+| `<` (less than)      | `&lt;`      | `&#60;`         |
+| `>` (greater than)   | `&gt;`      | `&#62;`         |
+| `&` (ampersand)      | `&amp;`     | `&#38;`         |
+| (non-breaking space) | `&nbsp;`    | `&#160;`        |
+
+### Example:
+
+```html
+<p>10&nbsp;&nbsp;PM</p>
+```
+
+## 13. What are HTML Tags?
+
+**HTML tags** are the building blocks of an HTML document. They define the structure and content of web pages.
+
+Each HTML tag usually comes in a **pair**:
+
+- **Opening tag:** `<tagname>`
+- **Closing tag:** `</tagname>`
+
+### Example:
+
+```html
+<p>Hello, world!</p>
+```
+
+## 14. What is a `<marquee>` in HTML?
+
+The `<marquee>` tag in HTML is used to create **scrolling text or images** on a webpage — either horizontally or vertically.
+
+### Key Features:
+
+- Scrolls content automatically.
+- Can control speed, direction, and behavior.
+- Not part of modern HTML standards and is **deprecated** in HTML5.
+
+### Example:
+
+```html
+<marquee behavior="scroll" direction="left">This is a scrolling message</marquee>
+```
+## 15. What is the advantage of collapsing white space?
+
+**Collapsing white space** means that the browser treats multiple spaces, tabs, and newlines as a **single space** when rendering HTML content.
+
+### Advantages:
+
+- **Cleaner output**: Prevents extra spacing from affecting layout unintentionally.
+- **Improved readability**: Developers can format HTML code with proper indentation without impacting display.
+- **Smaller file size**: Extra spaces and line breaks aren’t rendered, which helps optimize performance.
+- **Consistency**: Ensures uniform text display across different browsers and screen sizes.
+
+### Example:
+
+```html
+<p>This       is        text.</p>
+```
+
+## 16. How do you insert a copyright symbol in HTML?
+
+In HTML, you can insert a **copyright symbol** using an **HTML entity**.
+
+### Methods:
+
+- **Entity name:** `&copy;`
+- **Entity number:** `&#169;`
+
+### Example:
+
+```html
+<p>&copy; 2025 Your Company</p>
+```
