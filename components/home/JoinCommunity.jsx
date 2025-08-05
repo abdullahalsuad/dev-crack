@@ -19,7 +19,7 @@ const JoinCommunity = () => {
             your contribution drives us forward.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="https://discord.gg/Gzht2qKAn8" target="_blank">
+            <Link href="https://discord.gg/hECbGhyY5b" target="_blank">
               <Button />
             </Link>
           </div>

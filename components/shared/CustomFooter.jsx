@@ -14,7 +14,7 @@ const SOCIAL_LINKS = [
     icon: <FaDiscord className="text-white" size={20} />,
     gradient: "from-indigo-500 to-indigo-700",
     border: "border-indigo-400/50",
-    link: "https://discord.gg/Gzht2qKAn8",
+    link: "https://discord.gg/hECbGhyY5b",
   },
 ];
 

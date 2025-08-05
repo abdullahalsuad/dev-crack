@@ -66,7 +66,7 @@ If Dev Crack helped you land your dream job or just made your interview prep eas
 
 If you have any questions, feel free to open a [discussion](https://github.com/abdullahalsuad/dev-crack/discussions) or reach out via [Issues](https://github.com/abdullahalsuad/dev-crack/issues).
 
-**Join Our Discord Community**: [Join DEV ZeroOne](https://discord.gg/VRPSPcak)
+**Join Our Discord Community**: [Join DEV ZeroOne](https://discord.gg/hECbGhyY5b)
 
 <br/>
 <br/>

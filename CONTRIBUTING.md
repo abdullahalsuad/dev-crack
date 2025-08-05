@@ -121,7 +121,7 @@ git commit -m "docs: update README with new setup instructions"
 
 If you have any questions, feel free to open a [discussion](https://github.com/abdullahalsuad/dev-crack/discussions) or reach out via [Issues](https://github.com/abdullahalsuad/dev-crack/issues).
 
-**Join Our Discord Community**:  [Join DEV ZeroOne](https://discord.gg/VRPSPcak)
+**Join Our Discord Community**:  [Join DEV ZeroOne](https://discord.gg/hECbGhyY5b)
 
 
 

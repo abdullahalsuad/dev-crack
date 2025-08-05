@@ -21,7 +21,7 @@ const navbar = (
     logo={<Image alt="logo" src={navLogo} height={90} width={100} />}
     logoLink={"/"}
     projectLink="https://github.com/abdullahalsuad/dev-crack"
-    chatLink="https://discord.gg/Gzht2qKAn8"
+    chatLink="https://discord.gg/hECbGhyY5b"
   />
 );
 
