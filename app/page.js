@@ -1,6 +1,7 @@
 import React from "react";
 import HeroSection from "../components/home/HeroSection";
 import QuestionSection from "../components/home/QuestionSection";
+import FAQSection from "../components/home/FAQSection";
 import JoinCommunity from "../components/home/JoinCommunity";
 
 const DevCrackPage = () => {
@@ -11,6 +12,9 @@ const DevCrackPage = () => {
 
       {/* Questions by Technology */}
       <QuestionSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* Join Our Community */}
       <JoinCommunity />
